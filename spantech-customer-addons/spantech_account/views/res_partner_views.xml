@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="name">res.partner.property.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <field name="property_account_payable_id" position="after">
+                <field name="property_out_journal_id" />
+                <field name="property_in_journal_id" />
+            </field>
+            <field name="property_supplier_payment_term_id" position="before">
+                <field name="approver_id" />
+            </field>
+            <group name="sale" position="inside">
+                <field name="partner_followup_cc_ids" widget="many2many_tags" />
+            </group>
+            <field name="is_company" position="after">
+                <field name="duplicated_bank_account_partners_count" invisible="1" />
+            </field>
+            <xpath expr="//div[@role='alert']" position="after">
+                <div
+                    groups="account.group_account_readonly,account.group_account_invoice"
+                    class="alert alert-warning"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': [('duplicated_bank_account_partners_count', '=', 0)]}"
+                >
+                    One or more Bank Accounts set on this partner are also used by other <bold
+                    ><button
+                            class="alert-link"
+                            type="object"
+                            name="action_view_partner_with_same_bank"
+                            role="button"
+                            string="Partners"
+                            style="padding: 0;vertical-align: baseline;"
+                        /></bold>. Please make sure that this is a wanted behavior.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

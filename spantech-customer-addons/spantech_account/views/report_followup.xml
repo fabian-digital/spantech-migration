@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    <template
+        id="template_followup_report"
+        inherit_id="account_followup.template_followup_report"
+    >
+        <xpath expr="//div[@id='followup-mode']" position="after">
+            <div
+                class="col-xl-6 no_print mb16 o_account_reports_contact_info"
+                t-if='context.get("print_mode") != True'
+                id='followup-mode'
+            >
+                <span class="font-weight-bold">Mail CC:</span><br />
+                <t t-if="invoice_address_id.partner_followup_cc_ids">
+                    <t
+                        t-foreach="invoice_address_id.partner_followup_cc_ids"
+                        t-as="followup_cc"
+                    >
+                        <a
+                            t-if="followup_cc.email"
+                            t-att-href="'mailto:' + followup_cc.email"
+                            title="Send an email"
+                        >
+                            <i class='fa fa-envelope' role="img" aria-label="Email" /><t
+                                t-esc="' ' + followup_cc.email"
+                            />
+                        </a>
+                        <br />
+                    </t>
+                </t>
+                <t
+                    t-if="invoice_address_id.parent_id and invoice_address_id.parent_id.partner_followup_cc_ids"
+                >
+                    <t
+                        t-foreach="invoice_address_id.parent_id.partner_followup_cc_ids"
+                        t-as="followup_cc"
+                    >
+                        <a
+                            t-if="followup_cc.email"
+                            t-att-href="'mailto:' + followup_cc.email"
+                            title="Send an email"
+                        >
+                            <i class='fa fa-envelope' role="img" aria-label="Email" /><t
+                                t-esc="' ' + followup_cc.email"
+                            />
+                        </a>
+                        <br />
+                    </t>
+                </t>
+            </div>
+        </xpath>
+    </template>-->
+</odoo>

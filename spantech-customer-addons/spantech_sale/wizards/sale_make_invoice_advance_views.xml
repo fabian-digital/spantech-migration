@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_sale_advance_payment_inv" model="ir.ui.view">
+        <field name="name">Invoice Orders</field>
+        <field name="model">sale.advance.payment.inv</field>
+        <field name="inherit_id" ref="sale.view_sale_advance_payment_inv" />
+        <field name="arch" type="xml">
+            <field name="has_down_payments" position="before">
+                <field name="show_qty_in_percentage" />
+            </field>
+            <field name="advance_payment_method" position="after">
+                <label for="partial_invoice" />
+                <div id="partial_invoice">
+                    <field name="partial_invoice" nolabel="1" />
+                    <field
+                        name="partial_invoice_percent"
+                        nolabel="1"
+                        class="oe_inline"
+                        attrs="{'invisible': [('partial_invoice', '=', False)]}"
+                        widget="percentage"
+                    />
+                </div>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<odoo>
+    <template id="report_picking" inherit_id="stock.report_picking">
+        <div t-if="o.origin" class="col-auto" name="div_origin" position="after">
+            <div
+                t-if="o.analytic_distribution"
+                class="col-auto"
+                name="div_project_code"
+            >
+                <strong>Project Code:</strong>
+                <p>
+                    <t t-foreach="o.analytic_distribution" t-as="distribution">
+                        <span class="badge rounded-pill text-bg-light border"><t
+                                t-esc="o.env['account.analytic.account'].browse(int(distribution))[0].name"
+                            />: <t
+                                t-esc="o.analytic_distribution.get(distribution)"
+                            />%</span>
+                    </t>
+                </p>
+            </div>
+        </div>
+    </template>
+
+</odoo>

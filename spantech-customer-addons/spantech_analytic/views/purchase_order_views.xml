@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_order_tree_kpis" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree" />
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field
+                    name="amount_total_uninvoiced"
+                    sum="Total Uninvoiced amount"
+                    widget="monetary"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_order_tree" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree" />
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field
+                    name="amount_total_uninvoiced"
+                    sum="Total Uninvoiced amount"
+                    widget="monetary"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_order_view_tree" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field
+                    name="amount_total_uninvoiced"
+                    sum="Total Uninvoiced amount"
+                    widget="monetary"
+                    optional="show"
+                />
+            </field>
+            <field name="date_planned" position="after">
+                <field name="state" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">purchase.order.filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search" />
+        <field name="arch" type="xml">
+            <filter name="unconfirmed" position="before">
+                <filter
+                    name="confirmed"
+                    string="Confirmed"
+                    domain="[('state', 'in', ['purchase', 'done'])]"
+                />
+            </filter>
+            <xpath expr="//group" position="inside">
+                <filter
+                    name="order_type"
+                    domain="[]"
+                    context="{'group_by': 'order_type'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

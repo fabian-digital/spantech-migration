@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="name">mrp.production.tree</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <button name="action_cancel" position="attributes">
+                <attribute name="context">{'cancel_reason': True}</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="name">mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <button name="action_confirm" position="attributes">
+                <attribute name="context">{"manual_confirmation":True}</attribute>
+            </button>
+            <xpath expr="//page[@name='miscellaneous']/group" position="inside">
+                <group>
+                    <field name="components_availability" />
+                    <field name="components_availability_state" />
+                </group>
+           </xpath>
+            <button name="action_view_stock_valuation_layers" position="attributes">
+                <attribute name="groups" />
+            </button>
+            <button name="action_cancel" position="attributes">
+                <attribute name="context">{'cancel_reason': True}</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="stock_backdating_mrp_production_form_view" model="ir.ui.view">
+        <field name="name">stock.backdating.mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="stock_backdating_mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="force_date" position="attributes">
+                <attribute name="string">Production Date</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view_inherited_view" model="ir.ui.view">
+        <field name="name">mrp_production components availability Inherited view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <field name="components_availability" optional="show" />
+                <field name="components_availability_state" optional="hide" />
+            </tree>
+            <tree position="attributes">
+                <attribute
+                    name="decoration-info"
+                >components_availability_state == 'expected'</attribute>
+                <attribute
+                    name="decoration-danger"
+                >components_availability_state == 'late'</attribute>
+            </tree>
+            <field name="name" position="after">
+                <field name="create_date" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_filter" model="ir.ui.view">
+        <field name="name">mrp_production search inherited view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="analytic_account_id" string="Analytic account" />
+            </field>
+            <filter name="procurement_group_id" position="after">
+                <filter
+                    string="Analytic account"
+                    name="analytic_account_group"
+                    domain="[]"
+                    context="{'group_by': 'analytic_account_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

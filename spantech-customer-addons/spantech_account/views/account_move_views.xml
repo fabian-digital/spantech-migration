@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="tier_validation_buttons"
+        inherit_id="base_tier_validation.tier_validation_buttons"
+    >
+        <button name="restart_validation" position="attributes">
+            <attribute
+                name="t-attf-attrs"
+            >{'invisible': ['|',('review_ids', '=', []),('can_restart_validation','=',False)]}</attribute>
+            <attribute
+                name="confirm"
+            >Are you sure you want to restart the validation?</attribute>
+        </button>
+    </template>
+
+    <template
+        id="tier_validation_label"
+        inherit_id="base_tier_validation.tier_validation_label"
+    >
+        <field name="next_review" position="attributes">
+            <attribute name="style">width: 100%</attribute>
+        </field>
+    </template>
+
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.move.select</field>
+        <field name="model">account.move</field>
+        <field
+            name="inherit_id"
+            ref="account_move_tier_validation.view_account_invoice_filter"
+        />
+        <field name="arch" type="xml">
+            <filter name="needs_review" position="attributes">
+                <attribute name="domain">[('reviewer_ids','in',uid)]</attribute>
+            </filter>
+            <filter name="validation_not_started" position="attributes">
+                <attribute
+                    name="domain"
+                >[('reviewer_ids', '=', False), ('validated', '=', False), ('rejected', '=', False)]
+                </attribute>
+            </filter>
+            <filter name="validation_in_progress" position="attributes">
+                <attribute name="domain">[('reviewer_ids', '!=', False)]</attribute>
+            </filter>
+            <filter name="tier_validated" position="after">
+                <filter
+                    name="tier_rejected"
+                    string="Rejected"
+                    domain="[('rejected', '=', True)]"
+                    help="Invoices rejected"
+                />
+            </filter>
+            <field name="invoice_user_id" position="after">
+                <field name="approver_id" />
+            </field>
+            <filter name="open" position="before">
+                <filter
+                    name="partial_matched"
+                    string="Partial Matched"
+                    domain="[('matched_status','=','partial_matched')]"
+                />
+                <filter
+                    name="full_matched"
+                    string="Full Matched"
+                    domain="[('matched_status','=','full_matched')]"
+                />
+                <filter
+                    name="not_matched"
+                    string="Not Matched"
+                    domain="[('matched_status','=','not_matched')]"
+                />
+                <separator />
+            </filter>
+            <filter name="status" position="after">
+                <filter
+                    name="group_matched_status"
+                    string="Matched"
+                    context="{'group_by':'matched_status'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">spantech.account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="priority">101</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <button name="button_cancel" position="attributes">
+                <attribute
+                    name="groups"
+                >account.group_account_manager,sales_team.group_sale_manager</attribute>
+            </button>
+            <button name="button_draft" position="attributes">
+                <attribute name="groups">account.group_account_manager</attribute>
+            </button>
+            <field name="to_check" position="after">
+                <field
+                    name="posting_user_id"
+                    readonly="1"
+                    attrs="{'invisible': [('posting_user_id', '=', False)]}"
+                />
+                <field
+                    name="posting_date"
+                    readonly="1"
+                    attrs="{'invisible': [('posting_date', '=', False)]}"
+                />
+            </field>
+            <div name="journal_div" position="after">
+                <field name="approver_id" />
+                <field
+                    name="show_qty_in_percentage"
+                    attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                />
+            </div>
+            <field name="ref" position="after">
+                <field name="invoice_origin" position="move" />
+            </field>
+
+            <field name="partner_id" position="attributes">
+                <attribute
+                    name="domain"
+                >['|',('parent_id','=',False),('type','in',['invoice'])]</attribute>
+                <attribute name="context" operation="update">
+                    {
+                        'verified_partner_search_mode': 1,
+                        }
+                </attribute>
+            </field>
+            <field name="partner_shipping_id" position="attributes">
+                <attribute
+                    name="domain"
+                >['|',('id','=',commercial_partner_id),'&amp;',('parent_id','=',commercial_partner_id),('type','in',['delivery','contact','other'])]</attribute>
+            </field>
+            <xpath
+                expr="//page[@id='invoice_tab']/group/group/field[@name='narration']"
+                position="replace"
+            />
+            <notebook position="inside">
+                <page
+                    id="invoice_note"
+                    string="Invoice Note"
+                    attrs="{'invisible': [('move_type', '=', 'entry')]}"
+                >
+                    <field name="narration" widget="html" nolabel="1" />
+                </page>
+            </notebook>
+            <xpath expr="//form/div[hasclass('alert-info')][2]" position="attributes">
+                <attribute name="class">alert alert-danger</attribute>
+            </xpath>
+            <xpath expr="//form/div[hasclass('alert-info')][1]" position="attributes">
+                <attribute name="class">alert alert-danger</attribute>
+            </xpath>
+            <field name="invoice_origin" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+            <group name="sale_info_group" position="inside">
+                <field name="show_reference_in_document" />
+                <field name="show_analytic_in_document" />
+            </group>
+            <field name="to_check" position="after">
+                <field
+                    name="last_payment_date"
+                    readonly="1"
+                    attrs="{'invisible': [('move_type', '!=', 'in_invoice')]}"
+                />
+            </field>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('state', '=', 'posted')]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!--<record id="view_consolidation_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field
+            name="inherit_id"
+            ref="account_consolidation_mapping_encoding_aid.view_move_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='consolidation_account_id'][1]"
+                position="attributes"
+            >
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>-->
+
+    <record id="view_invoice_tree" model="ir.ui.view">
+        <field name="name">account.invoice.tree</field>
+        <field name="model">account.move</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="payment_mode_id" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="state" position="before">
+                <field name="invoice_user_id" optional="show" />
+                <field name="approver_id" optional="show" />
+                <field name="matched_status" invisible="1" />
+                <button
+                    name="action_open_reconciled_tree"
+                    icon="fa-exclamation-circle"
+                    string="Partial Matched"
+                    type="object"
+                    attrs="{'invisible':[('matched_status','!=','partial_matched')]}"
+                />
+                <button
+                    name="action_open_reconciled_tree"
+                    icon="fa-check-circle"
+                    string="Full Matched"
+                    type="object"
+                    attrs="{'invisible':[('matched_status','!=','full_matched')]}"
+                />
+            </field>
+            <field name="invoice_user_id" position="attributes">
+                <attribute
+                    name="invisible"
+                >context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt', 'in_invoice', 'in_refund', 'in_receipt')</attribute>
+            </field>
+            <field name="team_id" position="attributes">
+                <attribute
+                    name="invisible"
+                >context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt', 'in_invoice', 'in_refund', 'in_receipt')</attribute>
+            </field>
+            <field name="invoice_date" position="after">
+                <field
+                    name="expected_vendor_bill_receipt_date"
+                    invisible="context.get('default_type') != 'in_receipt'"
+                    optional="show"
+                />
+            </field>
+            <field name="payment_state" position="after">
+                <field
+                    name="last_payment_date"
+                    optional="hide"
+                    invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"
+                />
+                <field name="validation_status" optional="show" />
+            </field>
+            <field name="invoice_partner_display_name" position="before">
+                <field
+                    name="invoice_partner_display_name"
+                    invisible="context.get('default_move_type')"
+                    groups="base.group_user"
+                    string="Partner"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="name">view_move_tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="invoice_date" optional="hide" />
+                <field name="posting_user_id" optional="hide" />
+                <field name="posting_date" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="account_move_line_view_amlse" model="ir.ui.view">
+        <field name="name">account.move.line.amlse</field>
+        <field name="model">account.move.line</field>
+        <field
+            name="inherit_id"
+            ref="account_move_line_search_extension.account_move_line_view_amlse"
+        />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="posting_user_id" optional="show" />
+                <field name="posting_date" optional="show" />
+            </field>
+            <field name="credit" position="after">
+                <field name="balance" sum="Total Balance" optional="show" />
+                <field name="purchase_price" optional="hide" />
+                <field name="purchase_price_total" optional="hide" />
+                <field name="margin" optional="hide" />
+                <field name="margin_percent" optional="hide" />
+            </field>
+            <field name="amount_currency" position="attributes">
+                <attribute name="sum">Total Amount Currency</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_move_line_product.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="before">
+                <field name="price_unit" optional="hide" />
+            </field>
+            <field name="credit" position="after">
+                <field name="purchase_price" optional="hide" />
+                <field name="purchase_price_total" optional="hide" />
+                <field name="margin" optional="hide" />
+                <field name="margin_percent" optional="hide" />
+            </field>
+            <field name="amount_currency" position="attributes">
+                <attribute name="sum">Total Amount Currency</attribute>
+            </field>
+            <field name="date" position="after">
+                <field name="posting_date" optional="show" />
+                <field name="posting_user_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_line_form" model="ir.ui.view">
+        <field name="name">account.move.line.form</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="posting_date" />
+                <field name="posting_user_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_move_line_filter" model="ir.ui.view">
+        <field name="name">account.move.line.search</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter" />
+        <field name="arch" type="xml">
+            <filter name="groupby_date" position="after">
+                <filter
+                    string="Posted by"
+                    name="groupby_posting_user_id"
+                    domain="[]"
+                    context="{'group_by': 'posting_user_id'}"
+                />
+                <filter
+                    string="Posting date"
+                    name="groupby_posting_date"
+                    domain="[]"
+                    context="{'group_by': 'posting_date'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+
+
+</odoo>

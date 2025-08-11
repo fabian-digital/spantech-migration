@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="purchase_order_tree" model="ir.ui.view">
+        <field name="name">purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field
+                    name="qty_received_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+                <field
+                    name="qty_invoiced_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_kpis_tree" model="ir.ui.view">
+        <field name="name">purchase.order.inherit.purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field
+                    name="qty_received_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+                <field
+                    name="qty_invoiced_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_tree" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field
+                    name="qty_received_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+                <field
+                    name="qty_invoiced_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']/parent::group" position="inside">
+                <field name="qty_received_ratio_total" widget="progressbar" />
+                <field name="qty_invoiced_ratio_total" widget="progressbar" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">request.quotation.select</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
+        <field name="arch" type="xml">
+            <filter name="activities_upcoming_all" position="after">
+                <separator />
+                <filter
+                    string="Received"
+                    name="received_order"
+                    domain="[('qty_received_ratio_total', '&gt;=', 100.0)]"
+                />
+                <filter
+                    string="Partial Reception"
+                    name="partial_reception_order"
+                    domain="[('qty_received_ratio_total', '&gt;', 0.0),('qty_received_ratio_total', '&lt;', 100.0)]"
+                />
+                <filter
+                    string="Not Receeived"
+                    name="not_received_order"
+                    domain="[('qty_received_ratio_total', '&lt;=', 0.0)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_search" model="ir.ui.view">
+        <field name="name">purchase.order.select</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search" />
+        <field name="arch" type="xml">
+            <filter name="activities_exception" position="after">
+                <separator />
+                <filter
+                    string="Received"
+                    name="received_order"
+                    domain="[('qty_received_ratio_total', '&gt;=', 100.0)]"
+                />
+                <filter
+                    string="Partial Reception"
+                    name="partial_reception_order"
+                    domain="[('qty_received_ratio_total', '&gt;', 0.0),('qty_received_ratio_total', '&lt;', 100.0)]"
+                />
+                <filter
+                    string="Not Receeived"
+                    name="not_received_order"
+                    domain="[('qty_received_ratio_total', '&lt;=', 0.0)]"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

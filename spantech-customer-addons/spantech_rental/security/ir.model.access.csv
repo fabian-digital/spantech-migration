@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_rental_analytic_user,access_sale_rental_analytic_user,sale_rental.model_sale_rental,analytic_global_view.analytic_global_view_user,1,0,0,0
+access_stock_move_link_rental_wizard,access_stock_move_link_rental_wizard,model_stock_move_link_rental_wizard,base.group_user,1,1,1,0
+access_stock_move_link_rental_line_wizard,access_stock_move_link_rental_line_wizard,model_stock_move_link_rental_line_wizard,base.group_user,1,1,1,0

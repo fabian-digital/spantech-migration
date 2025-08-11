@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="report_rental_order_document"
+        inherit_id="spantech_sale.report_saleorder_document"
+        primary="True"
+        priority="100"
+    >
+        <div id="informations" position="before">
+            <div t-if="doc.default_start_date and doc.default_end_date">
+                <t
+                    t-set="delta_dates"
+                    t-value="doc.default_end_date - doc.default_start_date"
+                />
+                <strong>Rental Period:</strong> <span
+                    t-field="doc.default_start_date"
+                /> to <span t-field="doc.default_end_date" /> (<span
+                    t-esc="delta_dates.days"
+                /> days)
+            </div>
+        </div>
+        <th name="th_quantity" position="replace">
+            <th name="th_quantity" class="text-end">Rental quantity</th>
+        </th>
+        <td name="td_name" position="attributes">
+            <attribute name="class">text-end</attribute>
+        </td>
+        <td name="td_quantity" position="replace">
+            <td name="td_quantity" class="text-end">
+                <span t-field="line.rental_qty" />
+            </td>
+        </td>
+    </template>
+
+    <template id="report_rental_order">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+                    t-call="spantech_rental.report_rental_order_document"
+                    t-lang="doc.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_rental_order" model="ir.actions.report">
+        <field name="name">Quotation / Order (Rental)</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">spantech_rental.report_rental_order</field>
+        <field name="report_file">spantech_rental.report_rental_order</field>
+        <field
+            name="print_report_name"
+        >(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="sale.model_sale_order" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

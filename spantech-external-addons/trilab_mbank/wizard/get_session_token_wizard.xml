@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="get_session_token_wizard_form" model="ir.ui.view">
+        <field name="name">get.session.token.wizard.form</field>
+        <field name="model">trilab_mbank.get.session.token.wizard</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <sheet>
+                    <field name="token_to_sign_file_id" invisible="1"/>
+                    <field name="login_to_sign_file_id" invisible="1"/>
+
+                    <field name="signed_file_id" invisible="1"/>
+                    <field name="signed_file_name" invisible="1"/>
+
+                    <field name="signed_login_file_id" invisible="1"/>
+                    <field name="signed_login_file_name" invisible="1"/>
+
+                    <field name="auth_token" invisible="1"/>
+
+                    <group col="4">
+                        <field name="journal_ids" colspan="2" widget="many2many_tags"/>
+                        <field name="session_expiration" required="1"/>
+                    </group>
+
+                    <group col="4">
+                        <p>Please sign files in "CAdES" format with data included.</p>
+                    </group>
+
+                    <group string="Step One - Login"
+                           col="4"
+                           attrs="{'invisible': [('auth_token', '!=', False)]}"
+                    >
+                        <div col="2">
+                            <button name="button_get_login_to_sign_file"
+                                    string="Get login file to sign"
+                                    class="oe_highlight"
+                                    type="object"
+                                    attrs="{'invisible': [('login_to_sign_file_id', '!=', False)]}"
+                            />
+
+                            <button name="button_download_login_to_sign"
+                                    string="Download login file to sign"
+                                    class="oe_highlight"
+                                    type="object"
+                                    attrs="{'invisible': ['|', ('login_to_sign_file_id', '=', False), ('signed_login_file_id', '!=', False)]}"
+                            />
+
+                            <button name="button_get_login_token"
+                                    string="Login"
+                                    class="oe_highlight"
+                                    type="object"
+                                    attrs="{'invisible': [('signed_login_file_id', '=', False)]}"
+                            />
+                        </div>
+
+                        <field name="signed_login_file_datas"
+                               widget="binary"
+                               filename="signed_login_file_name"
+                               col="2"
+                               attrs="{'invisible': [('login_to_sign_file_id', '=', False)]}"
+                        />
+                    </group>
+
+                    <group string="Step Two - Create Session"
+                           col="4"
+                           attrs="{'invisible': [('auth_token', '=', False)]}"
+                    >
+                        <div col="2">
+                            <button name="button_get_token_to_sign"
+                                    type="object"
+                                    string="Get session token to sign"
+                                    class="oe_highlight"
+                                    attrs="{'invisible': ['|', ('session_expiration', '=', False), ('token_to_sign_file_id', '!=', False)]}"
+                            />
+
+                            <button name="button_download_token_to_sign"
+                                    type="object"
+                                    string="Download file to sign"
+                                    class="oe_highlight"
+                                    attrs="{'invisible': ['|', ('token_to_sign_file_id','=', False), ('signed_file_id','!=', False)]}"
+                            />
+
+                            <button name="button_get_session_token"
+                                    type="object"
+                                    string="Get Session Token"
+                                    class="oe_highlight"
+                                    attrs="{'invisible': [('signed_file_id', '=', False)]}"
+                            />
+                        </div>
+
+                        <field name="signed_file_datas"
+                               widget="binary"
+                               filename="signed_file_name"
+                               col="2"
+                               attrs="{'invisible': [('token_to_sign_file_id','=', False)]}"
+                        />
+                    </group>
+
+                </sheet>
+                <footer>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="get_session_token_wizard_action" model="ir.actions.act_window">
+        <field name="name">Get Session Token Wizard</field>
+        <field name="res_model">trilab_mbank.get.session.token.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="get_session_token_wizard_form"/>
+    </record>
+
+    <record id="get_multi_session_token_wizard_action" model="ir.actions.act_window">
+        <field name="name">Get Session Token Wizard</field>
+        <field name="res_model">trilab_mbank.get.session.token.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="account.model_account_journal"/>
+        <field name="binding_view_types">list</field>
+        <field name="context">{'x_multi': True}</field>
+    </record>
+
+</odoo>

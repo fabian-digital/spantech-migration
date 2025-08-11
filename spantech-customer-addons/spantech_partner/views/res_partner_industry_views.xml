@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_industry_view_form" model="ir.ui.view">
+        <field name="name">Industry</field>
+        <field name="model">res.partner.industry</field>
+        <field name="inherit_id" ref="base.res_partner_industry_view_form" />
+        <field name="arch" type="xml">
+            <field name="full_name" position="after">
+                <field name="segment" />
+                <field name="subsegment" />
+            </field>
+        </field>
+    </record>
+    <record id="res_partner_industry_view_tree" model="ir.ui.view">
+        <field name="name">Industry</field>
+        <field name="model">res.partner.industry</field>
+        <field name="inherit_id" ref="base.res_partner_industry_view_tree" />
+        <field name="arch" type="xml">
+            <field name="full_name" position="after">
+                <field name="segment" />
+                <field name="subsegment" />
+            </field>
+        </field>
+    </record>
+    <record id="res_partner_industry_view_search" model="ir.ui.view">
+        <field name="name">res.partner.industry.view.search</field>
+        <field name="model">res.partner.industry</field>
+        <field name="inherit_id" ref="base.res_partner_industry_view_search" />
+        <field name="arch" type="xml">
+            <field name="full_name" position="after">
+                <field name="segment" />
+                <field name="subsegment" />
+            </field>
+            <filter name="inactive" position="after">
+                <separator />
+                <filter
+                    string="Segment"
+                    name="groupby_segment"
+                    domain="[]"
+                    context="{'group_by': 'segment'}"
+                />
+                <filter
+                    string="Subsegment"
+                    name="groupby_subsegment"
+                    domain="[]"
+                    context="{'group_by': 'subsegment'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.expense.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <group name="accounting" position="inside">
+                <group
+                    name="expenses"
+                    string="Expenses"
+                    attrs="{'invisible': [('can_be_expensed','=', False)]}"
+                >
+                    <field name="expense_mandatory_attachment" />
+                    <field name="is_expense_cashwithdrawal" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

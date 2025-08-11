@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="trial_balance_wizard" model="ir.ui.view">
+        <field name="name">trial.balance.report.wizard.inherit</field>
+        <field name="model">trial.balance.report.wizard</field>
+        <field name="inherit_id" ref="account_financial_report.trial_balance_wizard" />
+        <field name="arch" type="xml">
+            <group name="main_info" position="before">
+                <group
+                    name="consolidation"
+                    style="margin-bottom:0px;"
+                    groups="account_consolidation_mapping_base.group_consolidation_account_mapping"
+                >
+                    <label for="consolidation" />
+                    <div name="consolidation" class="o_row">
+                        <field name="consolidation" nolabel="1" />
+                        <button
+                            name="check_consolidation"
+                            string="Sanity Check"
+                            type="object"
+                            help="Check the consistency of the Consolidation Counterpart Account Settings."
+                        />
+                    </div>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

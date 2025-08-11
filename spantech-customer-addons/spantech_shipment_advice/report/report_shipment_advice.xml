@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template
+        id="report_shipment_advice_document"
+        inherit_id="shipment_advice.report_shipment_advice_document"
+        priority="101"
+    >
+        <table name="header" position="replace">
+            <table class="table table-sm" name="header">
+                <tr>
+                    <th>Warehouse address</th>
+                    <td colspan="3">
+                        <div
+                            t-esc="o.warehouse_id.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": False, "no_tag_br": True}'
+                        />
+                    </td>
+                </tr>
+            </table>
+        </table>
+        <xpath expr="//table[@name='bulk_content']" position="replace">
+            <div>
+                <t
+                    t-foreach="o.loaded_move_line_without_package_ids.mapped('picking_id').mapped('partner_id')"
+                    t-as="partner"
+                >
+                    <table class="table table-sm" name="header">
+                        <tr>
+                            <th>Shipment advice</th>
+                            <td>
+                                <span t-field="o.name" />
+                            </td>
+                            <th />
+                            <td />
+                        </tr>
+                        <tr>
+                            <th>Arrival date</th>
+                            <td>
+                                <span t-field="o.arrival_date" />
+                            </td>
+                            <th>Total load (kg)</th>
+                            <td>
+                                <span t-field="o.total_load" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Departure date</th>
+                            <td colspan="3">
+                                <span t-field="o.departure_date" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Truck ref.</th>
+                            <td colspan="3">
+                                <span t-field="o.ref" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Loading dock</th>
+                            <td>
+                                <span t-field="o.dock_id" />
+                            </td>
+                            <th>Driver signature</th>
+                            <td style="border-bottom: 2px dotted black;" />
+                        </tr>
+                    </table>
+                    <h3
+                        t-esc="partner"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "no_tag_br": True}'
+                    />
+                    <table
+                        class="table table-sm"
+                        name="bulk_content"
+                        style="page-break-after: always;"
+                        t-if="o.loaded_move_line_without_package_ids"
+                    >
+                        <strong>Bulk content</strong>
+                        <thead>
+                            <tr>
+                                <th>Analytic Account</th>
+                                <th>Order</th>
+                                <th>Transfer</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                t-foreach="o.loaded_move_line_without_package_ids.filtered(lambda x: x.picking_id.partner_id == partner and x.qty_done > 0).sorted(key=lambda x: x.picking_id.name)"
+                                t-as="line"
+                            >
+                                <td>
+                                    <span t-field="line.analytic_account_id" />
+                                </td>
+                                <td>
+                                    <t t-if="line.picking_id.sale_id">
+                                        <span
+                                            t-field="line.picking_id.sale_id.auto_purchase_order_id"
+                                        />
+                                    </t>
+                                </td>
+                                <td>
+                                    <span t-field="line.picking_id" />
+                                </td>
+                                <td>
+                                    <span t-field="line.product_id" />
+                                </td>
+                                <td>
+                                    <span t-field="line.qty_done" />
+                                </td>
+                                <td>
+                                    <span t-field="line.move_id.weight_done" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>

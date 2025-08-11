@@ -1,0 +1,137 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* trilab_jpk_vat_lock_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-02 07:01+0000\n"
+"PO-Revision-Date: 2023-10-02 07:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model,name:trilab_jpk_vat_lock_date.model_account_change_lock_date
+msgid "Change Lock Date"
+msgstr "Zmiana daty blokady"
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model,name:trilab_jpk_vat_lock_date.model_res_company
+msgid "Companies"
+msgstr "Firmy"
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception__message
+msgid "Exception message"
+msgstr "Komunikat"
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception__id
+msgid "ID"
+msgstr ""
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_account_change_lock_date__x_jpk_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_res_company__x_jpk_lock_date
+msgid "JPK Lock Date"
+msgstr "Data blokady JPK"
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model,name:trilab_jpk_vat_lock_date.model_account_move
+msgid "Journal Entry"
+msgstr "Zapis dziennika"
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,field_description:trilab_jpk_vat_lock_date.field_jpk_vat_date_exception__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model.fields,help:trilab_jpk_vat_lock_date.field_res_company__x_jpk_lock_date
+msgid "Lock date for JPK reporting"
+msgstr "Data blokady dla sprawozdawczości JPK"
+
+#. module: trilab_jpk_vat_lock_date
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_vat_lock_date.jpk_vat_date_wizard
+msgid "No"
+msgstr "Nie"
+
+#. module: trilab_jpk_vat_lock_date
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_vat_lock_date.view_account_change_lock_date_jpk
+msgid "Pick a date to lock"
+msgstr "Wybierz datę blokady"
+
+#. module: trilab_jpk_vat_lock_date
+#. odoo-python
+#: code:addons/trilab_jpk_vat_lock_date/wizard/jpk_vat_date_exception.py:0
+#, python-format
+msgid ""
+"The JPK date falls within an already closed JPK reporting period, potentially there will be a need to correct past JPK Declaration.\n"
+"Do you want to continue?"
+msgstr ""
+"Data JPK wypada w zamkniętym już okresie sprawozdawczym JPK, potencjalnie może zaistnieć potrzeba skorygowania wcześniejszej Deklaracji JPK.\n"
+"Czy chcesz kontynuować?"
+
+#. module: trilab_jpk_vat_lock_date
+#. odoo-python
+#: code:addons/trilab_jpk_vat_lock_date/models/account_move.py:0
+#, python-format
+msgid ""
+"The TAX date falls within a period closed for TAX reporting, there will be a"
+" potential need to correct the reports."
+msgstr ""
+"Data rozliczenia podatkowego przypada w okresie zamkniętym "
+"dla sprawozdawczości podatkowej, zaistnieje potencjalna konieczność korekty "
+"zeznań."
+
+#. module: trilab_jpk_vat_lock_date
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_vat_lock_date.jpk_vat_date_wizard
+msgid "VAT Date Exception"
+msgstr "Wyjątek daty VAT"
+
+#. module: trilab_jpk_vat_lock_date
+#: model:ir.model,name:trilab_jpk_vat_lock_date.model_jpk_vat_date_exception
+msgid "VAT Date exception wizard"
+msgstr "Wizard Daty VAT"
+
+#. module: trilab_jpk_vat_lock_date
+#. odoo-python
+#: code:addons/trilab_jpk_vat_lock_date/models/account_move.py:0
+#, python-format
+msgid "Warning"
+msgstr "Uwaga"
+
+#. module: trilab_jpk_vat_lock_date
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_vat_lock_date.jpk_vat_date_wizard
+msgid "Yes"
+msgstr "Tak"

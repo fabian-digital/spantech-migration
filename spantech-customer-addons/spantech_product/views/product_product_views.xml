@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="product_normal_form_view_inherited" model="ir.ui.view">
+        <field name="name">Product Template Only Form Inherited view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="priority">101</field>
+        <field name="arch" type="xml">
+            <field name="default_code" position="replace">
+                <label for="default_code" />
+                <div>
+                    <field name="default_code" />
+                    <button
+                        name="%(spantech_product.code_product_update_action)d"
+                        type="action"
+                        string="Update Code"
+                        class="btn btn-link oe_inline"
+                    />
+                </div>
+                <field name="secondary_code" />
+            </field>
+        </field>
+    </record>
+    <record id="product_product_tree_view" model="ir.ui.view">
+        <field name="name">Product Template Tree Inherited view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="secondary_code" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record id="product_product_search_view" model="ir.ui.view">
+        <field name="name">Product Template Search Inherited view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view" />
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="secondary_code" />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+# See https://github.com/OCA/maintainer-quality-tools/blob/master/travis/clone_oca_dependencies
+# The expected format for oca_dependencies.txt:
+# * comment lines start with # and are ignored
+# *  a dependency line contains:
+#   - the name of the OCA project
+#   - (optional) the URL to the git repository (defaulting to the OCA repository)
+#   - (optional) the name of the branch to use (defaulting to ${VERSION}). It is
+#     required if you want to select a commit SHA in the next parameter.
+#   - (optional) the commit SHA1 to use. If you set this option you MUST specify
+#     the branch
+
+noviat_addons https://github.com/Noviat-Projects/spantech-noviat-addons.git 16.0
+oca_addons https://github.com/Noviat-Projects/spantech-oca-addons.git 16.0
+external_addons https://github.com/Noviat-Projects/spantech-external-addons.git 16.0
+replace_addons https://github.com/Noviat-Projects/spantech-replace-addons.git 16.0

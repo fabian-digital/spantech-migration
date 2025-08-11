@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+
+    <!-- Specific buttons space i.e. for invoices and bills-->
+    <t
+        t-name="account.ListView.Buttons"
+        t-inherit="account.ListView.Buttons"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="." position="inside">
+            <t t-call="web_tree_date_search.web_tree_date_search_core" />
+        </xpath>
+    </t>
+
+    <!-- Generic buttons space -->
+    <t
+        t-name="web_tree_date_search.web_tree_date_search_toolbar3"
+        t-inherit="web.ListView.Buttons"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="." position="inside">
+            <t t-call="web_tree_date_search.web_tree_date_search_core" />
+        </xpath>
+    </t>
+
+    <!-- logic of showing boxes -->
+    <t t-name="web_tree_date_search.web_tree_date_search_core" owl="1">
+        <div
+            id="web_tree_date_search_toolbar"
+            name="web_tree_date_search_toolbar"
+            class="o_web_tree_date_search_toolbar"
+            style="margin-bottom:0px;"
+        >
+            <t t-foreach="dateFilters" t-as="dateFilter" t-key="dateFilter.name">
+                <t t-call="web_tree_date_search.web_tree_date_search_field3" />
+            </t>
+        </div>
+    </t>
+
+    <t t-name="web_tree_date_search.web_tree_date_search_field3" owl="1">
+        <table name="web_tree_date_search_field" class="o_web_tree_date_search_input">
+            <thead>
+                <tr>
+                    <th
+                        name="date_field_label"
+                        t-esc="dateFilter.display_name + ' :'"
+                    />
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td name="date_from">
+                        <div t-att-class="'oe_date_filter_from_' + dateFilter.name">
+                            <input
+                                t-on-change="ev => this._onchange_date_from(ev, dateFilter)"
+                                type="date"
+                                class="o_searchview_input date_search_input"
+                                name="dateFrom"
+                                placeholder="From..."
+                            />
+                        </div>
+                    </td>
+                    <td name="date_to">
+                        <div t-att-class="'oe_date_filter_to_' + dateFilter.name">
+                            <input
+                                t-on-change="ev => this._onchange_date_to(ev, dateFilter)"
+                                type="date"
+                                class="o_searchview_input date_search_input"
+                                name="dateTo"
+                                placeholder="To..."
+                            />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </t>
+
+</templates>

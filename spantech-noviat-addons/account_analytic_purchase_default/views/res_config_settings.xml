@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.form.analytic.default.required.purchase</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="account_analytic_invoice_default.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <div id="analytic_default_required_div" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field
+                            name="analytic_account_mandatory_on_purchase"
+                            class="o_light_label"
+                            string="Analytic Mandatory (Purchases)"
+                        />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label
+                            for="analytic_account_mandatory_on_purchase"
+                            string="Analytic Mandatory (Purchases)"
+                        />
+                        <span
+                            class="fa fa-lg fa-building-o"
+                            title="Values set here are company-specific."
+                            role="img"
+                            aria-label="Values set here are company-specific."
+                            groups="base.group_multi_company"
+                        />
+                        <div class="row">
+                            <div class="text-muted col-lg-8">
+                                Analytic Account are mandatory on Purchase Orders
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

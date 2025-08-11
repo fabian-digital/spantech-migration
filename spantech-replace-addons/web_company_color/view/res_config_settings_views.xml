@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_budget" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.budget</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25" />
+        <field
+      name="inherit_id"
+      ref="base_setup.res_config_settings_view_form"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='companies']" position="inside">
+                <div id="web_company_color">
+                    <h2>Web Company Color</h2>
+                    <div
+            class="row mt16 o_settings_container"
+            name="web_company_color_option_setting_container"
+          >
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="color_multi_active_companies" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="color_multi_active_companies" />
+                                <div class="text-muted">
+                                    Activate this feature if you want a different set of
+                                    colors when the user has several companies selected.
+                                </div>
+                            </div>
+                        </div>
+                        <div
+              class="col-12 col-lg-6 o_setting_box"
+              attrs="{'invisible': [('color_multi_active_companies','=',False)]}"
+            >
+                            <div class="row">
+                                <label for="color_navbar_bg" />
+                                <field name="color_navbar_bg" widget="color" />
+                            </div>
+                            <div class="row">
+                                <label for="color_navbar_bg_hover" />
+                                <field
+                  name="color_navbar_bg_hover"
+                  widget="color"
+                />
+                            </div>
+                            <div class="row">
+                                <label for="color_navbar_text" />
+                                <field
+                  name="color_navbar_text"
+                  widget="color"
+                />
+                            </div>
+                            <div class="row">
+                                <label for="color_button_bg" />
+                                <field name="color_button_bg" widget="color" />
+                            </div>
+                            <div class="row">
+                                <label for="color_button_bg_hover" />
+                                <field
+                  name="color_button_bg_hover"
+                  widget="color"
+                />
+                            </div>
+                            <div class="row">
+                                <label for="color_button_text" />
+                                <field
+                  name="color_button_text"
+                  widget="color"
+                />
+                            </div>
+                            <div class="row">
+                                <label for="color_link_text" />
+                                <field name="color_link_text" widget="color" />
+                            </div>
+                            <div class="row">
+                                <label for="color_link_text_hover" />
+                                <field
+                  name="color_link_text_hover"
+                  widget="color"
+                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

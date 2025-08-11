@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem
+        id="menu_spantech_audit"
+        name="Audit"
+        groups="spantech_base.group_spantech_auditlog"
+        web_icon="auditlog,static/description/icon.png"
+    >
+        <menuitem
+            id="menu_spantech_audit_logs"
+            name="Logs"
+            action="auditlog.action_auditlog_log_tree"
+            sequence="10"
+        />
+            <menuitem
+            id="menu_spantech_auditlog_line"
+            name="Log Lines"
+            action="auditlog.action_auditlog_line"
+            sequence="20"
+        />
+        <menuitem
+            id="menu_action_auditlog_rule_tree"
+            action="auditlog.action_auditlog_rule_tree"
+            sequence="30"
+        />
+    </menuitem>
+
+</odoo>

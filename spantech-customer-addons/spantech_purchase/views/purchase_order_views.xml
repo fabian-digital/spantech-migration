@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button
+                    name="action_boom_kit"
+                    type="object"
+                    string="Explode Kit"
+                    states="draft"
+                />
+            </header>
+            <field name="partner_id" position="before">
+                <field
+                    name="commercial_partner_id"
+                    widget="res_partner_many2one"
+                    context="{'res_partner_search_mode': 'supplier', 'show_address': 1, 'show_vat': True, 'verified_partner_search_mode': 1}"
+                    options='{"always_reload": True}'
+                    domain="[('parent_id','=',False)]"
+                />
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute
+                    name="domain"
+                >['|',('id','=',commercial_partner_id),('parent_id','=',commercial_partner_id)]</attribute>
+            </field>
+            <div name="date_planned_div" position="after">
+                <field name="show_category_warning" invisible="1" />
+            </div>
+            <sheet position="before">
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': [('show_category_warning', '=', False)]}"
+                >
+                    One of the products has the default category and then you will not be able to validate your purchase order until the products have the correct settings.
+                </div>
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': [('analytic_distribution_blocking', '=', '')]}"
+                >
+                    <field name="analytic_distribution_blocking" />
+                </div>
+            </sheet>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">purchase.order.filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <filter
+                    name="analytic_account_ids"
+                    domain="[]"
+                    context="{'group_by': 'analytic_account_ids'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_search" model="ir.ui.view">
+        <field name="name">purchase.order.filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <filter
+                    name="analytic_account_ids"
+                    domain="[]"
+                    context="{'group_by': 'analytic_account_ids'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase.menu_product_pricelist_action2_purchase" model="ir.ui.menu">
+        <field name="parent_id" ref="purchase.menu_purchase_products" />
+        <field name="sequence">50</field>
+    </record>
+
+</odoo>

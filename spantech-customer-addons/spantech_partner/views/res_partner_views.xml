@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">spantech.res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="verified" />
+                <field name="verified_date" readonly="1" />
+            </field>
+            <field name="ref" position="before">
+                <field name="property_old_erp_customer_ref" />
+                <field name="property_old_erp_supplier_ref" />
+            </field>
+            <field name="website" position="before">
+                <field
+                    name="email_hubspot"
+                    widget="email"
+                    attrs="{'required': [('user_ids','!=', [])]}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_partner_tree" model="ir.ui.view">
+        <field name="name">res.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="display_name" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="display_name" position="before">
+                <field name="verified" optional="hide" />
+            </field>
+            <field name="display_name" position="after">
+                <field name="name" optional="hide" string="Name without modification" />
+            </field>
+        </field>
+    </record>
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">spantech.res.partner.select.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <filter name="type_company" position="after">
+                <separator />
+                <filter
+                    string="Verified"
+                    name="partner_verified"
+                    domain="[('verified', '=', True)]"
+                />
+                <filter
+                    string="Not Verified"
+                    name="partner_not_verified"
+                    domain="[('verified', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="verified_date"
+                    string="Verified Date"
+                    date="verified_date"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="view_identification_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.id_number</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_identification.view_partner_form" />
+        <field name="arch" type="xml">
+            <page name="id_numbers" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+        </field>
+    </record>
+</odoo>

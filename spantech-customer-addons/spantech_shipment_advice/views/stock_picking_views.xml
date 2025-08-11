@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="vpicktree" model="ir.ui.view">
+      <field name="name">stock.picking.tree</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.vpicktree" />
+      <field name="arch" type="xml">
+          <field name="origin" position="after">
+              <field name="planned_shipment_advice_id" optional="show" />
+          </field>
+      </field>
+    </record>
+</odoo>

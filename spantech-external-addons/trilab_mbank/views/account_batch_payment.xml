@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_batch_payment_form_inherit" model="ir.ui.view">
+        <field name="name">view_batch_payment_form_inherit</field>
+        <field name="model">account.batch.payment</field>
+        <field name="inherit_id" ref="account_batch_payment.view_batch_payment_form"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field name="x_mbank_show_payment_button" invisible="1"/>
+                <button name="x_mbank_domestic_transfer" type="object" string="mBank Payment" class="oe_highlight"
+                        attrs="{'invisible': [('x_mbank_show_payment_button', '!=', True)]}"/>
+            </header>
+            <field name="name" position="after">
+                <field name="x_mbank_batch_id" invisible="1"/>
+                <field name="x_mbank_status" attrs="{'invisible': [('x_mbank_batch_id', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

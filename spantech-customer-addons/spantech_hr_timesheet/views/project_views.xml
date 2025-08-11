@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="edit_project" model="ir.ui.view">
+        <field name="name">spantech_hr_timesheet.edit_project</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    class="oe_stat_button"
+                    name="%(hr_timesheet.act_hr_timesheet_line_by_project)d"
+                    type="action"
+                    icon="fa-calendar"
+                    attrs="{'invisible': [('allow_timesheets', '=', False)]}"
+                    groups="hr_timesheet.group_hr_timesheet_user"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <div class="oe_inline">
+                            <span class="o_stat_value mr-1">
+                                <field
+                                    name="total_timesheet_time"
+                                    widget="statinfo"
+                                    nolabel="1"
+                                />
+                            </span>
+                            <span class="o_stat_value">
+                                <field
+                                    name="timesheet_encode_uom_id"
+                                    class="o_stat_text"
+                                    options="{'no_open' : True}"
+                                />
+                            </span>
+                        </div>
+                        <span class="o_stat_text">Recorded</span>
+                    </div>
+                </button>
+            </xpath>
+            <div name="alias_def" position="after">
+                <field name="hours_in_man_days" />
+                <label
+                    for="task_completion_danger_threshold_min"
+                    string="Danger Threshold"
+                />
+                <div name="task_completion_threshold_div" class="o_row">
+                    <div
+                        class="d-flex align-items-center"
+                        style="flex: auto;-webkit-flex: 0;width: fit-content !important;"
+                    >
+                        <span class="o_status o_status_red" />
+                    </div>
+                    <span class="oe_inline">&lt;</span>
+                    <field
+                        name="task_completion_danger_threshold_min"
+                        class="oe_inline text-warning"
+                    />
+                    <span class="oe_inline text-warning">to</span>
+                    <field
+                        name="task_completion_danger_threshold_max"
+                        class="oe_inline text-warning"
+                    />
+                    <span class="oe_inline">&lt;</span>
+                    <div
+                        class="d-flex align-items-center"
+                        style="flex: auto;-webkit-flex: 0;width: fit-content !important;"
+                    >
+                        <span class="o_status o_status_green" />
+                    </div>
+                </div>
+            </div>
+            <div name="dates" position="after">
+                <field name="budgeted_man_days" />
+            </div>
+        </field>
+    </record>
+
+    <record id="project_timesheet_action" model="ir.actions.act_window">
+        <field name="name">Project Timesheet</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No collaborators found
+            </p>
+            <p>
+                Collaborate efficiently with key stakeholders by sharing with them the Kanban view of your tasks. Collaborators will be able to edit parts of tasks and send messages.
+            </p>
+        </field>
+    </record>
+
+</odoo>

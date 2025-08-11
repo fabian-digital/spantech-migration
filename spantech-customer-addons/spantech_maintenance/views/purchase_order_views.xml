@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="ir.ui.view" id="purchase_order_maintenance_equipment">
+      <field name="name">Purchasr Order for Maintenance Equipment</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form" />
+      <field name="arch" type="xml">
+	  <field name="fiscal_position_id" position="after">
+	      <separator string="Maintenance" />
+              <field name="maintenance_equipment_id" />
+              <field
+                    name="maintenance_information"
+                    placeholder="Maintenance extra information"
+                />
+	  </field>
+      </field>
+    </record>
+</odoo>

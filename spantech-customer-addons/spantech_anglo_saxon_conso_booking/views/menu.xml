@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <menuitem
+        id="spantech_anglo_saxon_conso_booking_menu_pl"
+        name="Generate ICO P&amp;L Entries"
+        parent="account.menu_finance_entries_actions"
+        action="spantech_anglo_saxon_conso_booking_action_pl"
+        groups="account.group_account_manager"
+        sequence="60"
+    />
+
+  <menuitem
+        id="spantech_anglo_saxon_conso_booking_menu_bs"
+        name="Generate ICO BS Entries"
+        parent="account.menu_finance_entries_actions"
+        action="spantech_anglo_saxon_conso_booking_action_bs"
+        groups="account.group_account_manager"
+        sequence="60"
+    />
+
+</odoo>

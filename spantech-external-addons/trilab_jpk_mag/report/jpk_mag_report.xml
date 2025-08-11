@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="trilab_jpk_mag.jpk_mag_report">
+        <t t-call="web.html_container">
+            <t t-call="trilab_jpk_base.internal_layout">
+                <t t-call="trilab_jpk_mag.report_jpk_mag_report_base"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_jpk_mag_report_base">
+        <t t-set="title">JPK MAG Report - <t t-out="company_name"/></t>
+        <t t-set="company_name" t-value="company_name"/>
+        <div class="page">
+            <div class="row">
+                <h4
+                        class="mt0"
+                        t-out="title or 'Odoo Report'"
+                        style="text-align: center;"
+                />
+            </div>
+
+            <t t-foreach="doc['mapping']" t-as="section">
+                <div class="page_break"/>
+                <div class="act_as_table data_table" style="width: 100%;">
+                    <table class="table act_as_table">
+                        <thead>
+                            <tr class="act_as_row" t-translation="off">
+                                <th style="text-align: left;"
+                                    t-att-colspan="len(doc['sections'][section.key]['columns_header'])"
+                                    t-out="section.title"
+                                />
+
+                            </tr>
+                            <tr class="act_as_row" t-translation="off">
+                                <t t-foreach="doc['sections'][section.key]['columns_header']" t-as="col">
+                                    <th t-out="col"/>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc['sections'][section.key]['lines']" t-as="line">
+                                <t t-set="is_odd" t-value="line_index % 2 != 0"/>
+                                <tr class="act_as_row" t-translation="off"
+                                    t-att-style="is_odd and 'background-color: #f8f9fa;' or ''">
+                                    <t t-foreach="line['columns']" t-as="col">
+                                        <t t-if="col is not None">
+                                            <td t-out="col"/>
+                                        </t>
+                                        <t t-else="">
+                                            <td t-out="'-'"/>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </div>
+    </template>
+</odoo>

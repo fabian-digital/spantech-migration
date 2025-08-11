@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record
+        id="generate_crossovered_budget_version_wiz_action"
+        model="ir.actions.server"
+    >
+        <field name="name">Generate PBR Version</field>
+        <field name="model_id" ref="account_budget.model_crossovered_budget" />
+        <field name="state">code</field>
+        <field name="binding_model_id" ref="model_crossovered_budget" />
+        <field name="binding_view_types">form</field>
+        <field
+            name="code"
+        >action = records.action_generate_budget_version_wizard()</field>
+    </record>
+
+    <record id="generate_crossovered_budget_version_wiz_form" model="ir.ui.view">
+        <field name="name">generate.crossovered.budget.version.wiz.form</field>
+        <field name="model">generate.crossovered.budget.version.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="crossovered_budget_id" readonly="True" />
+                    <field name="version" />
+                </group>
+                <footer>
+                    <button
+                        string="Generate"
+                        name="action_generate_crossovered_budget_version"
+                        type="object"
+                    />
+                    <button string="Cancel" special="cancel" class="oe-link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem
+        id="analytic_global_view_root_menu"
+        groups="analytic_global_view.analytic_global_view_user"
+        name="Analytic"
+        sequence="50"
+        web_icon="analytic_global_view,static/menu_icon.png"
+    >
+        <menuitem id="analytic_global_view_analytic_menu" name="Analytic" sequence="10">
+            <menuitem
+                id="analytic_global_view_analytic_analytic_account_action_menu"
+                name="Analytic Accounts"
+                action="analytic.action_account_analytic_account_form"
+                sequence="10"
+            />
+        </menuitem>
+        <menuitem
+            id="analytic_global_view_configuration_menu"
+            name="Configuration"
+            groups="analytic_global_view.analytic_global_view_manager"
+            sequence="100"
+        >
+            <menuitem
+                id="account_analytic_plan_menu"
+                name="Analytic Plans"
+                action="analytic.account_analytic_plan_action"
+                groups="analytic.group_analytic_accounting"
+                sequence="2"
+            />
+        </menuitem>
+    </menuitem>
+
+</odoo>

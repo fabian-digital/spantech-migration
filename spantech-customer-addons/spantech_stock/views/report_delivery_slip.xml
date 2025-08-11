@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='signature']" position="after">
+            <div class="mt32" t-if="o.external_note">
+                <p t-raw="o.external_note" />
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="report_delivery_partner_left_document"
+        inherit_id="stock.report_delivery_document"
+        primary="True"
+        priority="101"
+    >
+        <div name="div_outgoing_address" position="replace" />
+        <xpath expr="//h2" position="before">
+            <div class="row mb-5">
+                <div class="offset-1 col-6">
+                    <div
+                        t-if="partner"
+                        t-esc="partner"
+                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'
+                    />
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="report_deliveryslip_partner_left">
+        <t t-foreach="docs" t-as="o">
+            <t
+                t-call="spantech_stock.report_delivery_partner_left_document"
+                t-lang="o.partner_id.lang"
+            />
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Fiscal Position Templates -->
+    <record id="fiscal_position_template_1a" model="account.fiscal.position.template">
+        <field name="sequence">1</field>
+        <field name="name">PL osoba</field>
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="auto_apply" eval="True"/>
+        <field name="vat_required" eval="False"/>
+        <field name="country_id" ref="base.pl"/>
+    </record>
+    <record id="fiscal_position_template_1b" model="account.fiscal.position.template">
+        <field name="sequence">2</field>
+        <field name="name">PL firma</field>
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="auto_apply" eval="True"/>
+        <field name="vat_required" eval="True"/>
+        <field name="country_id" ref="base.pl"/>
+    </record>
+
+    <record id="fiscal_position_template_2" model="account.fiscal.position.template">
+        <field name="sequence">3</field>
+        <field name="name">UE</field>
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="auto_apply" eval="True"/>
+        <field name="vat_required" eval="True"/>
+        <field name="country_group_id" ref="base.europe"/>
+    </record>
+
+    <record id="fiscal_position_template_3" model="account.fiscal.position.template">
+        <field name="sequence">4</field>
+        <field name="name">IM/EX</field>
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="auto_apply" eval="True"/>
+    </record>
+
+    <!-- Fiscal Position Tax Templates -->
+
+    <!-- European Union -->
+    <!-- Sales -->
+
+    <record id="fiscal_position_tax_template_1a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_s_23_towary"/>
+        <field name="tax_dest_id" ref="ue_s_towary"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_1b" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_s_23_uslugi"/>
+        <field name="tax_dest_id" ref="ue_s_uslugi"/>
+    </record>
+
+    <record id="fiscal_posistion_tax_template_2" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_s_8_towary"/>
+        <field name="tax_dest_id" ref="ue_s_towary"/>
+    </record>
+
+    <record id="fiscal_posistion_tax_template_3a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_s_5_towary"/>
+        <field name="tax_dest_id" ref="ue_s_towary"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_4" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_s_0_towary"/>
+        <field name="tax_dest_id" ref="ue_s_towary"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_5" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_s_zw_towary"/>
+        <field name="tax_dest_id" ref="ue_s_towary"/>
+    </record>
+
+    <!-- European Union -->
+    <!-- Purchase -->
+
+    <record id="fiscal_position_tax_template_10a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_z_23_towary_poz"/>
+        <field name="tax_dest_id" ref="ue_z_23_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_10b" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_z_23_uslugi_poz"/>
+        <field name="tax_dest_id" ref="ue_z_23_uslugi_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_10c" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_z_23_towary_st"/>
+        <field name="tax_dest_id" ref="ue_z_23_towary_st"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_12a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_z_8_towary_poz"/>
+        <field name="tax_dest_id" ref="ue_z_8_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_13a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_z_5_towary_poz"/>
+        <field name="tax_dest_id" ref="ue_z_5_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_14" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_z_0_towary_poz"/>
+        <field name="tax_dest_id" ref="ue_z_0_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_15" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_2"/>
+        <field name="tax_src_id" ref="vat_z_zw_towary_poz"/>
+        <field name="tax_dest_id" ref="ue_z_zw_towary_poz"/>
+    </record>
+
+    <!-- World Export/Import -->
+    <!-- Sales -->
+
+    <record id="fiscal_position_tax_template_21a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_s_23_towary"/>
+        <field name="tax_dest_id" ref="ex_s_towary"/>
+    </record>
+    <record id="fiscal_position_tax_template_21b" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_s_23_uslugi"/>
+        <field name="tax_dest_id" ref="ex_s_uslugi"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_22a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_s_8_towary"/>
+        <field name="tax_dest_id" ref="ex_s_towary"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_23a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_s_5_towary"/>
+        <field name="tax_dest_id" ref="ex_s_towary"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_24" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_s_0_towary"/>
+        <field name="tax_dest_id" ref="ex_s_towary"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_25" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_s_zw_towary"/>
+        <field name="tax_dest_id" ref="ex_s_towary"/>
+    </record>
+
+
+    <!-- World Export/Import -->
+    <!-- Purchase -->
+
+    <record id="fiscal_position_tax_template_31a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_z_23_towary_poz"/>
+        <field name="tax_dest_id" ref="im_z_23_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_31b" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_z_23_uslugi_poz"/>
+        <field name="tax_dest_id" ref="im_z_23_uslugi_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_31c" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_z_23_towary_st"/>
+        <field name="tax_dest_id" ref="im_z_23_towary_st"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_32a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_z_8_towary_poz"/>
+        <field name="tax_dest_id" ref="im_z_8_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_33a" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_z_5_towary_poz"/>
+        <field name="tax_dest_id" ref="im_z_5_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_34" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_z_0_towary_poz"/>
+        <field name="tax_dest_id" ref="im_z_0_towary_poz"/>
+    </record>
+
+    <record id="fiscal_position_tax_template_35" model="account.fiscal.position.tax.template">
+        <field name="position_id" ref="fiscal_position_template_3"/>
+        <field name="tax_src_id" ref="vat_z_zw_towary_poz"/>
+        <field name="tax_dest_id" ref="im_z_zw_towary_poz"/>
+    </record>
+
+</odoo>

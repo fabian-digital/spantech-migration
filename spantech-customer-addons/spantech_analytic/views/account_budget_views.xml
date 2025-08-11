@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_budget_post_form" model="ir.ui.view">
+        <field name="name">account.budget.post.form</field>
+        <field name="model">account.budget.post</field>
+        <field name="inherit_id" ref="account_budget.view_budget_post_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="budget_grouping_key" />
+                <field name="order_type" />
+            </field>
+        </field>
+    </record>
+    <record id="view_budget_post_tree" model="ir.ui.view">
+        <field name="name">account.budget.post.tree</field>
+        <field name="model">account.budget.post</field>
+        <field name="inherit_id" ref="account_budget.view_budget_post_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="budget_grouping_key" />
+                <field name="order_type" />
+            </field>
+        </field>
+    </record>
+
+    <record id="crossovered_budget_view_tree" model="ir.ui.view">
+        <field name="name">crossovered.budget.view.tree</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="analytic_account_id" optional="show" />
+                <field name="initial_date" optional="show" />
+            </field>
+            <field name="date_to" position="after">
+                <field name="margin_percentage_initial_amount" />
+                <field name="margin_percentage_planned_amount" />
+                <field name="poc" widget="percentage" />
+            </field>
+        </field>
+    </record>
+
+
+    <record id="crossovered_budget_view_form" model="ir.ui.view">
+        <field name="name">crossovered.budget.view.form</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_form" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="analytic_account_id"
+                    attrs="{'readonly':[('state','!=','draft')]}"
+                    required="1"
+                />
+                <field
+                    name="initial_date"
+                    attrs="{'readonly':[('state','!=','draft')]}"
+                />
+            </field>
+            <xpath expr="//sheet//field[@name='company_id']" position="after">
+                <label for="poc" />
+                <div>
+                    <field
+                        name="poc"
+                        widget="percentage"
+                        nolable="True"
+                        class="oe_inline"
+                    />
+                    <div class="text-muted o_field_widget oe_inline px-2">( <field
+                            name="poc_actual"
+                            class="oe_inline"
+                        /> / <field name="poc_le" class="oe_inline" /> )</div>
+                </div>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly':[('state','not in',['draft','confirm','validate'])]}</attribute>
+                <attribute name="context" operation="update">
+                    {
+                        'default_analytic_account_id': analytic_account_id,
+                        }
+                </attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='general_budget_id']"
+                position="before"
+            >
+                <field name="crossovered_budget_state" invisible="1" />
+                <field name="sequence" widget="handle" />
+                <field name="budget_grouping_key" optional="show" />
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='general_budget_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly':[('crossovered_budget_state','!=','draft')]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='analytic_account_id']"
+                position="attributes"
+            >
+                <attribute name="optional">hide</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly':[('crossovered_budget_state','!=','draft')]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='date_from']"
+                position="attributes"
+            >
+                <attribute name="optional">hide</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly':[('crossovered_budget_state','!=','draft')]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='date_to']"
+                position="attributes"
+            >
+                <attribute name="optional">hide</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly':[('crossovered_budget_state','!=','draft')]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='paid_date']"
+                position="attributes"
+            >
+                <attribute name="optional">hide</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly':[('crossovered_budget_state','!=','draft')]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='planned_amount']"
+                position="attributes"
+            >
+                <attribute name="class">fw-bolder</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='planned_amount']"
+                position="after"
+            >
+                    <xpath
+                    expr="//field[@name='crossovered_budget_line']/tree/field[@name='practical_amount']"
+                    position="move"
+                />
+                            <field
+                    name="engaged_amount"
+                    optional="show"
+                    sum="Engaged Amount"
+                />
+                            <field
+                    name="to_engage_amount"
+                    optional="show"
+                    sum="To Engage Amount"
+                    options='{"bg_color": "#FFFFC5"}'
+                />
+                            <field
+                    name="initial_amount"
+                    optional="show"
+                    sum="Initial Amount"
+                    class="fw-bolder"
+                />
+                            <field name="delta" optional="show" />
+                            <field
+                    name="delta_percentage"
+                    optional="show"
+                    widget="percentage"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='theoritical_amount']"
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree/field[@name='percentage']"
+                position="attributes"
+            >
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']/tree"
+                position="attributes"
+            >
+                <attribute name="decoration-success" />
+                <attribute name="decoration-danger" />
+            </xpath>
+            <notebook position="after">
+                <group class="oe_subtotal_footer oe_right">
+                    <field name="margin_initial_amount" invisible="1" />
+                    <field name="margin_percentage_initial_amount" />
+                    <field name="margin_planned_amount" invisible="1" />
+                    <field name="margin_percentage_planned_amount" />
+                    <field name="initial_amount_total" invisible="1" />
+                    <field name="planned_amount_total" invisible="1" />
+                    <field name="to_engage_amount_total" invisible="1" />
+                    <field name="engaged_amount_total" invisible="1" />
+                </group>
+            </notebook>
+            <page position="before">
+                <page string="Budget Lines Grouped" name="budget_lines_grouped">
+                    <field name="crossovered_budget_line_grouped_ids">
+                        <tree editable="bottom">
+                            <field name="crossovered_budget_id" invisible="1" />
+                            <field name="currency_id" invisible="1" />
+                            <field name="company_id" invisible="1" />
+                            <field name="budget_grouping_key" />
+                            <field
+                                name="planned_amount"
+                                optional="show"
+                                sum="Planned Amount"
+                                class="fw-bolder"
+                            />
+                            <field
+                                name="practical_amount"
+                                optional="show"
+                                sum="Practical Amount"
+                            />
+                            <field
+                                name="engaged_amount"
+                                optional="show"
+                                sum="Engaged Amount"
+                            />
+                            <field
+                                name="to_engage_amount"
+                                optional="show"
+                                sum="To Engage Amount"
+                            />
+                            <field
+                                name="initial_amount"
+                                optional="show"
+                                sum="Initial Amount"
+                                class="fw-bolder"
+                            />
+                            <field name="delta" optional="show" />
+                            <field
+                                name="delta_percentage"
+                                optional="show"
+                                widget="percentage"
+                            />
+                            <field
+                                name="theoritical_amount"
+                                invisible="1"
+                                sum="Theoritical Amount"
+                            />
+                        </tree>
+                    </field>
+                </page>
+            </page>
+            <notebook position="inside">
+                <page string="Purchase Order Lines" name="purchase_order_lines">
+                    <field name="purchase_order_line_ids">
+                        <tree editable="bottom">
+                            <field name="order_id" />
+                            <field name="order_type" optional="show" />
+                            <field name="name" optional="show" />
+                            <field name="partner_id" optional="show" />
+                            <field name="product_id" optional="show" />
+                            <field name="price_unit" optional="show" />
+                            <field name="product_qty" optional="show" />
+                            <field name="product_uom" optional="show" />
+                            <field
+                                name="price_uninvoiced"
+                                optional="show"
+                                sum="Uninvoiced"
+                            />
+                            <field
+                                name="price_subtotal"
+                                optional="show"
+                                sum="Subtotal"
+                            />
+                            <field name="date_planned" optional="show" />
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_open_budgets_analysis"
+                        icon="fa-bar-chart"
+                        string="Budget Analysis"
+                        widget="statinfo"
+                    />
+                    <button
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_open_purchase_orders"
+                        icon="fa-shopping-cart"
+                        string="Purchase Orders"
+                        widget="statinfo"
+                    />
+                    <button
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_open_analytic_lines"
+                        icon="fa-usd"
+                        string="Analytic Items"
+                        widget="statinfo"
+                    />
+                    <button
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_open_account_move_lines"
+                        icon="fa-pencil-square-o"
+                        string="Journal Items"
+                        widget="statinfo"
+                    />
+                    <button
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_open_crossovered_budget_versions"
+                        icon="fa-clock-o"
+                        string="PBR Versions"
+                        attrs="{'invisible': [('budget_version_count', '=', 0)]}"
+                        widget="statinfo"
+                    >
+                            <field name="budget_version_count" invisible="True" />
+                    </button>
+                </div>
+            </xpath>
+            <header position="inside">
+                <button
+                    name="action_recompute_values"
+                    type="object"
+                    string="Recompute values"
+                />
+                <button
+                    name="action_set_to_engage_to_zero"
+                    type="object"
+                    string="To Engage = 0"
+                />
+            </header>
+        </field>
+    </record>
+    <record id="view_crossovered_budget_line_tree" model="ir.ui.view">
+        <field name="name">crossovered.budget.line.tree</field>
+        <field name="model">crossovered.budget.lines</field>
+        <field
+            name="inherit_id"
+            ref="account_budget.view_crossovered_budget_line_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="planned_amount" position="before">
+                <field name="initial_amount" optional="show" />
+            </field>
+            <field name="planned_amount" position="after">
+                <field name="delta" optional="show" />
+                <field name="delta_percentage" optional="show" widget="percentage" />
+            </field>
+            <field name="theoritical_amount" position="after">
+                <field name="to_engage_amount" optional="show" />
+                <field name="engaged_amount" optional="show" />
+                <field name="margin_percentage_initial_amount" optional="show" />
+                <field name="margin_percentage_planned_amount" optional="show" />
+
+            </field>
+            <field name="general_budget_id" position="after">
+                <field name="budget_grouping_key" />
+            </field>
+            <field name="planned_amount" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="theoritical_amount" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="paid_date" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+            <field name="analytic_account_id" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="date_from" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+            <field name="date_to" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+        </field>
+    </record>
+    <record id="view_crossovered_budget_line_form" model="ir.ui.view">
+        <field name="name">crossovered.budget.line.form</field>
+        <field name="model">crossovered.budget.lines</field>
+        <field
+            name="inherit_id"
+            ref="account_budget.view_crossovered_budget_line_form"
+        />
+        <field name="arch" type="xml">
+            <field name="planned_amount" position="before">
+                <field name="initial_amount" sum="Initial Budget" />
+            </field>
+            <field name="theoritical_amount" position="after">
+                <field name="to_engage_amount" sum="To Engage" />
+                <field name="engaged_amount" sum="Engaged" />
+            </field>
+            <field name="general_budget_id" position="after">
+                <field name="budget_grouping_key" />
+            </field>
+        </field>
+    </record>
+    <record id="view_crossovered_budget_line_pivot" model="ir.ui.view">
+        <field name="name">crossovered.budget.line.pivot</field>
+        <field name="model">crossovered.budget.lines</field>
+        <field
+            name="inherit_id"
+            ref="account_budget.view_crossovered_budget_line_pivot"
+        />
+        <field name="arch" type="xml">
+            <field name="planned_amount" position="before">
+                <field name="initial_amount" type="measure" string="Initial Budget" />
+                <field name="to_engage_amount" type="measure" string="To Engage" />
+                <field name="engaged_amount" type="measure" string="Engaged" />
+            </field>
+            <field name="planned_amount" position="attributes">
+                <attribute name="string">Last Estimate</attribute>
+            </field>
+            <field name="practical_amount" position="attributes">
+                <attribute name="string">Actuals</attribute>
+            </field>
+        </field>
+    </record>
+    <record id="view_crossovered_budget_line_search" model="ir.ui.view">
+        <field name="name">account.budget.line.search</field>
+        <field name="model">crossovered.budget.lines</field>
+        <field
+            name="inherit_id"
+            ref="account_budget.view_crossovered_budget_line_search"
+        />
+        <field name="arch" type="xml">
+            <filter name="group_crossevered_budgdet_id" position="after">
+                <filter
+                    name="group_budget_grouping_key"
+                    string="Grouping Key"
+                    domain="[]"
+                    context="{'group_by':'budget_grouping_key'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

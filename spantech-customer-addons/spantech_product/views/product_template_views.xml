@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.common.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="priority">101</field>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="project_type" />
+            </field>
+	    <field name="categ_id" position="after">
+                <field name="raw_material_id"/>
+	    </field> 
+            <field name="standard_price" position="replace">
+                <t groups="spantech_product.group_edit_product_cost">
+                    <field
+                        name="standard_price"
+                        class="oe_inline"
+                        widget='monetary'
+                        options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
+                    />
+                </t>
+                <t groups="!spantech_product.group_edit_product_cost">
+                    <field
+                        name="standard_price"
+                        class="oe_inline"
+                        widget='monetary'
+                        options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
+                        readonly="1"
+                        force_save="1"
+                    />
+                </t>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_only_form_view" model="ir.ui.view">
+        <field name="name">Product Template Only Form Inherited view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="priority">101</field>
+        <field name="arch" type="xml">
+            <field name="default_code" position="replace">
+                <label for="default_code" />
+                <div>
+                    <field
+                        name="default_code"
+                        attrs="{'invisible': [('product_variant_count', '>', 1)]}"
+                    />
+                    <button
+                        name="%(spantech_product.code_product_update_action)d"
+                        type="action"
+                        string="Update Code"
+                        class="btn btn-link oe_inline"
+                    />
+                </div>
+		<field
+                    name="secondary_code"
+                    attrs="{'invisible': [('product_variant_count', '>', 1)]}"
+		/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_tree_view" model="ir.ui.view">
+        <field name="name">Product Template Tree Inherited view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="secondary_code" optional="show" />
+            </field>
+            <field name="type" position="after">
+                <field name="project_type" />
+            </field>
+            <field name="uom_id" position="after">
+                <field name="weight" optional="hide" />
+                <field name="volume" optional="hide" />
+		<field name="raw_material_id" string="Raw Material" optional="hide"/>
+            </field>
+        </field>
+    </record>
+    <record id="product_template_search_view" model="ir.ui.view">
+        <field name="name">Product Template Search Inherited view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="secondary_code" />
+		<field name="raw_material_id" />
+            </field>
+            <field name="name" position="after">
+                <field name="default_code" />
+                <field name="name" />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+        <record id="view_task_form2" model="ir.ui.view">
+            <field name="name">view_task_form2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="arch" type="xml">
+                <field name="project_id" position="before">
+                    <field name="sequence" />
+                </field>
+                <field name="user_ids" position="after">
+                    <field name="employee_sponsor_id" widget="many2one_avatar" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_task_tree2" model="ir.ui.view">
+            <field name="name">view_task_tree2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field
+                    name="performance_indicator_icon"
+                    string=" "
+                    optional="hide"
+                />
+                    <field name="performance_indicator" string="Perf" optional="hide" />
+                    <field name="sequence" optional="show" widget="handle" />
+                </field>
+                <field name="milestone_id" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </field>
+                <field name="user_ids" position="after">
+                    <field
+                    name="employee_sponsor_id"
+                    optional="show"
+                    widget="many2one_avatar"
+                />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_task_search_form" model="ir.ui.view">
+            <field name="name">view_task_search_form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form" />
+            <field name="arch" type="xml">
+                <filter name="blocked" position="before">
+                    <filter
+                    name="performance_indicator_status_no"
+                    string="No Man-Days"
+                    domain="[('performance_indicator_status', '=', 'no')]"
+                />
+                    <filter
+                    name="performance_indicator_status_good"
+                    string="Good"
+                    domain="[('performance_indicator_status', '=', 'good')]"
+                />
+                    <filter
+                    name="performance_indicator_status_danger"
+                    string="Danger"
+                    domain="[('performance_indicator_status', '=', 'danger')]"
+                />
+                    <filter
+                    name="performance_indicator_status_bad"
+                    string="Bad"
+                    domain="[('performance_indicator_status', '=', 'bad')]"
+                />
+                    <separator />
+                </filter>
+                <filter name="user" position="after">
+                    <filter
+                    name="employee_sponsor_id"
+                    context="{'group_by': 'employee_sponsor_id'}"
+                />
+                </filter>
+            </field>
+        </record>
+
+        <record id="view_task_form2_inherited" model="ir.ui.view">
+            <field name="name">view_task_form2_inherited</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited" />
+            <field name="arch" type="xml">
+                <field name="user_ids" position="after">
+                    <field name="allow_timesheets_project" invisible="1" />
+                    <field
+                    name="allow_timesheets"
+                    invisible="0"
+                    attrs="{'invisible': [('allow_timesheets_project', '!=', True)]}"
+                />
+                    <field
+                    name="timesheet_type"
+                    readonly="0"
+                    attrs="{'invisible': [('allow_timesheets', '!=', True)]}"
+                />
+                </field>
+                <field name="tag_ids" position="after">
+                    <label for="task_completion" />
+                    <div name="task_completion_div">
+                        <field name="task_completion" class="oe_inline" />
+                        <span class="oe_inline">%</span>
+                    </div>
+                </field>
+                <field name="planned_hours" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <xpath expr="//field[@name='planned_hours']/.." position="after">
+                    <field name="allocated_man_days" />
+                </xpath>
+                <field name="progress" position="after">
+                    <label for="performance_indicator" />
+                    <div name="performance_indicator_div" class="o_row">
+                        <field name="performance_indicator" class="oe_inline" />
+                        <span class="oe_inline">%</span>
+                        <field name="performance_indicator_icon" />
+                    </div>
+                </field>
+                <xpath
+                expr="//group[@name='project_hours']//field['total_hours_spent']"
+                position="after"
+            >
+                    <span class="o_td_label float-start">
+                        <label class="fw-bold" for="man_day_spent" />
+                    </span>
+                    <field name="man_day_spent" nolabel="1" />
+                </xpath>
+                <xpath
+                expr="//group[@name='project_hours']//field['remaining_hours'][last()]"
+                position="after"
+            >
+                    <span class="o_td_label float-start">
+                        <label class="fw-bold" for="remaining_man_days" />
+                    </span>
+                    <field name="remaining_man_days" nolabel="1" />
+                </xpath>
+            </field>
+        </record>
+
+    <record id="view_task_kanban" model="ir.ui.view">
+        <field name="name">view_task_kanban</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="performance_indicator_icon" />
+            </field>
+            <xpath
+                expr="//div[hasclass('o_kanban_record_bottom')]//field[@name='activity_ids']"
+                position="after"
+            >
+                <field name="performance_indicator_icon" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_tree2_inherited" model="ir.ui.view">
+            <field name="name">view_task_tree2_inherited</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.view_task_tree2_inherited" />
+            <field name="arch" type="xml">
+                <field name="progress" position="after">
+                    <field
+                    name="task_completion"
+                    widget="progressbar"
+                    optional="hide"
+                />
+                    <xpath expr="//field[@name='progress'][2]" position="move" />
+                </field>
+                <field name="total_hours_spent" position="after">
+                    <field name="allocated_man_days" optional="hide" />
+                    <field name="man_day_spent" optional="hide" />
+                </field>
+                <field name="remaining_hours" position="after">
+                    <field name="remaining_man_days" optional="hide" />
+                </field>
+            </field>
+        </record>
+
+</odoo>

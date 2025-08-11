@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="copy_session_token_wizard_form" model="ir.ui.view">
+        <field name="name">copy.session.token.wizard.form</field>
+        <field name="model">trilab_mbank.copy.session.token.wizard</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <sheet>
+                    <group>
+                        <field name="journal_ids" colspan="2" widget="many2many_tags"/>
+                        <field name="mbank_dik" invisible="1"/>
+                        <field name="mbank_user_id" invisible="1"/>
+                        <field name="source_journal_id" required="1"
+                               domain="[('x_mbank_dik','=', mbank_dik), ('x_mbank_user_id', '=', mbank_user_id), ('x_mbank_auth_method', '=', 'background_session'), ('id', 'not in', journal_ids), ('x_mbank_session_token', '!=', False)]"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="copy_session_token" type="object" string="Copy Session Token"
+                            class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="copy_session_token_wizard_action" model="ir.actions.act_window">
+        <field name="name">Copy Session Token Wizard</field>
+        <field name="res_model">trilab_mbank.copy.session.token.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="account.model_account_journal"/>
+        <!--        <field name="binding_view_types">list</field>-->
+    </record>
+
+</odoo>

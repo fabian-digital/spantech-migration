@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_move_form_trilab" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
+                <field name="x_pl_vat_gtu" string="GTU"
+                       attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='tax_ids']" position="before">
+                <field name="x_pl_vat_gtu" string="GTU"
+                       attrs="{'column_invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+            </xpath>
+
+            <notebook position="inside">
+                <page id="pl_vat" string="PL VAT"
+                      attrs="{'invisible': ['|', ('move_type', '=', 'entry'), ('country_code', '!=', 'PL')]}">
+                    <group>
+                        <group>
+                            <field name="pl_vat_date"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))]}"/>
+                            <field name="x_pl_vat_mpp"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))]}"/>
+                            <field name="x_pl_vat_dokument_zakupu"
+                                   attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund'))]}"/>
+                            <field name="x_pl_vat_imp"
+                                   attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund'))]}"/>
+                            <field name="x_pl_vat_reverse_charge"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))],
+                                           'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="x_pl_vat_typ_dokumentu"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))],
+                                           'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="x_pl_vat_sw"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))],
+                                           'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="x_pl_vat_ee"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))],
+                                           'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="x_pl_vat_tp"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))],
+                                           'readonly': [('move_type', 'in', ('out_invoice', 'out_refund')), ('state', '!=', 'draft')]}"/>
+                            <field name="x_pl_vat_tt_wnt"
+                                   attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund'))]}"/>
+                            <field name="x_pl_vat_tt_d"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+                            <field name="x_pl_vat_mr_t"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+                        </group>
+                        <group attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}">
+                            <field name="x_pl_vat_mr_uz"/>
+                            <field name="x_pl_vat_i42"/>
+                            <field name="x_pl_vat_i63"/>
+                            <field name="x_pl_vat_b_spv"/>
+                        </group>
+                        <group>
+                            <field name="x_pl_vat_b_spv_dostawa"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+                            <field name="x_pl_vat_b_mpv_prowizja"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+                            <field name="x_pl_vat_korekta_podstawy_opodt"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))],
+                                           'readonly': [('move_type', 'in', ('out_invoice', 'out_refund')), ('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="x_pl_vat_wsto_ee"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+                            <field name="x_pl_vat_ied"
+                                   attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+                        </group>
+                        <group>
+                            <field name="x_pl_change_jpk_proof"
+                                   attrs="{'readonly': [('move_type', 'in', ('out_invoice', 'out_refund')), ('state', '!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

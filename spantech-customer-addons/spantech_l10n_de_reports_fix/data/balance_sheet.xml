@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+     <record
+        id="l10n_de_reports.skr_bs_liabilities_a_v_balance"
+        model="account.report.expression"
+    >
+        <field name="date_scope">from_fiscalyear</field>
+    </record>
+
+</odoo>

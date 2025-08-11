@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="consolidation_period_kanban" model="ir.ui.view">
+        <field name="name">consolidation.period.kanban.spantech</field>
+        <field name="model">consolidation.period</field>
+        <field
+            name="inherit_id"
+            ref="account_consolidation.consolidation_period_kanban"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='action_toggle_state']/parent::div" position="after">
+                <div>
+                    <a
+                        name="action_copy_period"
+                        role="menuitem"
+                        type="object"
+                    >Copy period</a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="consolidation_period_form" model="ir.ui.view">
+        <field name="name">consolidation.period.form.spantech</field>
+        <field name="model">consolidation.period</field>
+        <field
+            name="inherit_id"
+            ref="account_consolidation.consolidation_period_form"
+        />
+        <field name="arch" type="xml">
+            <field name="date_analysis_end" position="after">
+                <field name="version" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- TODO: The original template is empty, find how it's working
+    <template
+        id="spantech_stock.report_product_product_replenishment"
+        inherit_id="stock.report_product_product_replenishment"
+    >
+        <a t-if="line['document_out']" position="after">
+            <t t-if="line['document_out_origin']">
+                - <span t-esc="line['document_out_origin']" />
+            </t>
+        </a>
+         <a t-if="line['document_in']" position="after">
+             <t t-if="line['document_in_origin']">
+                - <span t-esc="line['document_in_origin']" />
+            </t>
+         </a>
+    </template>-->
+</odoo>

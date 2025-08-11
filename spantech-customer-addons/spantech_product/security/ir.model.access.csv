@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_sequence,access_product_sequence,model_product_sequence,base.group_user,1,1,1,0
+access_manager_product_sequence,access_manager_product_sequence,model_product_sequence,base.group_system,1,1,1,1
+access_ir_sequence_group_product_config,ir_sequence group_product_config,model_ir_sequence,spantech_product.group_product_config,0,1,0,1
+access_code_product_update,access_code_product_update,model_code_product_update,base.group_user,1,1,1,1

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.menu" id="account.menu_action_move_in_receipt_type">
+        <field name="name">Vendor Prepayments</field>
+    </record>
+
+    <menuitem
+        id="account_prepayment_spantech_menu"
+        action="spantech_account.account_prepayment_spantech_action"
+        parent="account.menu_finance_payables"
+        groups="account.group_account_invoice"
+        sequence="3"
+    />
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_product_replenish" model="ir.ui.view">
+        <field name="name">Replenish</field>
+        <field name="model">product.replenish</field>
+        <field name="inherit_id" ref="stock.view_product_replenish" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="attributes">
+                <attribute name="attrs">{'readonly': [
+                    ('line_ids', '!=', [])]}</attribute>
+            </field>
+            <field name="product_uom_id" position="attributes">
+                <attribute name="attrs">{'readonly': [
+                    ('line_ids', '!=', [])]}</attribute>
+            </field>
+            <footer position="before">
+                <group>
+                    <field name="line_ids">
+                        <tree editable="top" create="0" edit="1" delete="1">
+                            <field name="res_model" invisible="1" />
+                            <field name="res_id" invisible="1" />
+                            <field name="res_line_id" invisible="1" />
+                            <field name="res_name" readonly="1" />
+                            <field name="commitment_date" readonly="1" />
+                            <field name="quantity" />
+                            <field name="unit_id" />
+                        </tree>
+                    </field>
+                </group>
+            </footer>
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+
+</odoo>

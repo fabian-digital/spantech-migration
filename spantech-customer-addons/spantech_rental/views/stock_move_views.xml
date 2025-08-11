@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_move_rental_tree" model="ir.ui.view">
+        <field name="name">stock.move.rental.tree</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="start_order_id" optional="show" />
+                <field name="rented_product_id" optional="show" />
+            </field>
+            <field name="state" position="after">
+                <field
+                    name="rental_state"
+                    string="Rental State"
+                    widget="badge"
+                    decoration-success="rental_state == 'in'"
+                    decoration-info="rental_state == 'ordered'"
+                    decoration-warning="rental_state == 'out'"
+                    decoration-muted="rental_state == 'cancel'"
+                    decoration-danger="rental_state == 'sold'"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_rental_search" model="ir.ui.view">
+       <field name="name">stock.move.rental.search</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_search" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="rented_product_id" />
+            </field>
+            <filter name="done" position="after">
+                <separator />
+                <filter
+                    name="rental_ordered"
+                    string="Ordered"
+                    domain="[('rental_state', '=', 'ordered')]"
+                />
+                <filter
+                    name="rental_out"
+                    string="Out"
+                    domain="[('rental_state', '=', 'out')]"
+                />
+                <filter
+                    name="rental_sell_progress"
+                    string="Sell in progress"
+                    domain="[('rental_state', '=', 'sell_progress')]"
+                />
+                <filter
+                    name="rental_sold"
+                    string="Sold"
+                    domain="[('rental_state', '=', 'sold')]"
+                />
+                <filter
+                    name="rental_in"
+                    string="Back In"
+                    domain="[('rental_state', '=', 'in')]"
+                />
+                <filter
+                    name="rental_cancel"
+                    string="Cancelled"
+                    domain="[('rental_state', '=', 'cancel')]"
+                />
+            </filter>
+            <group position="inside">
+                <filter
+                    name="group_by_rented_product_id"
+                    string="Rented Product"
+                    context="{'group_by':'rented_product_id'}"
+                />
+                <filter
+                    name="group_by_start_order_id"
+                    string="Rental Sale Order"
+                    context="{'group_by':'start_order_id'}"
+                />
+            </group>
+       </field>
+    </record>
+
+    <record id="sale_rental_stock_action" model="ir.actions.act_window">
+        <field name="name">Sale Rental Stock Moves</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="spantech_rental.view_move_rental_search" />
+        <field name="view_id" ref="spantech_rental.view_move_rental_tree" />
+        <field name="domain">[("rental_id","!=",False)]</field>
+    </record>
+
+    <menuitem
+        id="sale_rental_stock_menu"
+        name="Sale Rental Stock Moves"
+        parent="sale.sale_order_menu"
+        action="sale_rental_stock_action"
+        sequence="26"
+    />
+</odoo>

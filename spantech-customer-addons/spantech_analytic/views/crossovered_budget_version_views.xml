@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="crossovered_budget_version_action" model="ir.actions.act_window">
+        <field name="context">{}</field>
+        <field name="domain" />
+        <field name="name">PBR Versions</field>
+        <field name="res_model">crossovered.budget.version</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="crossovered_budget_version_view_tree" model="ir.ui.view">
+        <field name="name">crossovered.budget.version.view.tree</field>
+        <field name="model">crossovered.budget.version</field>
+        <field name="inherit_id" ref="spantech_analytic.crossovered_budget_view_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="edit">0</attribute>
+                <attribute name="create">0</attribute>
+            </xpath>
+            <field name="name" position="before">
+                <field name="create_date" optional="show" widget="date" />
+            </field>
+            <field name="name" position="after">
+                <field name="version" />
+            </field>
+        </field>
+    </record>
+
+    <record id="crossovered_budget_version_view_form" model="ir.ui.view">
+        <field name="name">crossovered.budget.version.view.form</field>
+        <field name="model">crossovered.budget.version</field>
+        <field name="inherit_id" ref="spantech_analytic.crossovered_budget_view_form" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">0</attribute>
+                <attribute name="create">0</attribute>
+            </xpath>
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <field name="name" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="name" position="after">
+                <field name="crossovered_budget_id" class="oe_inline px-2" />-<field
+                    name="version"
+                    class="oe_inline px-2"
+                />
+            </field>
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <field name="user_id" position="before">
+                <field name="create_date" />
+            </field>
+            <xpath
+                expr="//field[@name='crossovered_budget_line']//tree/button[@name='action_open_budget_entries']"
+                position="attributes"
+            >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//page[@name='purchase_order_lines']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

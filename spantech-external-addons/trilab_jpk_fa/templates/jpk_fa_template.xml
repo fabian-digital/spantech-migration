@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:JPK xmlns:ns="http://jpk.mf.gov.pl/wzor/2022/02/17/02171/"
+        xmlns:def="http://crd.gov.pl/xml/schematy/dziedzinowe/mf/2018/08/24/eD/DefinicjeTypy/">
+    <ns:Naglowek>
+        <ns:KodFormularza kodSystemowy="JPK_FA (4)" wersjaSchemy="1-0">JPK_FA</ns:KodFormularza>
+        <ns:WariantFormularza>4</ns:WariantFormularza>
+        <ns:CelZlozenia>1</ns:CelZlozenia>
+        <ns:DataWytworzeniaJPK>{{ wizard.get_create_date() }}</ns:DataWytworzeniaJPK>
+        <ns:DataOd>{{ wizard.get_date_from() }}</ns:DataOd>
+        <ns:DataDo>{{ wizard.get_date_to() }}</ns:DataDo>
+        <ns:KodUrzedu>{{ wizard.company_id.pl_tax_office_id.code }}</ns:KodUrzedu>
+    </ns:Naglowek>
+    <ns:Podmiot1>
+        <ns:IdentyfikatorPodmiotu>
+            <ns:NIP>{{ wizard.company_id.partner_id.x_get_pl_vat(validate=False) }}</ns:NIP>
+            <ns:PelnaNazwa>{{ wizard.company_id.name }}</ns:PelnaNazwa>
+        </ns:IdentyfikatorPodmiotu>
+        <ns:AdresPodmiotu>
+            <def:KodKraju>{{ wizard.company_id.country_id.code }}</def:KodKraju>
+            <def:Wojewodztwo>{{ wizard.company_id.state_id.name }}</def:Wojewodztwo>
+            <def:Powiat>{{ wizard.company_id.pl_county }}</def:Powiat>
+            <def:Gmina>{{ wizard.company_id.pl_community }}</def:Gmina>
+            <def:Ulica>{{ wizard.company_id.x_street_short }}</def:Ulica>
+            <def:NrDomu>{{ wizard.company_id.x_street_short_number }}</def:NrDomu>
+            <def:Miejscowosc>{{ wizard.company_id.city }}</def:Miejscowosc>
+            <def:KodPocztowy>{{ wizard.company_id.zip }}</def:KodPocztowy>
+        </ns:AdresPodmiotu>
+    </ns:Podmiot1>
+    {% for invoice in wizard.invoice_ids %}
+    <ns:Faktura>
+        <ns:KodWaluty>{{ invoice.currency_id.name }}</ns:KodWaluty>
+        <ns:P_1>{{ invoice.invoice_date }}</ns:P_1>
+        <ns:P_2A>{{ invoice.name }}</ns:P_2A>
+        <ns:P_3A>{{ invoice.partner_id.name }}</ns:P_3A>
+        {% if invoice.partner_id.contact_address %}
+        <ns:P_3B>{{ invoice.partner_id.contact_address.replace('\n', ' ') }}</ns:P_3B>
+        {% endif %}
+        <ns:P_3C>{{ invoice.company_id.name }}</ns:P_3C>
+        <ns:P_3D>{{ invoice.company_id.partner_id.contact_address.replace('\n', ' ') }}</ns:P_3D>
+        <ns:P_4A>{{ invoice.company_id.country_id.code }}</ns:P_4A>
+        <ns:P_4B>{{ invoice.company_id.partner_id.x_get_pl_vat(validate=False) }}</ns:P_4B>
+        {% if invoice.partner_id.x_get_eu_vat_country() %}
+        <ns:P_5A>{{ invoice.partner_id.x_get_eu_vat_country() }}</ns:P_5A>
+        {% endif %}
+        {% if invoice.partner_id.vat %}
+        <ns:P_5B>{{ invoice.partner_id.vat }}</ns:P_5B>
+        {% endif %}
+        <ns:P_6>{{ invoice.x_invoice_sale_date or invoice.invoice_date }}</ns:P_6>
+        <ns:P_13_1>{{ wizard.get_value(invoice, 'P_13_1') }}</ns:P_13_1>
+        <ns:P_14_1>{{ wizard.get_value(invoice, 'P_14_1') }}</ns:P_14_1>
+        {% if invoice.currency_id != invoice.company_currency_id %}
+        <ns:P_14_1W>{{ wizard.get_value(invoice, 'P_14_1W', True) }}</ns:P_14_1W>
+        {% endif %}
+        <ns:P_13_2>{{ wizard.get_value(invoice, 'P_13_2') }}</ns:P_13_2>
+        <ns:P_14_2>{{ wizard.get_value(invoice, 'P_14_2') }}</ns:P_14_2>
+        {% if invoice.currency_id != invoice.company_currency_id %}
+        <ns:P_14_2W>{{ wizard.get_value(invoice, 'P_14_2W', True) }}</ns:P_14_2W>
+        {% endif %}
+        <ns:P_13_3>{{ wizard.get_value(invoice, 'P_13_3') }}</ns:P_13_3>
+        <ns:P_14_3>{{ wizard.get_value(invoice, 'P_14_3') }}</ns:P_14_3>
+        {% if invoice.currency_id != invoice.company_currency_id %}
+        <ns:P_14_3W>{{ wizard.get_value(invoice, 'P_14_3W', True) }}</ns:P_14_3W>
+        {% endif %}
+        <ns:P_13_4>{{ wizard.get_value(invoice, 'P_13_4') }}</ns:P_13_4>
+        <ns:P_14_4>{{ wizard.get_value(invoice, 'P_14_4') }}</ns:P_14_4>
+        {% if invoice.currency_id != invoice.company_currency_id %}
+        <ns:P_14_4W>{{ wizard.get_value(invoice, 'P_14_4W', True) }}</ns:P_14_4W>
+        {% endif %}
+        <ns:P_13_5>{{ wizard.get_value(invoice, 'P_13_5') }}</ns:P_13_5>
+        <ns:P_13_6>{{ wizard.get_value(invoice, 'P_13_6') }}</ns:P_13_6>
+        <ns:P_13_7>{{ wizard.get_value(invoice, 'P_13_7') }}</ns:P_13_7>
+        <ns:P_15>{{ '{:.2f}'.format(invoice.amount_total_in_currency_signed) }}</ns:P_15>
+        <ns:P_16>false</ns:P_16>
+        <ns:P_17>false</ns:P_17>
+        <ns:P_18>{{ 'true' if invoice.x_pl_vat_reverse_charge else 'false' }}</ns:P_18>
+        <ns:P_18A>{{ 'true' if invoice.x_pl_vat_mpp else 'false' }}</ns:P_18A>
+        <ns:P_19>false</ns:P_19>
+        <ns:P_20>false</ns:P_20>
+        <ns:P_21>false</ns:P_21>
+        <ns:P_22>false</ns:P_22>
+        <ns:P_23>false</ns:P_23>
+        <ns:P_106E_2>false</ns:P_106E_2>
+        <ns:P_106E_3>false</ns:P_106E_3>
+        <ns:RodzajFaktury>{{ 'VAT' if (invoice.move_type == 'out_invoice') else 'KOREKTA' }}</ns:RodzajFaktury>
+        {% if invoice.move_type == 'out_refund' %}
+        <ns:PrzyczynaKorekty>{{ invoice.ref or '' }}</ns:PrzyczynaKorekty>
+        <ns:NrFaKorygowanej>{{ invoice.reversed_entry_id.name or invoice.ref or 'Korekta zbiorcza' }}</ns:NrFaKorygowanej>
+        {% endif %}
+    </ns:Faktura>
+    {% endfor %}
+    <ns:FakturaCtrl>
+        <ns:LiczbaFaktur>{{ wizard.invoice_len }}</ns:LiczbaFaktur>
+        <ns:WartoscFaktur>{{ wizard.get_invoice_total_value() }}</ns:WartoscFaktur>
+    </ns:FakturaCtrl>
+    {% for line in wizard.filter_printable_lines(wizard.invoice_line_ids) %}
+    <ns:FakturaWiersz>
+        <ns:P_2B>{{ line.move_id.name }}</ns:P_2B>
+        <ns:P_7>{{ line.product_id.name }}</ns:P_7>
+        <ns:P_8A>{{ line.product_uom_id.name }}</ns:P_8A>
+        <ns:P_8B>{{ line.quantity * (line.x_is_corrected_line and -1 or 1) }}</ns:P_8B>
+        {% if not line.tax_ids.price_include %}
+        <ns:P_9A>{{ '{:.2f}'.format(wizard.copy_sign(line, -line.balance, line.price_unit)) }}</ns:P_9A>
+        {% else %}
+        <ns:P_9B>{{ '{:.2f}'.format(wizard.copy_sign(line, -line.balance, line.price_unit)) }}</ns:P_9B>
+        {% endif %}
+        {% if not line.tax_ids.price_include %}
+        <ns:P_11>{{ '{:.2f}'.format(wizard.copy_sign(line, -line.balance, line.price_subtotal)) }}</ns:P_11>
+        {% else %}
+        <ns:P_11A>{{ '{:.2f}'.format(wizard.copy_sign(line, -line.balance, line.price_total)) }}</ns:P_11A>
+        {% endif %}
+        <ns:P_12>{{ line.tax_ids.amount | int}}</ns:P_12>
+        <ns:P_12_XII>0</ns:P_12_XII>
+    </ns:FakturaWiersz>
+    {% endfor %}
+    <ns:FakturaWierszCtrl>
+        <ns:LiczbaWierszyFaktur>{{ wizard.invoice_line_len }}</ns:LiczbaWierszyFaktur>
+        <ns:WartoscWierszyFaktur>{{ wizard.get_invoice_total_value() }}</ns:WartoscWierszyFaktur>
+    </ns:FakturaWierszCtrl>
+</ns:JPK>

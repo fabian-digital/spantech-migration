@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- N_S_KR23 -->
+    <record id="P_13_1" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_19"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_1</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_KR8 -->
+    <record id="P_13_2" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_17"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_2</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_KR5 -->
+    <record id="P_13_3" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_15"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_3</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_DT-pod-nab -->
+    <record id="P_13_4" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_31"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_4</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_D-EX -->
+    <record id="P_13_5" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_11"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_5</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_KR0 -->
+    <record id="P_13_6_1" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_13"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_6</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_WDT -->
+    <record id="P_13_6_2" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_21"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_6</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_EXT -->
+    <record id="P_13_6_3" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_22"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_6</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- N_S_KRZW -->
+    <record id="P_13_7" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_10"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_13_7</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- P_S_KR23 -->
+    <record id="P_14_1" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_20"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_1</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <record id="P_14_1W" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_20"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_1W</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- P_S_KR8 -->
+    <record id="P_14_2" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_18"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_2</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <record id="P_14_2W" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_18"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_2W</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- P_S_KR5 -->
+    <record id="P_14_3" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_16"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_3</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <record id="P_14_3W" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_16"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_3W</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <!-- P_S_DT-pod-nab -->
+    <record id="P_14_4" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_32"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_4</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+    <record id="P_14_4W" model="jpk.account.tag">
+        <field name="account_tag_id" ref="trilab_jpk_vat.pl_jpk_K_32"/>
+        <field name="jpk_document_type" ref="trilab_jpk_base.jpk_fa_doc_type"/>
+        <field name="jpk_markup">P_14_4W</field>
+        <field name="jpk_section">SprzedazWiersz</field>
+    </record>
+
+</odoo>

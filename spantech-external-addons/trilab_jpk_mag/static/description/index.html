@@ -1,0 +1,146 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+<section class="oe_container app">
+    <div class="oe_row oe_spaced" style="max-width: 95%;">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Trilab JPK - MAG (Magazyn)</h2>
+            <div class="oe_demo" style=" margin: 30px auto 0; padding: 0 15px 0 0; border:none; width: 96%;">
+                <p>
+                    Moduł do generowania plików JPK MAG. Wraz z modułem Trilab JPK Transfer zapewnia pełną obsługę
+                    procesu sprawozdawczość JPK MAG.<br>
+
+                </p>
+
+                <p>
+                   <img src="scr1.png" width="600" />
+                </p>
+
+                <p>
+                    Mechanizm raportujący działa sposób analogiczny do Raportów Finansowych
+                    i umożliwia:
+                </p>
+
+                <ul>
+                    <li>podgląd danych,</li>
+                    <li>wygenerowanie danych do Excel,</li>
+                    <li>wygenerowania pliku XML,</li>
+                    <li>wygenerowanie pliku XML z utworzeniem wysyłki w module JPK Transfer.</li>
+                 </ul>
+
+                <p>
+                    Parametrami uruchomieniowymi są:
+                </p>
+
+                <ul>
+                    <li>Okres,</li>
+                    <li>Magazyn</li>
+
+                </ul>
+
+                <p>
+                    UWAGA:
+                </p>
+
+                <ul>
+                    <li>Moduł wymaga wcześniejszej instalacji modułu Trilab JPK Base.</li>
+                    <li>Opcjonalny moduł Trilab JPK Transfer pozwala na wysłanie plików JPK z poziomu Odoo.</li>
+                    <li>Moduł przeznaczony dla wersji Enterprise.</li>
+
+                   Przyjęta zasada kwalifikacji transakcji (może to być zmienione/dostosowane pod potrzebu konkretnej parametryzacji Odoo):
+                    <li>PZ - wszystkie transakcje o kodzie typu transakcji "incoming" oraz uzupełnionym kontrahencie na danej operacji</li>
+                    <li>WZ - wszystkie transakcje o kodzie typu transakcji "outgoing" oraz uzupełnionym kontrahencie na danej operacji</li>
+                    <li>RW - wszystkie transakcje o kodzie typu transakcji "outgoing" oraz braku uzupełnionego kontrahentana danej operacji</li>
+                    <li>MM - wszystkie transakcje o kodzie typu transakcji "internal"</li>
+
+
+                </ul>
+
+                <p>Wspiera wersję 12 Odoo.</p>
+
+                <hr>
+
+                <p>English Description:</p>
+
+                <p>
+                    Module for generating JPK MAG XML files. Together with the Trilab JPK Transfer module provides
+                    full support for the JPK MAG reporting process.
+                </p>
+
+                <p>
+                    The data selection mechanism is flexible and fully parametrised.
+                </p>
+                <p>
+                    The reporting mechanism works in similar to to Financial Reports and enables:
+                </p>
+                <ul>
+                    <li>data preview,</li>
+                    <li>generating data for Excel,</li>
+                    <li>generate an XML file,</li>
+                    <li>generating an XML file with shipping creation in JPK Transfer module.</li>
+                </ul>
+
+                <p>
+                    The parameters are:
+                </p>
+                <ul>
+                    <li>Period,</li>
+                    <li>Inventory</li>
+
+                </ul>
+
+                <p>Warning:</p>
+                <ul>
+                    <li>This module requires prior installation of the Trilab JPK Base module.</li>
+                    <li>Module for Enterprise version.</li>
+                    <li>Optional module Trilab JPK Transfer allows to send JPK files directly from Odoo.</li>
+
+                    Transaction maping rules (this can be changed / adapted to the needs of a specific Odoo setup):
+                    <li>PZ - all transactions with transaction type code "incoming" and entered partner datas for operations</li>
+					<li>WZ - all transactions with the transaction type code "outgoing" and entered partner datas for operations</li>
+					<li>RW - all transactions with the transaction type code 'outgoing' and not entered partner datas for operations</li>
+					<li>MM - all transactions with transaction type code "internal"</li>
+                </ul>
+
+                <p>Supports Odoo version 12.</p>
+
+                <h3>Changelog</h3>
+                <ul>
+                    <li>
+                        <b>1.2 12/10/2020</b><br/>
+                        unify with base
+                    </li>
+                    <li>
+                        <b>1.0 17/09/2019</b><br/>
+                        release module on odoo
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="oe_row oe_spaced text-center">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Technical Help & Support</h2>
+        </div>
+        <div class="col-md-12 pad0">
+            <div class="oe_mt16">
+                <h4>For any type of technical help & support requests, Feel free to contact us</h4>
+                <p>
+                    <a style="background: #002e5a  none repeat scroll 0 0; color: rgb(255, 255, 255);position: relative; overflow: hidden;" class="btn btn-warning btn-lg" rel="nofollow" href="mailto:odoo@trilab.pl">
+                        <span style="height: 354px; width: 354px; top: -147.433px; left: -6.93335px;" class="o_ripple"></span>
+                        <i class="fa fa-envelope"></i> odoo@trilab.pl
+                    </a>
+                <p>
+            </div>
+            <div class="oe_mt16">
+                <h4>Visit our website for more support.</h4>
+                <p>
+                <a style="background: #002e5a  none repeat scroll 0 0; color: rgb(255, 255, 255);position: relative; overflow: hidden;"
+                   class="btn btn-warning btn-lg" rel="nofollow" href="https://trilab.pl" target="_blank"><span
+                        style="height: 354px; width: 354px; top: -147.433px; left: -6.93335px;" class="o_ripple"></span>
+                    <i class="fa fa-web"></i>https://trilab.pl</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

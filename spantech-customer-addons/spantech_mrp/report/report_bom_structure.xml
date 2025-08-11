@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="mrp.action_report_bom_structure" model="ir.actions.report">
+        <field name="paperformat_id" ref="spantech_mrp.paperformat_for_bom_structure" />
+    </record>
+
+
+    <record id="bom_structure_xlsx" model="ir.actions.report">
+        <field name="model">mrp.bom</field>
+        <field name="name">Bom Structure XLSX</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_file">bom_structure</field>
+        <field name="report_name">spantech_mrp.bom_structure_xlsx</field>
+        <field
+            name="print_report_name"
+        >'Bom Structure - %s' % object.display_name</field>
+    </record>
+
+    <template id="report_mrp_bom_spantech" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//h1" position="inside">
+            <t t-if="data.get('warehouse', False)">
+                <span
+                    style="position: absolute;right:1em;"
+                    t-esc="data['warehouse'].name"
+                />
+            </t>
+        </xpath>
+        <th name="th_mrp_bom_h" position="after">
+            <th class="text-right">Level</th>
+        </th>
+        <td name="td_mrp_bom" position="after">
+            <td name="td_mrp_level" class="text-right">
+                <span>
+                    <t t-esc="data['level']" />
+                </span>
+            </td>
+        </td>
+
+        <table position="after">
+            <t t-if="report_type == 'pdf'">
+                <t t-foreach="data['plans']" t-as="l">
+                    <t t-if="l['plan_src']">
+                        <t t-if="l['plan_landscape']">
+                            <div class="page" style="page-break-before: always;">
+                                <img
+                                    t-att-src="image_data_uri(l['plan_src'])"
+                                    style="width:1500px;height:975px;margin: auto;"
+                                    alt="plan"
+                                />
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div
+                                class="page"
+                                style="page-break-before: always; -webkit-transform: rotate(90deg);"
+                            >
+                                <img
+                                    t-att-src="image_data_uri(l['plan_src'])"
+                                    style="width:975px;height:1500px;object-fit: scale-down;object-position: right bottom;"
+                                    alt="plan"
+                                />
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </table>
+    </template>
+    <template id="report_mrp_bom_pdf_line" inherit_id="mrp.report_mrp_bom_pdf_line">
+        <td name="td_mrp_code" position="after">
+            <td name="td_mrp_level" class="text-right">
+                <span>
+                    <t t-esc="l['level']" />
+                </span>
+            </td>
+        </td>
+    </template>
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="helpdesk_ticket_reporter_view_tree" model="ir.ui.view">
+        <field name="name">Ticket Reporter Tree View</field>
+        <field name="model">helpdesk.ticket.reporter</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="help" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="helpdesk_ticket_reporter_view_search" model="ir.ui.view">
+        <field name="name">Ticket Reporter Search View</field>
+        <field name="model">helpdesk.ticket.reporter</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="helpdesk_ticket_reporter_action" model="ir.actions.act_window">
+        <field name="name">Ticket Reporter</field>
+        <field name="res_model">helpdesk.ticket.reporter</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="helpdesk_ticket_reporter_view_search" />
+    </record>
+    <record
+        id="helpdesk_ticket_reporter_action_view_tree"
+        model="ir.actions.act_window.view"
+    >
+        <field name="sequence" eval="0" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="helpdesk_ticket_reporter_view_tree" />
+        <field name="act_window_id" ref="helpdesk_ticket_reporter_action" />
+    </record>
+
+    <menuitem
+        id="menu_config_ticket_reporter"
+        name="Ticket Reporter"
+        parent="helpdesk.helpdesk_menu_config"
+        action="spantech_helpdesk.helpdesk_ticket_reporter_action"
+        sequence="3"
+    />
+
+
+</odoo>

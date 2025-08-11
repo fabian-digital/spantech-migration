@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_bank_statement_form" model="ir.ui.view">
+        <field name="name">account.bank.statement.form</field>
+        <field name="model">account.bank.statement</field>
+        <field
+            name="inherit_id"
+            ref="account_bank_statement_advanced.account_bank_statement_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="accounting_date" position="after">
+                <field name="is_spantech_expense" invisible="1" />
+                <field name="address_home_id" invisible="1" />
+                <label
+                    for="employee_id"
+                    attrs="{'invisible': [('is_spantech_expense','=',False)]}"
+                />
+                <div attrs="{'invisible': [('is_spantech_expense','=',False)]}">
+                    <field
+                        name="employee_id"
+                        class="oe_inline"
+                        options="{'no_create': True, 'no_open': True}"
+                        attrs="{'required': [('is_spantech_expense','=',True)]}"
+                    />
+                    <button
+                        name="action_update_partner_based_on_employee"
+                        class="oe_inline"
+                        icon="fa-refresh"
+                        type="object"
+                        title="Update Partner based on Employee"
+                        attrs="{'invisible': [('state','!=','draft')]}"
+                    />
+                </div>
+            </field>
+            <field name="line_ids" position="attributes">
+                <attribute name="context" operation="update">
+                    {
+                        'default_partner_id': address_home_id,
+                    }
+                </attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

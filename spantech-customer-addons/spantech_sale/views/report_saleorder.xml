@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_saleorder_document"
+        inherit_id="sale.report_saleorder_document"
+        priority="100"
+    >
+        <xpath
+            expr="//p[@t-if='not is_html_empty(doc.payment_term_id.note)']"
+            position="replace"
+        >
+            <div
+                t-if="doc.company_id and doc.company_id.sale_footer"
+                class="mt-4"
+                id="sale_footer"
+            >
+                <span t-field="doc.company_id.sale_footer" />
+            </div>
+        </xpath>
+        <xpath expr="//td[@name='td_priceunit']/span" position="attributes">
+            <attribute name="t-options">{'widget': 'float', 'precision': 2}</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-if='doc.partner_shipping_id != doc.partner_invoice_id']//strong"
+            position="before"
+        >
+            <br />
+        </xpath>
+        <xpath expr="//div[@id='informations']" position="replace">
+            <div class="row mt-4 mb-4" id="informations">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>Project Code:</strong>
+                            </th>
+                            <th>
+                                <strong>Your Reference:</strong>
+                            </th>
+                            <th t-if="doc.state in ['draft','sent']">
+                                <strong>Quotation Date:</strong>
+                            </th>
+                            <th t-if="doc.state not in ['draft','sent']">
+                                <strong>Order Date:</strong>
+                            </th>
+                            <th t-if="doc.state in ['draft', 'sent']">
+                                <strong>Expiration:</strong>
+                            </th>
+                            <th t-if="doc.show_commitment_date_in_document">
+                                <strong>Commitment Date:</strong>
+                            </th>
+                            <th>
+                                <strong>Salesperson:</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span
+                                    t-if="doc.analytic_account_id"
+                                    t-field="doc.analytic_account_id.name"
+                                />
+                            </td>
+                            <td>
+                                <span t-field="doc.client_order_ref" />
+                            </td>
+                            <td>
+                                <span
+                                    t-if="doc.date_order"
+                                    t-field="doc.date_order"
+                                    t-options='{"widget": "date"}'
+                                />
+                            </td>
+                            <td t-if="doc.state in ['draft', 'sent']">
+                                <span
+                                    t-if="doc.validity_date"
+                                    t-field="doc.validity_date"
+                                />
+                            </td>
+                            <td t-if="doc.show_commitment_date_in_document">
+                                <span
+                                    t-if="doc.commitment_date"
+                                    t-field="doc.commitment_date"
+                                    t-options='{"widget": "date"}'
+                                />
+                            </td>
+                            <td>
+                                <span t-if="doc.user_id.name" t-field="doc.user_id" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+        <th name="th_taxes" position="replace" />
+        <td name="td_taxes" position="replace" />
+        <div id="total" position="attributes">
+            <attribute name="class">mt-5 mb-5</attribute>
+        </div>
+        <xpath expr="//p[@t-field='doc.note']" position="replace">
+            <p t-raw="doc.note" />
+        </xpath>
+        <xpath expr="//div[@id='total']/div" position="attributes">
+            <attribute
+                name="t-attf-class"
+            >#{'col-8' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto</attribute>
+        </xpath>
+
+        <xpath
+            expr="//table[hasclass('o_main_table')]/thead//tr[1]//th[2]"
+            position="attributes"
+        >
+            <attribute name="t-if">doc.show_commitment_date_in_document</attribute>
+        </xpath>
+        <xpath
+            expr="//span[@t-field='line.commitment_date']/parent::td"
+            position="attributes"
+        >
+            <attribute name="t-if">doc.show_commitment_date_in_document</attribute>
+        </xpath>
+    </template>
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field
+            name="attachment"
+        >(object.state == 'sale') and ((object.name or 'SO').replace('/','_')+'.pdf')</field>
+        <field name="attachment_use">True</field>
+    </record>
+</odoo>

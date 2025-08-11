@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="report_invoice_document"
+        inherit_id="account.report_invoice_document"
+        priority="100"
+    >
+        <xpath expr="//div[@id='informations']" position="after">
+            <div class="row mt-4 mb-4" id="new_informations">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th name="thead_project">
+                                <strong>Project Code:</strong>
+                            </th>
+                            <th name="thead_ref" t-if="o.show_reference_in_document">
+                                <strong>Customer Reference</strong>
+                            </th>
+                            <th name="thead_invoice_date">
+                                <strong>Invoice Date</strong>
+                            </th>
+                            <th name="thead_due_date">
+                                <strong>Due Date</strong>
+                            </th>
+                            <th name="thead_source">
+                                <strong>Source</strong>
+                            </th>
+                            <th name="thead_partner_ref">
+                                <strong>Customer Code</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td name="td_project">
+                                <t
+                                    t-set="analytic_count"
+                                    t-value="len(o.analytic_distribution) if o.analytic_distribution else 0"
+                                />
+                                <t
+                                    t-foreach="o.analytic_distribution"
+                                    t-as="distribution"
+                                >
+                                    <span><t
+                                            t-esc="o.env['account.analytic.account'].browse(int(distribution))[0].name"
+                                        /><t t-if="analytic_count > 1">: <t
+                                                t-esc="o.analytic_distribution.get(distribution)"
+                                            />%</t></span>
+                                </t>
+                            </td>
+                            <td name="td_ref" t-if="o.show_reference_in_document">
+                                <span t-field="o.ref" />
+                            </td>
+                            <td name="td_invoice_date">
+                                <span
+                                    t-if="o.invoice_date"
+                                    t-field="o.invoice_date"
+                                    t-options='{"widget": "date"}'
+                                />
+                            </td>
+                            <td name="td_due_date">
+                                <span
+                                    t-if="o.invoice_date_due"
+                                    t-field="o.invoice_date_due"
+                                    t-options='{"widget": "date"}'
+                                />
+                            </td>
+                            <td name="td_source">
+                                <span t-field="o.invoice_origin" />
+                            </td>
+                            <td name="td_partner_ref">
+                                <span t-field="o.partner_id.ref" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='informations']" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath
+            expr="//span[@t-field='o.payment_reference']/ancestor::p"
+            position="before"
+        >
+            <div class="mt-4" />
+        </xpath>
+        <xpath expr="//span[@t-field='line.price_unit']" position="attributes">
+            <attribute name="t-options">{"widget": "float", "precision": 2}</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='line.quantity']" position="replace">
+            <span
+                t-if="line.move_id.show_qty_in_percentage"
+                t-esc="line.quantity * 100"
+                t-options="{'widget': 'float', 'precision': 2}"
+            />
+            <span t-else="" t-field="line.quantity" />
+        </xpath>
+        <xpath expr="//span[@t-field='line.product_uom_id']" position="replace">
+            <span
+                t-if="line.move_id.show_qty_in_percentage"
+                groups="uom.group_uom"
+            >%</span>
+            <span t-else="" t-field="line.product_uom_id" groups="uom.group_uom" />
+        </xpath>
+        <xpath expr="//span[@t-field='o.narration']" position="replace">
+            <span t-raw="o.narration" />
+        </xpath>
+        <th name="th_description" position="after">
+            <th
+                name="th_analytic"
+                t-if="o.show_analytic_in_document"
+                class="text-left"
+            ><span>Project</span></th>
+        </th>
+        <td name="account_invoice_line_name" position="after">
+            <td name="account_invoice_analytic" t-if="o.show_analytic_in_document">
+                <t
+                    t-set="analytic_count"
+                    t-value="len(line.analytic_distribution) if line.analytic_distribution else 0"
+                />
+                <t t-foreach="line.analytic_distribution" t-as="distribution">
+                    <span><t
+                            t-esc="line.env['account.analytic.account'].browse(int(distribution))[0].name"
+                        /><t t-if="analytic_count > 1">: <t
+                                t-esc="line.analytic_distribution.get(distribution)"
+                            />%</t></span>
+                </t></td>
+        </td>
+    </template>
+</odoo>

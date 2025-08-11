@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="timesheet_itl_report_wizard_action" model="ir.actions.server">
+        <field name="name">Generate ITL timesheet report</field>
+        <field name="model_id" ref="project.model_project_project" />
+        <field name="state">code</field>
+        <field name="binding_model_id" ref="model_project_project" />
+        <field name="code">action = records.action_open_wizard()</field>
+    </record>
+
+</odoo>

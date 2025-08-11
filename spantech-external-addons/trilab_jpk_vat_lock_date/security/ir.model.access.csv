@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+trilab_jpk_vat.access_jpk_vat_date_exception,access_jpk_vat_date_exception,trilab_jpk_vat_lock_date.model_jpk_vat_date_exception,base.group_user,1,1,1,0

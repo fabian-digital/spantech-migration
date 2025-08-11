@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_prepayement_spantech_view_form" model="ir.ui.view">
+        <field name="name">account.prepayment.spantech.view.form</field>
+        <field name="model">account.prepayment.spantech</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_post"
+                        string="Post"
+                        class="oe_highlight"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'confirm')]}"
+                    />
+                    <button
+                        name="action_confirm"
+                        string="Confirm"
+                        class="oe_highlight"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancel"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'confirm')]}"
+                    />
+                    <button
+                        name="action_draft"
+                        string="Set to Draft"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'cancel')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="partner_id"
+                                widget="res_partner_many2one"
+                                context="{
+                                            'res_partner_search_mode': 'supplier',
+                                            'show_address': 1, 'default_is_company': True, 'show_vat': True}"
+                                options='{"always_reload": True, "no_quick_create": True}'
+                            />
+                            <field
+                                name="partner_bank_id"
+                                context="{'default_partner_id': partner_id}"
+                                domain="[('partner_id', '=', partner_id)]"
+                            />
+                            <field name="ref" />
+                            <field name="prepayment_amount" />
+                            <field
+                                name="move_id"
+                                groups="account.group_account_manager"
+                            />
+                        </group>
+                        <group>
+                            <field name="prepayment_date" />
+                            <field name="expected_vendor_bill_receipt_date" />
+                            <field
+                                name="journal_id"
+                                groups="account.group_account_manager"
+                            />
+                            <field name="analytic_account_id" />
+                            <field name="approver_id" />
+                            <field name="currency_id" />
+                            <field
+                                name="payment_mode_id"
+                                groups="account.group_account_manager"
+                            />
+                            <field name="company_id" />
+                            <field name="user_id" />
+                        </group>
+                    </group>
+                </sheet>
+                <div class="o_attachment_preview" />
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_prepayement_spantech_view_tree" model="ir.ui.view">
+        <field name="name">account.prepayment.spantech.view.tree</field>
+        <field name="model">account.prepayment.spantech</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="prepayment_date" optional="show" />
+                <field name="partner_id" />
+                <field name="partner_bank_id" optional="hide" />
+                <field name="ref" optional="show" />
+                <field name="prepayment_amount" optional="show" />
+                <field name="currency_id" optional="hide" />
+                <field
+                    name="analytic_account_id"
+                    optional="show"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field name="approver_id" optional="show" />
+                <field
+                    name="journal_id"
+                    optional="show"
+                    groups="account.group_account_manager"
+                />
+                <field name="company_id" optional="show" />
+                <field name="matched_status" invisible="1" />
+                <button
+                    name="action_open_reconciled_tree"
+                    icon="fa-exclamation-circle"
+                    string="Partial Matched"
+                    type="object"
+                    attrs="{'invisible':[('matched_status','!=','partial_matched')]}"
+                    groups="account.group_account_manager"
+                />
+                <button
+                    name="action_open_reconciled_tree"
+                    icon="fa-check-circle"
+                    string="Full Matched"
+                    type="object"
+                    attrs="{'invisible':[('matched_status','!=','full_matched')]}"
+                    groups="account.group_account_manager"
+                />
+                <field
+                    name="payment_mode_id"
+                    optional="hide"
+                    groups="account.group_account_manager"
+                />
+                <field name="payment_state" optional="show" />
+                <field name="validation_status" optional="show" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="account_prepayement_spantech_view_search" model="ir.ui.view">
+            <field name="name">account.prepayment.spantech.view.search</field>
+            <field name="model">account.prepayment.spantech</field>
+            <field name="arch" type="xml">
+                <search string="Search Invoice">
+                    <field
+                    name="name"
+                    string="Invoice"
+                    filter_domain="['|', '|' ,('name', 'ilike', self),
+                    ('ref', 'ilike', self),
+                    ('partner_id', 'child_of', self)]"
+                />
+                    <field name="journal_id" groups="account.group_account_manager" />
+                    <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+                    <field name="partner_id" operator="child_of" />
+                    <field
+                    name="user_id"
+                    string="Salesperson"
+                    domain="[('share', '=', False)]"
+                />
+                    <field name="approver_id" />
+                    <field name="prepayment_date" string="Period" />
+                    <filter
+                    domain="[('user_id', '=', uid)]"
+                    name="myprepayments"
+                    help="My Prepayments"
+                />
+                    <separator />
+                    <filter
+                    name="needs_review"
+                    string="Needs my Review"
+                    domain="[('reviewer_ids','in',uid)]"
+                    help="My Accounts to review"
+                />
+                    <filter
+                    name="validation_not_started"
+                    string="Validation Not Started"
+                    domain="[('reviewer_ids', '=', False), ('validated', '=', False), ('rejected', '=', False)]"
+                    help="Invoices where validation has not started"
+                />
+                    <filter
+                    name="validation_in_progress"
+                    string="Validation In Progress"
+                    domain="[('reviewer_ids', '!=', False)]"
+                    help="Invoices Pending to Validate"
+                />
+                    <filter
+                    name="tier_validated"
+                    string="Validated"
+                    domain="[('validated', '=', True)]"
+                    help="Invoices validated and ready to be confirmed"
+                />
+                    <filter
+                    name="tier_rejected"
+                    string="Rejected"
+                    domain="[('rejected', '=', True)]"
+                    help="Invoices rejected"
+                />
+                    <separator />
+                    <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state','=','draft')]"
+                />
+                    <filter
+                    name="confirmed"
+                    string="Confirmed"
+                    domain="[('state', '=', 'confirm')]"
+                />
+                    <filter
+                    name="posted"
+                    string="Posted"
+                    domain="[('state', '=', 'posted')]"
+                />
+                    <filter
+                    name="cancel"
+                    string="Cancelled"
+                    domain="[('state', '=', 'cancel')]"
+                />
+                    <separator />
+                    <filter
+                    name="partial_matched"
+                    string="Partial Matched"
+                    domain="[('matched_status','=','partial_matched')]"
+                />
+                    <filter
+                    name="full_matched"
+                    string="Full Matched"
+                    domain="[('matched_status','=','full_matched')]"
+                />
+                    <filter
+                    name="not_matched"
+                    string="Not Matched"
+                    domain="[('matched_status','=','not_matched')]"
+                />
+                    <separator />
+                    <filter
+                    name="in_payment"
+                    string="In Payment"
+                    domain="[('payment_state', '=', 'in_payment'), ('state', '=', 'posted')]"
+                />
+                    <filter
+                    name="partial"
+                    string="Partially Paid"
+                    domain="[('payment_state', '=', 'partial'), ('state', '=', 'posted')]"
+                />
+                    <filter
+                    name="paid"
+                    string="Paid"
+                    domain="[('payment_state', '=', 'paid'), ('state', '=', 'posted')]"
+                />
+                    <filter
+                    name="unpaid"
+                    string="Not Paid"
+                    domain="[('payment_state', '=', 'not_paid'), ('state', '=', 'posted')]"
+                />
+                    <filter
+                    name="reversed"
+                    string="Reversed"
+                    domain="[('payment_state', '=', 'reversed'), ('state', '=', 'posted')]"
+                />
+                    <separator />
+                    <filter
+                    name="prepayment_date_filter"
+                    string="Prepayment Date"
+                    date="prepayment_date"
+                />
+                    <separator />
+                    <group expand="0" string="Group By">
+                        <filter
+                        string="Salesperson"
+                        name="salesperson"
+                        context="{'group_by':'user_id'}"
+                    />
+                        <filter
+                        name="status"
+                        string="Status"
+                        context="{'group_by':'state'}"
+                    />
+                        <filter
+                        name="group_analytic_account_id"
+                        string="Analytic Account"
+                        context="{'group_by':'analytic_account_id'}"
+                    />
+                        <filter
+                        name="group_matched_status"
+                        string="Matched"
+                        context="{'group_by':'matched_status'}"
+                    />
+                        <separator />
+                        <filter
+                        string="Prepayment Date"
+                        name="prepayment_date_group"
+                        context="{'group_by': 'prepayment_date'}"
+                    />
+                    </group>
+               </search>
+            </field>
+        </record>
+
+    <record id="account_prepayment_spantech_action" model="ir.actions.act_window">
+        <field name="name">Vendor Prepayments</field>
+        <field name="res_model">account.prepayment.spantech</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

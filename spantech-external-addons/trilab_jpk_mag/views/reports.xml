@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_print_report_jpk_mag_report_html" model="ir.actions.report">
+        <field name="name">JPK MAG</field>
+        <field name="model">jpk.mag.report.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">trilab_jpk_mag.jpk_mag_report</field>
+        <field name="report_file">trilab_jpk_mag.jpk_mag_report</field>
+    </record>
+
+    <record id="action_print_report_jpk_mag_report_pdf" model="ir.actions.report">
+        <field name="name">JPK MAG</field>
+        <field name="model">jpk.mag.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">trilab_jpk_mag.jpk_mag_report</field>
+        <field name="report_file">trilab_jpk_mag.jpk_mag_report</field>
+        <field name="paperformat_id" ref="trilab_jpk_base.paperformat_euro_landscape"/>
+    </record>
+
+    <record id="action_print_report_jpk_mag_report_xml" model="ir.actions.report">
+        <field name="name">JPK MAG</field>
+        <field name="model">jpk.mag.report.wizard</field>
+        <field name="report_type">jpk_xml</field>
+        <field name="report_name">trilab_jpk_mag.jpk_mag_report</field>
+        <field name="report_file">trilab_jpk_mag.jpk_mag_report</field>
+    </record>
+
+    <record id="action_print_report_jpk_mag_report_xlsx" model="ir.actions.report">
+        <field name="name">JPK MAG</field>
+        <field name="model">jpk.mag.report.wizard</field>
+        <field name="report_type">jpk_xlsx</field>
+        <field name="report_name">trilab_jpk_mag.jpk_mag_report</field>
+        <field name="report_file">trilab_jpk_mag.jpk_mag_report</field>
+    </record>
+
+    <record id="action_print_report_stock_picking_summary_report_xlsx" model="ir.actions.report">
+        <field name="name">Picking Summary (XLSX)</field>
+        <field name="model">stock.picking</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="report_type">jpk_xlsx</field>
+        <field name="report_name">trilab_jpk_mag.stock_picking_summary_report</field>
+        <field name="report_file">trilab_jpk_mag.stock_picking_summary_report</field>
+        <field name="print_report_name">object.x_jpk_get_summary_print_report_name()</field>
+    </record>
+</odoo>

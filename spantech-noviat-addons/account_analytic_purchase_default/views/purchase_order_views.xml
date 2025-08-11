@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <div name="reminder" position="after">
+                <field
+                    name="analytic_distribution"
+                    widget="analytic_distribution"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field
+                    name="analytic_distribution"
+                    groups="!analytic.group_analytic_accounting"
+                    invisible="1"
+                />
+            </div>
+            <field name="order_line" position="attributes">
+                <attribute name="context" operation="update">
+                    {
+                        'default_analytic_distribution': analytic_distribution,
+                    }
+                </attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_kpis_tree" model="ir.ui.view">
+        <field name="name">purchase.order.tree.kpis.analytic.default</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="analytic_distribution"
+                    widget="analytic_distribution"
+                    optional="show"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_tree" model="ir.ui.view">
+        <field name="name">purchase.order.tree.analytic.default</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="analytic_distribution"
+                    widget="analytic_distribution"
+                    optional="show"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_tree" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree.analytic.default</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="analytic_distribution"
+                    widget="analytic_distribution"
+                    optional="show"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_order_view_search" model="ir.ui.view">
+        <field name="name">purchase.order.select</field>
+        <field name="model">purchase.order</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field
+                    name="analytic_distribution"
+                    filter_domain="['|', ('analytic_distribution','ilike', self), ('order_line.analytic_distribution','ilike', self)]"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">request.quotation.select</field>
+        <field name="model">purchase.order</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field
+                    name="analytic_distribution"
+                    filter_domain="['|', ('analytic_distribution','ilike', self), ('order_line.analytic_distribution','ilike', self)]"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="action_timesheet_from_mrp" model="ir.actions.act_window">
+        <field name="name">Timesheet Mrp</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[('production_id', '=', active_id)]</field>
+    </record>
+
+    <record id="mrp_production_form_view_bi_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.form.view.bi.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="%(bi_mrp_timesheet.action_timesheet_from_mrp)d"
+                        attrs="{'invisible': [('manage_timesheet_bool','=', False)]}"
+                        class="oe_stat_button"
+                        icon="fa-calendar"
+                        type="action">
+                    Timesheets
+                </button>
+            </xpath>
+            
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="manage_timesheet_bool"/>
+            </xpath>
+
+            <xpath expr="//page[1]" position="after">
+                <page name="timesheet" string="Timesheet" attrs="{'invisible': [('manage_timesheet_bool','=', False)]}">
+                    <field name="timesheet_ids">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="employee_id" readonly="1"/>
+                            <field name="project_id" required="1"/>
+                            <field name="production_id" invisible="1"/>
+                            <field name="work_order_id" domain="[('production_id', '=', production_id)]"/>
+                            <field name="task_id"/>
+                            <field name="name"/>
+                            <field name="unit_amount" optional="show" string="Duration" widget="timesheet_uom"
+                                   sum="Total"
+                                   decoration-danger="unit_amount &gt; 24"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem id="menu_timesheet_mrp"
+              name="Timesheet"
+              parent="mrp.menu_mrp_root"
+              sequence="99"/>
+
+    <menuitem id="menu_my_timesheet"
+              name="My Timesheet"
+              action="hr_timesheet.act_hr_timesheet_line"
+              parent="bi_mrp_timesheet.menu_timesheet_mrp"/>
+    <menuitem id="menu_all_timesheet"
+              name="All Timesheet"
+              groups="hr_timesheet.group_hr_timesheet_approver"
+              action="hr_timesheet.timesheet_action_all"
+              parent="bi_mrp_timesheet.menu_timesheet_mrp"/>
+</odoo>

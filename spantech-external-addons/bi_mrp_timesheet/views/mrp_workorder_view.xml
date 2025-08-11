@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_timesheet_from_mrp_workorder" model="ir.actions.act_window">
+        <field name="name">Timesheet Mrp</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[('work_order_id', '=', active_id)]</field>
+    </record>
+
+
+    <record id="mrp_workorder_form_view_bi_inherit" model="ir.ui.view">
+        <field name="name">mrp.workorder.form.view.bi.inherit</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="%(bi_mrp_timesheet.action_timesheet_from_mrp_workorder)d"
+                        class="oe_stat_button"
+                        icon="fa-calendar"
+                        type="action">
+                    Timesheets
+                </button>
+            </xpath>
+
+            <xpath expr="//page[1]" position="after">
+                <page name="timesheet" string="Timesheet">
+                    <field name="timesheet_ids">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="employee_id" readonly="1"/>
+                            <field name="project_id" required="1"/>
+                            <field name="production_id" readonly="1"/>
+                            <field name="task_id"/>
+                            <field name="name"/>
+                            <field name="unit_amount" string="Duration" optional="show" widget="timesheet_uom"
+                                   sum="Total"
+                                   decoration-danger="unit_amount &gt; 24"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

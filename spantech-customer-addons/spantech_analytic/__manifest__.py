@@ -1,0 +1,50 @@
+# Copyright 2009-2023 Noviat
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Spantech Analytic",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "Noviat",
+    "website": "https://www.noviat.com/",
+    "category": "Spantech",
+    "installable": True,
+    "depends": [
+        "spantech_base",
+        "spantech_account",
+        "spantech_hr",
+        "analytic",
+        "account_budget",
+        "analytic_global_view",
+        "analytic_global_view_purchase",
+        "analytic_global_view_sale",
+        "analytic_global_view_stock",
+        "account_analytic_invoice_default",
+        "account_analytic_sale_default",
+        "account_analytic_purchase_default",
+        "account_inter_company_rules",
+        "mrp",
+        "stock_picking_analytic",
+        "stock_analytic",
+        "purchase_stock_analytic",
+        "purchase_order_type",
+        "web_tree_dynamic_colored_field",
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/account_analytic_plan_views.xml",
+        "views/account_analytic_views.xml",
+        "views/account_budget_views.xml",
+        "views/crossovered_budget_version_views.xml",
+        "views/account_move_views.xml",
+        "views/purchase_order_views.xml",
+        "views/res_company_views.xml",
+        "wizards/generate_crossovered_budget_version.xml",
+        "views/menus.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "spantech_analytic/static/src/components/**/*",
+        ],
+    },
+}

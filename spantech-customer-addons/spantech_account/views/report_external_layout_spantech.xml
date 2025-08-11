@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- TODO: Update code
+    <template
+        id="external_layout_standard"
+        inherit_id="web.external_layout_standard"
+    >
+        <xpath expr="//t[@t-call='web.address_layout']" position="before">
+            <t
+                t-if="o and 'fiscal_position_id' in o and o.fiscal_position_id and o.fiscal_position_id.foreign_vat"
+            >
+                <t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat" />
+            </t>
+        </xpath>
+    </template>-->
+</odoo>

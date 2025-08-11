@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="spantech_account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@role='alert']" position="before">
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': [('show_intercompany_warning', '=', False)]}"
+                >
+                    In the case of Interco invoicing, you have to select the entity itself and not a contact from the Spantech Entity.
+                </div>
+            </xpath>
+            <field name="show_qty_in_percentage" position="after">
+                <field name="is_interco_commercial_partner" invisible="1" />
+                <field name="show_intercompany_warning" invisible="1" />
+                <separator
+                    string="Intercompany"
+                    attrs="{'invisible':['|',('is_interco_partner','=',False),('move_type','not in',['out_invoice','out_refund'])]}"
+                />
+                <field
+                    name="is_interco_partner"
+                    attrs="{'invisible':['|',('is_interco_partner','=',False),('move_type','not in',['out_invoice','out_refund'])]}"
+                />
+                <field
+                    name="intercompany_lines"
+                    attrs="{'invisible':['|',('is_interco_partner','=',False),('move_type','not in',['out_invoice','out_refund'])]}"
+                />
+                <field
+                    name="spantech_automatic_intercompany_document"
+                    attrs="{'invisible':['|',('is_interco_partner','=',False),('move_type','not in',['out_invoice','out_refund'])],'readonly': [('state', '!=', 'draft')]}"
+                />
+            </field>
+            <xpath expr="//field[@name='invoice_line_ids']//tree" position="inside">
+                <field name="is_interco_partner" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_line_filter" model="ir.ui.view">
+        <field name="name">account.move.line.search</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter" />
+        <field name="arch" type="xml">
+            <filter name="date" position="after">
+                <separator />
+                <filter
+                    string="Is Spantech Entity"
+                    name="is_spantech_entity"
+                    domain="[('is_interco_partner', '=',True)]"
+                />
+                <filter
+                    string="Is Not Spantech Entity"
+                    name="is_not_spantech_entity"
+                    domain="[('is_interco_partner', '!=',True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_account_move_filter" model="ir.ui.view">
+        <field name="name">account.move.search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter" />
+        <field name="arch" type="xml">
+            <filter name="date" position="after">
+                <separator />
+                <filter
+                    string="Is Spantech Entity"
+                    name="is_spantech_entity"
+                    domain="[('is_interco_partner', '=',True)]"
+                />
+                <filter
+                    string="Is Not Spantech Entity"
+                    name="is_not_spantech_entity"
+                    domain="[('is_interco_partner', '!=',True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.invoice.search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <filter name="due_date" position="after">
+                <separator />
+                <filter
+                    string="Is Spantech Entity"
+                    name="is_spantech_entity"
+                    domain="[('is_interco_partner', '=',True)]"
+                />
+                <filter
+                    string="Is Not Spantech Entity"
+                    name="is_not_spantech_entity"
+                    domain="[('is_interco_partner', '!=',True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="jpk_settings_tree" model="ir.ui.view">
+        <field name="name">jpk_settings_tree</field>
+        <field name="model">jpk.settings</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="endpoint_url"/>
+                <field name="jpk_mf_public_key_id" invisible="1"/>
+                <field name="jpk_mf_public_key_id_datas" widget="binary" filename="jpk_mf_public_key_id_name"/>
+                <field name="jpk_mf_public_key_id_name" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="jpk_settings_form" model="ir.ui.view">
+        <field name="name">jpk_settings_form</field>
+        <field name="model">jpk.settings</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <label for="name"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="endpoint_url"/>
+                            <field name="jpk_min_filename_length"/>
+                            <field name="jpk_max_filename_length"/>
+                            <field name="jpk_encryption_file_key_size"/>
+                            <field name="jpk_encryption_file_iv_size"/>
+                            <field name="jpk_encryption_file_block_size"/>
+                            <field name="jpk_max_chunk_size"/>
+                            <field name="jpk_mf_public_key_id" invisible="1"/>
+                            <field name="jpk_mf_public_key_id_datas" widget="binary"
+                                   filename="jpk_mf_public_key_id_name" required="1"/>
+                            <field name="jpk_mf_public_key_id_name" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

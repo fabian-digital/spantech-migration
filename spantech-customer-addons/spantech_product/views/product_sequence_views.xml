@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_sequence_view_form" model="ir.ui.view">
+        <field name="name">product.sequence.view.form</field>
+        <field name="model">product.sequence</field>
+        <field name="arch" type="xml">
+            <form>
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('number_next_actual', '&lt;=', 999)]}"
+                >
+                    This Product sequence has reached its limit.
+                </div>
+                <group>
+                    <field name="code" required="1" />
+                    <field name="name" required="1" />
+                    <field name="sequence_id" readonly="1" force_save="1" />
+                    <field name="number_next_actual" string="Next Number" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="product_sequence_view_tree" model="ir.ui.view">
+        <field name="name">product.sequence.view.tree</field>
+        <field name="model">product.sequence</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="number_next_actual &gt; 999">
+                <field name="code" />
+                <field name="name" />
+                <field name="sequence_id" />
+                <field name="number_next_actual" string="Next Number" />
+            </tree>
+        </field>
+    </record>
+    <record id="product_sequence_view_search" model="ir.ui.view">
+        <field name="name">product.sequence.view.search</field>
+        <field name="model">product.sequence</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="code" />
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <record id="action_product_sequence" model="ir.actions.act_window">
+        <field name="name">Product Sequences</field>
+        <field name="res_model">product.sequence</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_product_sequence"
+        action="spantech_product.action_product_sequence"
+        parent="mrp.menu_mrp_bom"
+        groups="spantech_product.group_product_config"
+        sequence="100"
+    />
+</odoo>

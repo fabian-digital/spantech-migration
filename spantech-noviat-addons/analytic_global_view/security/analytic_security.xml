@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="analytic_global_view_module_category" model="ir.module.category">
+            <field name="name">Analytic</field>
+            <field name="description">Handle analytic security</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <record id="analytic_global_view_user" model="res.groups">
+            <field name="name">Analytic User</field>
+            <field name="category_id" ref="analytic_global_view_module_category" />
+            <field
+                name="implied_ids"
+                eval="[(4, ref('analytic.group_analytic_accounting'))]"
+            />
+        </record>
+
+        <record id="analytic_global_view_manager" model="res.groups">
+            <field name="name">Analytic Manager</field>
+            <field name="category_id" ref="analytic_global_view_module_category" />
+            <field name="implied_ids" eval="[(4, ref('analytic_global_view_user'))]" />
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="base.group_system" model="res.groups">
+            <field
+                name="implied_ids"
+                eval="[(4, ref('analytic_global_view_manager'))]"
+            />
+        </record>
+    </data>
+
+</odoo>

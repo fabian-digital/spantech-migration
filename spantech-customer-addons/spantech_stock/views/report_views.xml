@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="action_report_delivery_partner_left" model="ir.actions.report">
+        <field name="name">Delivery Slip (Address Left)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >spantech_stock.report_deliveryslip_partner_left</field>
+        <field
+            name="report_file"
+        >spantech_stock.report_deliveryslip_partner_left</field>
+        <field
+            name="print_report_name"
+        >'Delivery Slip - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_receipt_picking" model="ir.actions.report">
+        <field name="name">Receipt Picking</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">spantech_stock.report_receipt_picking</field>
+        <field name="report_file">spantech_stock.report_receipt_picking</field>
+        <field
+            name="print_report_name"
+        >'Receipt Picking - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_delivery_slip_handwritten" model="ir.actions.report">
+        <field name="name">Rental Delivery Slip (SPI)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">spantech_stock.report_deliveryslip_handwritten</field>
+        <field name="report_file">spantech_stock.report_deliveryslip_handwritten</field>
+        <field
+            name="print_report_name"
+        >'Rental Delivery Slip - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        <field name="binding_model_id" ref="model_stock_picking" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="shipment_advice.paperformat_euro_landscape" />
+    </record>
+
+    <record id="action_report_control_checklist" model="ir.actions.report">
+        <field name="name">Control Checklist (VIE)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">spantech_stock.report_control_checklist</field>
+        <field name="report_file">spantech_stock.report_control_checklist</field>
+        <field name="print_report_name">'Control Checklist - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_stock_picking" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="shipment_advice.paperformat_euro_landscape" />
+    </record>
+
+</odoo>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="external_layout_SPI">
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+        <div
+            t-attf-class="header o_company_#{company.id}_layout"
+            t-att-style="report_header_style"
+        >
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img
+                        t-if="company.logo"
+                        t-att-src="image_data_uri(company.logo)"
+                        style="max-height: 45px;"
+                        alt="Logo"
+                    />
+                </div>
+                <div
+                    class="col-9 text-end"
+                    style="margin-top:22px;"
+                    t-field="company.report_header"
+                    name="moto"
+                />
+            </div>
+            <div
+                t-if="company.logo or company.report_header"
+                class="row zero_min_height"
+            >
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <ul class="list-unstyled">
+                        <li t-if="company.is_company_details_empty"><t
+                                t-esc="company.partner_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                            /></li>
+                        <li t-else=""><t t-esc="company.company_details" /></li>
+                        <li t-if="forced_vat">
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'" />:
+                            <span t-esc="forced_vat" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6" name="contact_address">
+                    <ul class="list-unstyled">
+                        <li t-if="partner"><t
+                                t-esc="partner"
+                                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                            /></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div
+            t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+            t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+            t-att-data-oe-model="o and o._name"
+            t-att-data-oe-id="o and o.id"
+            t-att-data-oe-lang="o and o.env.context.get('lang')"
+        >
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout" />
+            </div>
+            <t t-out="0" />
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page" /> / <span class="topage" />
+                </div>
+                <div
+                    t-if="report_type == 'pdf' and display_name_in_footer"
+                    class="text-muted"
+                >
+                    <span t-field="o.name" />
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template
+        id="report_deliveryslip_handwritten_document"
+        inherit_id="stock.report_delivery_document"
+        primary="True"
+        priority="105"
+    >
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">spantech_stock.external_layout_SPI</attribute>
+        </xpath>
+        <xpath expr="//th[@name='th_sml_product']" position="after">
+            <th name="th_sml_weight">
+                <strong>Weight</strong>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_sm_product']" position="after">
+            <th name="th_sm_weight">
+                <strong>Weight</strong>
+            </th>
+        </xpath>
+        <xpath expr="//table[@name='stock_move_table']/tbody/tr/td[1]" position="after">
+            <td name="move_line_weight">
+                <t t-if="move.product_id.weight">
+                    <t
+                        t-set="weight"
+                        t-value="move.product_id.weight * move.product_uom_qty"
+                    />
+                    <span
+                        t-esc="weight"
+                        t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                    /> kg
+                </t>
+            </td>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('page')]/div/div[@t-if='o.origin']"
+            position="after"
+        >
+            <div t-if="o.analytic_account_ids" class="col-auto">
+                <strong>Project code:</strong>
+                <p t-foreach="o.analytic_account_ids" t-as="anal">
+                    <t t-esc="anal.name" />
+                </p>
+            </div>
+        </xpath>
+        <xpath expr="//table[@name='stock_move_table']/tbody/tr" position="attributes">
+            <attribute
+                name="t-foreach"
+            >lines.sorted(lambda x: x.product_id.default_code if x.product_id.default_code else "", reverse=True)</attribute>
+        </xpath>
+        <xpath
+            expr="//table[@name='stock_move_table']/tbody/tr/td[4]"
+            position="replace"
+        >
+            <td>
+                <br /><br /><br />
+            </td>
+        </xpath>
+        <xpath
+            expr="//table[@name='stock_move_table']/tbody/tr/td[5]"
+            position="replace"
+        >
+            <td name="picto" style="text-align: center">
+                <img
+                    t-if="move.product_id.image_128"
+                    t-att-src="image_data_uri(move.product_id.image_128)"
+                    alt="Picto"
+                />
+            </td>
+        </xpath>
+        <xpath expr="//tr[@t-foreach='package_move_lines']" position="attributes">
+            <attribute
+                name="t-foreach"
+            >package_move_lines.sorted("product_id")</attribute>
+        </xpath>
+        <xpath expr="//tr[@t-foreach='move_lines']" position="attributes">
+            <attribute name="t-foreach">move_lines.sorted("product_id")</attribute>
+        </xpath>
+        <xpath expr="//tr[@t-foreach='o.move_line_ids']" position="attributes">
+            <attribute name="t-foreach">o.move_line_ids.sorted("product_id")</attribute>
+        </xpath>
+
+        <xpath
+            expr="//t[@t-call='stock.stock_report_delivery_has_serial_move_line']"
+            position="attributes"
+        >
+            <attribute
+                name="t-call"
+            >spantech_stock.stock_report_delivery_has_serial_move_line</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='stock.stock_report_delivery_has_serial_move_line']"
+            position="attributes"
+        >
+            <attribute
+                name="t-call"
+            >spantech_stock.stock_report_delivery_has_serial_move_line</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='stock.stock_report_delivery_has_serial_move_line']"
+            position="attributes"
+        >
+            <attribute
+                name="t-call"
+            >spantech_stock.stock_report_delivery_has_serial_move_line</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='stock.stock_report_delivery_aggregated_move_lines']"
+            position="attributes"
+        >
+            <attribute
+                name="t-call"
+            >spantech_stock.stock_report_delivery_aggregated_move_lines</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='stock.stock_report_delivery_aggregated_move_lines']"
+            position="attributes"
+        >
+            <attribute
+                name="t-call"
+            >spantech_stock.stock_report_delivery_aggregated_move_lines</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='stock.stock_report_delivery_aggregated_move_lines']"
+            position="attributes"
+        >
+            <attribute
+                name="t-call"
+            >spantech_stock.stock_report_delivery_aggregated_move_lines</attribute>
+        </xpath>
+        <xpath expr="//th[@t-if='has_hs_code']" position="replace">
+            <th name="picto_head" />
+        </xpath>
+        <xpath expr="//th[@t-if='has_hs_code']" position="replace">
+            <th name="picto_head" />
+        </xpath>
+        <xpath expr="//t[@t-set='aggregated_lines']" position="attributes">
+            <attribute
+                name="t-value"
+            >o.move_line_ids.sorted(lambda x: x.product_id.barcode, reverse=True)._get_aggregated_product_quantities()</attribute>
+        </xpath>
+    </template>
+
+    <template
+        id="stock_report_delivery_has_serial_move_line"
+        inherit_id="stock.stock_report_delivery_has_serial_move_line"
+        primary="True"
+        priority="100"
+    >
+        <xpath expr="//t[@name='move_line_lot']" position="before">
+            <td name="move_line_weight">
+                <t t-if="move_line.product_id.weight">
+                    <t
+                        t-set="weight"
+                        t-value="move_line.product_id.weight * move_line.product_uom_qty"
+                    />
+                    <span
+                        t-esc="weight"
+                        t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                    /> kg
+                </t>
+            </td>
+        </xpath>
+        <xpath expr="//td[@name='move_line_lot_qty_done']" position="replace">
+            <td name="move_line_lot_qty_done">
+                <br /><br /><br />
+            </td>
+            <td name="picto" style="text-align: center">
+                <img
+                    t-if="move_line.product_id.image_128"
+                    t-att-src="image_data_uri(move_line.product_id.image_128)"
+                    alt="Picto"
+                />
+            </td>
+        </xpath>
+        <xpath expr="//td[@t-if='has_hs_code']" position="replace" />
+    </template>
+
+    <template
+        id="stock_report_delivery_aggregated_move_lines"
+        inherit_id="stock.stock_report_delivery_aggregated_move_lines"
+        primary="True"
+        priority="100"
+    >
+        <xpath expr="//td[@name='move_line_aggregated_qty_ordered']" position="before">
+            <td name="move_line_weight">
+                <t t-if="aggregated_lines[line]['product'].weight">
+                    <t
+                        t-set="weight"
+                        t-value="aggregated_lines[line]['product'].weight * aggregated_lines[line]['qty_ordered']"
+                    />
+                    <span
+                        t-esc="weight"
+                        t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                    /> kg
+                </t>
+            </td>
+        </xpath>
+        <xpath expr="//td[@name='move_line_aggregated_qty_done']" position="replace">
+            <td name="move_line_aggregated_qty_done">
+                <br /><br /><br />
+            </td>
+            <td name="picto" style="text-align: center">
+                <img
+                    t-if="aggregated_lines[line]['product'].image_128"
+                    t-att-src="image_data_uri(aggregated_lines[line]['product'].image_128)"
+                    alt="Picto"
+                />
+            </td>
+        </xpath>
+        <xpath expr="//td[@t-if='has_hs_code']" position="replace" />
+    </template>
+
+    <template id="report_deliveryslip_handwritten">
+        <t t-foreach="docs" t-as="o">
+            <t
+                t-call="spantech_stock.report_deliveryslip_handwritten_document"
+                t-lang="o.partner_id.lang"
+            />
+        </t>
+    </template>
+
+</odoo>

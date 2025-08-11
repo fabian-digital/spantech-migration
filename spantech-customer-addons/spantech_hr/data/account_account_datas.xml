@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="account_account_credit_cards_staff" model="account.account">
+        <field name="name">credit cards staff</field>
+        <field name="code">555000</field>
+        <field name="account_type">asset_cash</field>
+        <field name="reconcile" eval="False" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_susp_acc_credit_cards_staff" model="account.account">
+        <field name="name">Susp acc - Credit Cards Staff</field>
+        <field name="code">595000</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_outst_rec_credit_cards_staff" model="account.account">
+        <field name="name">Outst rec - Credit Cards Staff</field>
+        <field name="code">585000</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="True" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_outst_pay_credit_cards_staff" model="account.account">
+        <field name="name">Outst pay - Credit Cards Staff</field>
+        <field name="code">585090</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="True" />
+    </record>
+    <record id="account_account_cash_withdrawal_staff" model="account.account">
+        <field name="name">Cash Withdrawal Staff</field>
+        <field name="code">571000</field>
+        <field name="account_type">asset_cash</field>
+        <field name="reconcile" eval="False" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_susp_acc_cash_withdrawal_staff" model="account.account">
+        <field name="name">Susp acc - Cash Withdrawal Staff</field>
+        <field name="code">595010</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_prepaid_cards_staff" model="account.account">
+        <field name="name">Prepaid Cards Staff</field>
+        <field name="code">5720000</field>
+        <field name="account_type">asset_cash</field>
+        <field name="reconcile" eval="False" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_susp_acc_prepaid_cards_staff" model="account.account">
+        <field name="name">Susp acc - Prepaid Cards Staff</field>
+        <field name="code">595020</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_outst_rec_prepaid_cards_staff" model="account.account">
+        <field name="name">Outst rec - Prepaid Cards Staff</field>
+        <field name="code">585020</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="True" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+    <record id="account_account_outst_pay_prepaid_cards_staff" model="account.account">
+        <field name="name">Outst pay - Prepaid Cards Staff</field>
+        <field name="code">585110</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="True" />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="partner_shipping_id" position="after">
+                <field
+                    name="intercompany_buyer"
+                    attrs="{'invisible': [('intercompany_buyer', '=', '')]}"
+                />
+            </field>
+            <field name="payment_term_id" position="after">
+                <separator
+                    string="Intercompany"
+                    attrs="{'invisible':[('is_interco_partner','=',False)]}"
+                />
+                <field
+                    name="is_interco_partner"
+                    attrs="{'invisible':[('is_interco_partner','=',False)]}"
+                />
+                <field
+                    name="spantech_automatic_intercompany_document"
+                    readonly="0"
+                    attrs="{'invisible':[('is_interco_partner','=',False)]}"
+                />
+            </field>
+            <xpath expr="//field[@name='expected_date']/parent::span" position="after">
+                <span
+                    name="intercompany_date_planned_span"
+                    attrs="{'invisible': [('intercompany_date_planned', '=', False)]}"
+                    class="text-muted"
+                >ICO Expected: <field
+                        name="intercompany_date_planned"
+                        class="oe_inline"
+                        widget="date"
+                    /></span>
+            </xpath>
+            <xpath
+                expr="//field[@name='expected_date']/parent::span"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                > {'invisible': [('intercompany_date_planned', '!=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

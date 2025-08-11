@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_valuation_layer_form" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.form</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_form" />
+        <field name="arch" type="xml">
+            <field name="create_date" position="attributes">
+                <attribute name="string">Create Date</attribute>
+            </field>
+            <field name="create_date" position="after">
+                <field name="date" />
+                <field name="force_date" />
+            </field>
+            <field name="stock_move_id" position="after">
+                <field name="operation_type" />
+            </field>
+        </field>
+    </record>
+
+    <record id="stock_valuation_layer_tree" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.tree</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree" />
+        <field name="arch" type="xml">
+            <field name="create_date" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="string">Create Date</attribute>
+            </field>
+            <field name="create_date" position="after">
+                <field name="date" optional="show" />
+                <field name="operation_type" optional="show" />
+            </field>
+            <field name="reference" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+            <field name="reference" position="after">
+                <field name="description" optional="show" />
+            </field>
+            <button name="action_revaluation" position="attributes">
+                <attribute
+                    name="groups"
+                >spantech_stock.group_add_manual_valuation</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_inventory_valuation_search" model="ir.ui.view">
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.view_inventory_valuation_search" />
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="after">
+                <field name="operation_type" />
+                <field name="force_date" />
+                <separator />
+                <filter
+                    name="force_date_filter"
+                    string="Date forced"
+                    domain="[('force_date','!=', False)]"
+                />
+                <filter
+                    name="is_opening_filter"
+                    string="Is an opening"
+                    domain="[('is_opening','=', True)]"
+                />
+            </field>
+            <filter name="group_by_product_id" position="before">
+                <filter
+                    string='Operation Type'
+                    name="group_by_operation_type"
+                    context="{'group_by': 'operation_type'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="valuation_layer_set_opening_server_action" model="ir.actions.server">
+        <field name="name">Set/Unset Opening</field>
+        <field name="model_id" ref="stock_account.model_stock_valuation_layer" />
+        <field
+            name="binding_model_id"
+            ref="stock_account.model_stock_valuation_layer"
+        />
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.action_set_is_opening()
+        </field>
+    </record>
+
+</odoo>

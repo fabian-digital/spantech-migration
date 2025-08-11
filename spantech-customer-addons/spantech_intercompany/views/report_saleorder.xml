@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_saleorder_document"
+        inherit_id="sale.report_saleorder_document"
+        priority="100"
+    >
+        <xpath expr="//t[@t-set='lines_to_report']" position="before">
+            <div class="mb-2" t-if="doc.intercompany_buyer">
+                <strong>ICO Buyer: </strong>
+                <span t-esc="doc.intercompany_buyer" />
+            </div>
+        </xpath>
+    </template>
+</odoo>

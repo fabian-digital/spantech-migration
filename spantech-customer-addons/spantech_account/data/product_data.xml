@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="product_product_vendor_prepayment" model="product.product">
+        <field name="name">Vendor Prepayment</field>
+        <field name="default_code">VENDOR_PREPAYMENT</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="product.product_category_all" />
+    </record>
+</odoo>

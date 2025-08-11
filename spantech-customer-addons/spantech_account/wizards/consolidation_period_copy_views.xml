@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="consolidation_period_copy_view_form" model="ir.ui.view">
+        <field name="name">Copy Consolidation Period</field>
+        <field name="model">consolidation.period.copy</field>
+        <field name="arch" type="xml">
+            <form string="Copy Consolidation Period">
+                <group name="input">
+                    <group name="input-l">
+                        <field name="date_analysis_begin" />
+                        <field name="date_analysis_end" />
+                    </group>
+                    <group name="input-r">
+                        <field name="version" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="copy_period"
+                        string="Copy Period"
+                        type="object"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="z"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="consolidation_period_copy_action" model="ir.actions.act_window">
+        <field name="name">Copy Consolidation Period</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">consolidation.period.copy</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="consolidation_period_copy_view_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

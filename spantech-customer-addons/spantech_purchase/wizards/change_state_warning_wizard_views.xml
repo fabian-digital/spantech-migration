@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_immediate_transfer" model="ir.ui.view">
+        <field name="name">change.state.warning.wizard.form</field>
+        <field name="model">change.state.warning.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Warning !">
+                <p>
+                    You are resetting to draft an ICO PO – Don’t’ forget to inform the counterpart to CANCEL the linked
+                    SO and remove the vendor reference in your PO before confirming it again.
+                </p>
+                <footer>
+                    <button
+                        name="process"
+                        string="OK"
+                        type="object"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="z"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

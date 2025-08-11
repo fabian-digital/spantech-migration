@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_move_tree_reconciled_view_form" model="ir.ui.view">
+        <field name="name">account.move.tree.reconciled.view.form</field>
+        <field name="model">account.move.tree.reconciled</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="move_id" readonly="1" />
+                    </group>
+                    <field name="line_ids" nolabel="1" readonly="1">
+                        <tree>
+                            <field
+                                name="account_move_tree_reconciled_id"
+                                invisible="1"
+                            />
+                            <field name="journal_name" optional="show" />
+                            <field name="amount" widget="monetary" optional="show" />
+                            <field name="date" optional="show" />
+                            <field name="move_id" optional="hide" />
+                            <field name="payment_id" optional="hide" />
+                            <field name="currency_id" invisible="1" />
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field
+                                        name="account_move_tree_reconciled_id"
+                                        invisible="1"
+                                    />
+                                    <field name="journal_name" />
+                                    <field name="amount" widget="monetary" />
+                                    <field name="date" />
+                                </group>
+                                <group>
+                                    <field name="move_id" />
+                                    <field name="payment_id" />
+                                    <field name="currency_id" />
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </sheet>
+                <footer>
+                    <button string="Close" class="btn btn-primary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

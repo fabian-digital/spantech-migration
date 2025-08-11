@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="shipment_advice_view_form" model="ir.ui.view">
+        <field name="name">shipment.advice.form</field>
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='loaded_move_lines_without_package']"
+                position="before"
+            >
+                <page string="Shipment Information" name="information">
+                    <field name="information" nolabel="1" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

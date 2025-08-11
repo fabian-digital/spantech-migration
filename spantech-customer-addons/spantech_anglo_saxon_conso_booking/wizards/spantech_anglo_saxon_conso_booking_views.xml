@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <record id="spantech_anglo_saxon_conso_booking_view_form_pl" model="ir.ui.view">
+    <field name="name">spantech.anglo.saxon.conso.booking.form</field>
+    <field name="model">spantech.anglo.saxon.conso.booking</field>
+    <field name="arch" type="xml">
+      <form string="Generate Anglo-Saxon ITR consolidation entry">
+        <div
+                    id="warnings"
+                    class="alert alert-info"
+                    role="alert"
+                    attrs="{'invisible': [('note', '=', '')]}"
+                >
+          <field name="note" attrs="{'invisible': [('note', '=', '')]}" readonly="1" />
+        </div>
+        <group name="main">
+          <group name="left">
+            <field name="date_range_id" options="{'no_create' : True}" />
+            <field name="date_start" readonly='1' force_save="1" />
+            <field name="date_end" readonly='1' force_save="1" />
+          </group>
+          <group name="right">
+            <field name="company_id" readonly="1" force_save="1" />
+          </group>
+        </group>
+        <footer>
+          <button
+                        name="create_move"
+                        string="Process"
+                        type="object"
+                        class="oe_highlight"
+                        default_focus="1"
+                    />
+          <button string="Cancel" class="btn-secondary" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="spantech_anglo_saxon_conso_booking_view_form_bs" model="ir.ui.view">
+    <field name="name">spantech.anglo.saxon.conso.booking.form</field>
+    <field name="model">spantech.anglo.saxon.conso.booking</field>
+    <field name="arch" type="xml">
+      <form string="Generate ICO BS Entry">
+        <div
+                    id="warnings"
+                    class="alert alert-info"
+                    role="alert"
+                    attrs="{'invisible': [('note', '=', '')]}"
+                >
+          <field name="note" attrs="{'invisible': [('note', '=', '')]}" readonly="1" />
+        </div>
+        <group name="main">
+          <group name="left">
+            <field name="date_range_id" options="{'no_create' : True}" />
+            <field name="date_start" readonly='1' force_save="1" />
+            <field name="date_end" readonly='1' force_save="1" />
+          </group>
+          <group name="right">
+            <field name="company_id" readonly="1" force_save="1" />
+          </group>
+        </group>
+        <footer>
+          <button
+                        name="create_move"
+                        string="Process"
+                        type="object"
+                        class="oe_highlight"
+                        default_focus="1"
+                    />
+          <button string="Cancel" class="btn-secondary" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="spantech_anglo_saxon_conso_booking_view_form_result" model="ir.ui.view">
+    <field name="name">uspantech.anglo.saxon.conso.booking.form.result</field>
+    <field name="model">spantech.anglo.saxon.conso.booking</field>
+    <field name="priority">2</field>
+    <field name="arch" type="xml">
+      <form string="Consolidation entry" edit="false">
+        <separator colspan="4" string="Results :" />
+        <field name="note" colspan="4" nolabel="1" width="850" height="400" />
+        <footer>
+          <button
+                        name="view_move"
+                        string="View ICO Consolidation Entry"
+                        type="object"
+                        class="oe_highlight"
+                        default_focus="1"
+                        invisible="not context.get('conso_move_id')"
+                    />
+          <button string="Cancel" class="btn-secondary" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record
+        id="spantech_anglo_saxon_conso_booking_action_pl"
+        model="ir.actions.act_window"
+    >
+    <field name="name">Generate ICO P&amp;L Entry</field>
+    <field name="res_model">spantech.anglo.saxon.conso.booking</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="spantech_anglo_saxon_conso_booking_view_form_pl" />
+    <field name="context">{'spantech_ico_pl': 1}</field>
+    <field name="target">new</field>
+  </record>
+
+  <record
+        id="spantech_anglo_saxon_conso_booking_action_bs"
+        model="ir.actions.act_window"
+    >
+    <field name="name">Generate ICO BS Entry</field>
+    <field name="res_model">spantech.anglo.saxon.conso.booking</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="spantech_anglo_saxon_conso_booking_view_form_bs" />
+    <field name="context">{'spantech_ico_bs': 1}</field>
+    <field name="target">new</field>
+  </record>
+
+</odoo>

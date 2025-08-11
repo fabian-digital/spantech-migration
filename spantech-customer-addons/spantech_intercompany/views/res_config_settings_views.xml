@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="spantech_base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_spantech_block')]" position="inside">
+                <h2>Intercompany Notifications</h2>
+                <div
+                    class="row mt16 o_settings_container"
+                    id="spantech_intercompany_notification"
+                >
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="interco_po_notif_user_ids" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                role="img"
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                            />
+                            <div class="row">
+                                <div class="text-muted col-lg-8">
+                                    When a purchase order is created via a Spantech entity,
+                                    these users will be notified of the creation
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field
+                                        name="interco_po_notif_user_ids"
+                                        class="o_light_label"
+                                        widget="many2many_tags_avatar"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="interco_so_notif_user_ids" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                role="img"
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                            />
+                            <div class="row">
+                                <div class="text-muted col-lg-8">
+                                    When a sale order is created via a Spantech entity,
+                                    these users will be notified of the creation
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field
+                                        name="interco_so_notif_user_ids"
+                                        class="o_light_label"
+                                        widget="many2many_tags_avatar"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="interco_am_notif_user_ids" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                role="img"
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                            />
+                            <div class="row">
+                                <div class="text-muted col-lg-8">
+                                    When an account move is created via a Spantech entity,
+                                    these users will be notified of the creation
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field
+                                        name="interco_am_notif_user_ids"
+                                        class="o_light_label"
+                                        widget="many2many_tags_avatar"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="purchase_intercompany_report_company_ids" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                role="img"
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                            />
+                            <div class="row">
+                                <div class="text-muted col-lg-8">
+                                    This setting allows to check the purchase in others
+                                    companies. Used in Purchase Intercompany report.
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field
+                                        name="purchase_intercompany_report_company_ids"
+                                        class="o_light_label"
+                                        widget="many2many_tags"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

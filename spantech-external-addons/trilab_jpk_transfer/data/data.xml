@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="0">
+    <record id="settings_testing_key" model="ir.attachment">
+        <field name="datas" type="base64" file="trilab_jpk_transfer/data/3c3c5c87f0dc4dac609b42678b6141b2.pem"/>
+        <field name="name">3c3c5c87f0dc4dac609b42678b6141b2.pem</field>
+    </record>
+
+    <record id="settings_test_obj" model="jpk.settings">
+        <field name="name">Środowisko testowe</field>
+        <field name="endpoint_url">https://test-e-dokumenty.mf.gov.pl</field>
+        <field name="jpk_mf_public_key_id" ref="trilab_jpk_transfer.settings_testing_key"/>
+        <field name="gate_type">eDocuments</field>
+    </record>
+
+    <record id="settings_production_key" model="ir.attachment">
+        <field name="datas" type="base64" file="trilab_jpk_transfer/data/366c88330d0be6dbd9354f3a0af3beaa.pem"/>
+        <field name="name">366c88330d0be6dbd9354f3a0af3beaa.pem</field>
+    </record>
+
+    <record id="settings_prod_obj" model="jpk.settings">
+        <field name="name">Środowisko produkcyjne</field>
+        <field name="endpoint_url">https://e-dokumenty.mf.gov.pl</field>
+        <field name="jpk_mf_public_key_id" ref="trilab_jpk_transfer.settings_production_key"/>
+        <field name="gate_type">eDocuments</field>
+    </record>
+
+    <function model="ir.default" name="set"
+              eval="('jpk.transfer', 'settings_id', ref('trilab_jpk_transfer.settings_prod_obj'))"/>
+
+    <record id="check_jpk_transfer_status_cron" model="ir.cron">
+        <field name="name">Check JPK Transfer Status</field>
+        <field name="model_id" ref="trilab_jpk_transfer.model_jpk_transfer"/>
+        <field name="state">code</field>
+        <field name="code">model.check_transfer_status_cron()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="settings_e_declarations_test_obj" model="jpk.settings">
+        <field name="name">Środowisko testowe</field>
+        <field name="endpoint_url">https://test-bramka.edeklaracje.gov.pl/uslugi/dokumenty</field>
+        <field name="gate_type">eDeclarations</field>
+    </record>
+
+    <record id="settings_e_declarations_prod_obj" model="jpk.settings">
+        <field name="name">Środowisko produkcyjne</field>
+        <field name="endpoint_url">https://bramka.e-deklaracje.mf.gov.pl/uslugi/dokumenty</field>
+        <field name="gate_type">eDeclarations</field>
+    </record>
+</odoo>

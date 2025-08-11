@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates id="template" xml:space="preserve">
+    <t
+        t-name="spantech_hr_timesheet.ProjectRightSidePanel"
+        t-inherit="project.ProjectRightSidePanel"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath
+            expr="//ProjectRightSidePanelSection[@name=&quot;'budgets'&quot;]"
+            position="before"
+        >
+            <ProjectRightSidePanelSection name="'performance'" show="true">
+                <t t-set-slot="title">
+                    ITL Performance
+                </t>
+                <t t-set-slot="header">
+                    <div
+                        class="row"
+                        data-toggle="tooltip"
+                        data-placement="left"
+                        title="Project completion - ((Actual Man-Days / Allocated Man-Days) * 100)"
+                    >
+                        <div class="col-6">
+                            <span t-esc="state.data.performance_items.performance" />%
+                        </div>
+                        <div
+                            t-if="state.data.performance_items.performance_indicator_status == 'no'"
+                            class="col-6 fa fa-circle"
+                        />
+                        <div
+                            t-if="state.data.performance_items.performance_indicator_status == 'good'"
+                            class="col-6 fa fa-circle text-success"
+                        />
+                        <div
+                            t-if="state.data.performance_items.performance_indicator_status == 'danger'"
+                            class="col-6 fa fa-circle text-warning"
+                        />
+                        <div
+                            t-if="state.data.performance_items.performance_indicator_status == 'bad'"
+                            class="col-6 fa fa-circle text-danger"
+                        />
+                    </div>
+                </t>
+                <table class="table table-striped table-hover mb-4">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Man-Days Consumption
+                            </td>
+                            <td class="o_progressbar w-100 d-flex align-items-center">
+                                <div
+                                    class="o_progress align-middle overflow-hidden"
+                                    role="progressbar"
+                                    t-att-aria-valuenow="state.data.performance_items.man_days_consumption"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                >
+                                    <div
+                                        t-attf-class="{{ state.data.performance_items.man_days_consumption > 100 ? 'o_progress_exceed' : '' }} h-100"
+                                        t-att-style="'width: min(' + 100 * state.data.performance_items.man_days_consumption / 100 + '%, 100%)'"
+                                    />
+                                </div>
+                                <div class="o_progressbar_value d-flex">
+                                    <span
+                                        class="mx-1"
+                                        t-esc="state.data.performance_items.man_days_consumption"
+                                    /> %
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Project Completion
+                            </td>
+                            <td class="o_progressbar w-100 d-flex align-items-center">
+                                <div
+                                    class="o_progress align-middle overflow-hidden"
+                                    role="progressbar"
+                                    t-att-aria-valuenow="state.data.performance_items.project_completion"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                >
+                                    <div
+                                        t-attf-class="{{ state.data.performance_items.project_completion > 100 ? 'o_progress_exceed' : '' }} h-100"
+                                        t-att-style="'width: min(' + 100 * state.data.performance_items.project_completion / 100 + '%, 100%)'"
+                                    />
+                                </div>
+                                <div class="o_progressbar_value d-flex">
+                                    <span
+                                        class="mx-1"
+                                        t-esc="state.data.performance_items.project_completion"
+                                    /> %
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Budgeted Man-Days
+                            </td>
+                            <td>
+                                <t
+                                    t-esc="state.data.performance_items.budgeted_man_days"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Allocated Man-Days
+                            </td>
+                            <td>
+                                <t
+                                    t-esc="state.data.performance_items.allocated_man_days"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Actual Man-Days (YTD)
+                            </td>
+                            <td>
+                                <t
+                                    t-esc="state.data.performance_items.actual_man_days"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                data-toggle="tooltip"
+                                data-placement="left"
+                                title="SUMPRODUCT((Task Completion / 100) * Allocated Man-Days)"
+                            >
+                                Scheduled Man-Days based on Completion (YTD)
+                            </td>
+                            <td>
+                                <t
+                                    t-esc="state.data.performance_items.scheduled_man_days"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Man-Days Over-Consumed
+                            </td>
+                            <td>
+                                <t
+                                    t-esc="state.data.performance_items.man_days_overconsumed"
+                                />
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Calendar Progression
+                            </td>
+                            <td class="o_progressbar w-100 d-flex align-items-center">
+                                <div
+                                    class="o_progress align-middle overflow-hidden"
+                                    role="progressbar"
+                                    t-att-aria-valuenow="state.data.performance_items.calendar_progression"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                >
+                                    <div
+                                        t-attf-class="{{ state.data.performance_items.calendar_progression > 100 ? 'o_progress_exceed' : '' }} h-100"
+                                        t-att-style="'width: min(' + 100 * state.data.performance_items.calendar_progression / 100 + '%, 100%)'"
+                                    />
+                                </div>
+                                <div class="o_progressbar_value d-flex">
+                                    <span
+                                        class="mx-1"
+                                        t-esc="state.data.performance_items.calendar_progression"
+                                    /> %
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Start Date
+                            </td>
+                            <td>
+                                <t t-esc="state.data.performance_items.date_start" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Deadline
+                            </td>
+                            <td>
+                                <t t-esc="state.data.performance_items.date_deadline" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Calendar Days Left
+                            </td>
+                            <td>
+                                <t
+                                    t-esc="state.data.performance_items.calendar_day_left"
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ProjectRightSidePanelSection>
+        </xpath>
+    </t>
+</templates>

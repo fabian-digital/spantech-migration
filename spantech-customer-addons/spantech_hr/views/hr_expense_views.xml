@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_expense_view_expenses_analysis_tree" model="ir.ui.view">
+        <field name="name">hr.expense.tree</field>
+        <field name="model">hr.expense</field>
+        <field
+            name="inherit_id"
+            ref="hr_expense.hr_expense_view_expenses_analysis_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="payment_mode" position="after">
+                <field name="expense_journal_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_expense_view_expenses_analysis_kanban" model="ir.ui.view">
+        <field name="name">hr.expense.kanban</field>
+        <field name="model">hr.expense</field>
+        <field
+            name="inherit_id"
+            ref="hr_expense.hr_expense_view_expenses_analysis_kanban"
+        />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="attachment_number" invisible="True" />
+            </field>
+            <xpath
+                expr="//div[contains(@t-attf-class, 'oe_kanban_card')]"
+                position="inside"
+            >
+                <div class="row">
+                    <div class="col-12">
+                        <a
+                            type="object"
+                            name="action_get_attachment_view"
+                            icon="fa-paperclip"
+                            attrs="{'invisible': [('attachment_number', '=', 0)]}"
+                        >
+                            <span><field
+                                    name="attachment_number"
+                                /> Attachment(s)</span>
+                        </a>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_expense_view_form" model="ir.ui.view">
+        <field name="name">hr.expense.view.form</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_mode']/parent::div" position="after">
+                <field name="allow_create_expense_report" invisible="1" />
+                <field name="expense_journal_id_domain" invisible="1" />
+                <field
+                    name="expense_journal_id"
+                    options="{'no_open': True}"
+                    domain="expense_journal_id_domain"
+                    attrs="{'invisible': [('payment_mode','=','own_account')],'readonly': [('is_editable', '=', False)],'required': [('payment_mode','!=','own_account')]}"
+                />
+            </xpath>
+            <xpath
+                expr="//button[contains(@class, 'oe_highlight') and contains(@class, 'o_expense_submit') and @name='action_submit_expenses']"
+                position="attributes"
+            >
+                 <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('attachment_number', '&lt;=', 0), '|', ('sheet_id', '!=', False), ('allow_create_expense_report','=', False)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//button[not(contains(@class, 'oe_highlight')) and contains(@class, 'o_expense_submit') and @name='action_submit_expenses']"
+                position="attributes"
+            >
+                 <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('attachment_number', '&gt;=', 1), '|', ('sheet_id', '!=', False), ('allow_create_expense_report','=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_expense_sheet_form" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.form</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form" />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field
+                    name="payment_mode_id"
+                    groups="account.group_account_invoice"
+                    options="{'no_open': True}"
+                    context="{'default_company_id': company_id}"
+                />
+            </field>
+            <xpath
+                expr="//field[@name='expense_line_ids']/tree/field[@name='name']"
+                position="after"
+            >
+                <field name="product_id" optional="hide" />
+            </xpath>
+            <xpath
+                expr="//field[@name='expense_line_ids']/tree/field[@name='attachment_number']"
+                position="before"
+            >
+                <field
+                    name="first_attachment_datas"
+                    widget="nt_binary_preview"
+                    optional="hide"
+                />
+            </xpath>
+
+            <xpath
+                expr="//notebook//field[@name='expense_line_ids']/tree/field[@name='date']"
+                position="after"
+            >
+                <button
+                    name="update_expense"
+                    attrs="{'invisible': [('state', 'not in', ('reported', 'approved'))]}"
+                    groups="account.group_account_manager"
+                    title="Update Expense"
+                    type="object"
+                    icon="fa-undo"
+                />
+            </xpath>
+
+            <field name="account_move_id" position="after">
+                <field
+                    name="cashwithdrawal_move_id"
+                    groups="account.group_account_invoice,account.group_account_readonly"
+                    attrs="{'invisible': [('cashwithdrawal_move_id', '=', False)]}"
+                    readonly="1"
+                />
+            </field>
+            <field name="user_id" position="before">
+                <field name="validation_amount" />
+                <field name="show_submit_button" invisible="1" />
+            </field>
+            <button name="action_submit_sheet" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': ['|',('show_submit_button', '=', False)]}</attribute>
+                <attribute name="states">draft,review</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_hr_expense_sheet_tree" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.tree</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_tree" />
+        <field name="arch" type="xml">
+            <field name="total_amount" position="before">
+                <field name="validation_amount" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_expense_sheet_view_search" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.search</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_sheet_view_search" />
+        <field name="arch" type="xml">
+            <filter name="my_reports" position="before">
+                <filter
+                    string="To Review by me"
+                    name="to_review"
+                    domain="[('state', '=', 'review'), ('employee_id.expense_reviewer_id.user_id', '=', uid)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="hr_expense.action_hr_expense_sheet_all" model="ir.actions.act_window">
+        <field
+            name="context"
+        >{ 'searchpanel_default_state': ["draft", "review", "submit", "approve", "post", "done"] }</field>
+    </record>
+
+</odoo>

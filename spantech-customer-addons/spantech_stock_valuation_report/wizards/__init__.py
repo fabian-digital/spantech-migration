@@ -1,0 +1,1 @@
+from . import spantech_stock_fifo_valuation_report_wizard

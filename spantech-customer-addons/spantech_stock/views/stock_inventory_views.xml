@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- TODO: stock.inventory does not exist anymore, how to adapt?
+    <record id="view_inventory_form_inherit" model="ir.ui.view">
+        <field name="name">stock.inventory.form.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_account.view_inventory_form_inherit" />
+        <field name="arch" type="xml">
+            <field name="accounting_date" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+        </field>
+    </record>
+    <record id="stock_inventory_line_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree" />
+        <field name="arch" type="xml">
+            <field name="inventory_id" position="before">
+                <field
+                    name="create_uid"
+                    widget="many2one_avatar_user"
+                    string="Counted By"
+                />
+            </field>
+        </field>
+    </record>-->
+</odoo>

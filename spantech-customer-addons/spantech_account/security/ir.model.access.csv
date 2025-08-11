@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_tree_reconciled,access_account_move_tree_reconciled,model_account_move_tree_reconciled,base.group_user,1,1,1,0
+access_account_move_tree_reconciled_line,access_account_move_tree_reconciled_line,model_account_move_tree_reconciled_line,base.group_user,1,1,1,0
+
+access_account_prepayment_user,account.prepayment.spantech user,model_account_prepayment_spantech,base.group_user,1,0,0,0
+access_account_prepayment_vendor_prepayment,account.prepayment.spantech vendor prepayment group,model_account_prepayment_spantech,spantech_account.group_vendor_prepayment_spantech,1,1,1,0
+access_account_prepayment_account_user,account.prepayment.spantech account user,model_account_prepayment_spantech,account.group_account_invoice,1,1,1,1
+
+access_consolidation_period_copy,consolidation.period.copy,model_consolidation_period_copy,account.group_account_manager,1,1,1,0

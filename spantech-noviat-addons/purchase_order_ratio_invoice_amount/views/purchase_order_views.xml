@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="purchase_order_kpis_tree" model="ir.ui.view">
+        <field name="name">purchase.order.kpis.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree" />
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field
+                    name="invoiced_amount"
+                    sum="Invoiced Amount"
+                    widget="monetary"
+                    optional="show"
+                />
+            </field>
+            <field name="state" position="before">
+                <field
+                    name="amount_invoiced_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_order_view_tree" model="ir.ui.view">
+        <field name="name">purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field
+                    name="invoiced_amount"
+                    sum="Invoiced Amount"
+                    widget="monetary"
+                    optional="show"
+                />
+            </field>
+            <field name="invoice_status" position="before">
+                <field
+                    name="amount_invoiced_ratio_total"
+                    widget="progressbar"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']/parent::group" position="inside">
+                <field name="amount_invoiced_ratio_total" widget="progressbar" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

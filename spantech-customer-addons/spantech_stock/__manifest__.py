@@ -1,0 +1,43 @@
+# Copyright 2009-2022 Noviat
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Spantech Stock",
+    "version": "16.0.1.1.0",
+    "license": "AGPL-3",
+    "author": "Noviat",
+    "website": "https://www.noviat.com/",
+    "category": "Spantech",
+    "depends": [
+        "spantech_sale",
+        "spantech_mrp",
+        "spantech_analytic",
+        "stock",
+        "stock_account",
+        "account_move_line_stock_info",
+        "sale_margin_sync",
+        "stock_account_valuation_report",
+        "shipment_advice",
+        "stock_backdating",
+    ],
+    "data": [
+        "security/stock_valuation_layer_security.xml",
+        "security/ir.model.access.csv",
+        "report/report_control_checklist.xml",
+        "report/report_delivery_slip_handwritten.xml",
+        "report/report_stock_forecasted.xml",
+        "report/report_receipt_picking.xml",
+        "views/account_move_line_views.xml",
+        "views/product_views.xml",
+        "views/stock_inventory_views.xml",
+        "views/stock_picking_views.xml",
+        "views/stock_valuation_layer_views.xml",
+        "views/stock_move_views.xml",
+        "views/report_delivery_slip.xml",
+        "wizard/product_replenish_views.xml",
+        "wizard/stock_valuation_layer_revaluation_views.xml",
+        "views/report_stockpicking_operations.xml",
+        "views/report_views.xml",
+    ],
+    "installable": True,
+}

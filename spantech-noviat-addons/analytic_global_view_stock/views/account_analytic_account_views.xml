@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">account.analytic.account.form</field>
+        <field name="model">account.analytic.account</field>
+        <field
+            name="inherit_id"
+            ref="analytic_global_view.view_account_analytic_account_form"
+        />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Stock Moves" id="stock_moves_tab">
+                    <field
+                        name="stock_move_ids"
+                        context="{'tree_view_ref': 'stock.view_move_tree'}"
+                        nolabel="1"
+                    />
+                </page>
+            </notebook>
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    type="object"
+                    name="action_open_stock_pickings"
+                    icon="fa-truck"
+                >
+                    <field
+                        string="Pickings"
+                        name="picking_ids_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>

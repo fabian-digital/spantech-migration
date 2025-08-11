@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_intercompany_report_tree_view" model="ir.ui.view">
+        <field name="name">purchase.intercompany.report.tree.view</field>
+        <field name="model">purchase.intercompany.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="po_name" optional="show" />
+                <field name="date_order" optional="show" />
+                <field name="date_approve" optional="hide" />
+                <field name="partner_id" optional="show" />
+                <field name="commercial_partner_id" optional="hide" />
+                <field name="category_id" optional="hide" />
+                <field name="name" optional="show" />
+                <field name="product_id" optional="show" />
+                <field name="product_uom" optional="hide" />
+                <field name="product_uom_qty" optional="show" />
+                <field name="qty_received" optional="hide" />
+                <field name="qty_invoiced" optional="hide" />
+                <field name="qty_to_invoice" optional="hide" />
+                <field name="price_unit" optional="show" />
+                <field name="price_subtotal" optional="show" />
+                <field name="price_tax" optional="hide" />
+                <field name="price_total" optional="hide" />
+                <field name="currency_id" invisible="1" />
+                <field name="analytic_distribution" optional="show" />
+                <field name="user_id" widget="many2one_avatar_user" optional="hide" />
+                <field name="company_id" optional="show" />
+                <field name="state" optional="show" />
+                <field name="create_date" optional="hide" />
+                <field name="write_date" optional="show" />
+                <field name="is_interco_partner" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="purchase_intercompany_report_search_view" model="ir.ui.view">
+        <field name="name">purchase.intercompany.report.search.view</field>
+        <field name="model">purchase.intercompany.report</field>
+        <field name="arch" type="xml">
+            <search string="Purchase Intercompany Report">
+                <filter
+                    string="Draft Quotation"
+                    name="draft_quotation"
+                    domain="[('state','=','draft')]"
+                />
+                <filter
+                    string="Sent Quotation"
+                    name="sent_quotation"
+                    domain="[('state','=','sent')]"
+                />
+                <filter
+                    string="Purchase Orders"
+                    name="orders"
+                    domain="[('state','!=','draft'), ('state','!=','sent'), ('state','!=','cancel')]"
+                />
+                <filter name="filter_date_order" date="date_order" />
+                <filter
+                    name="filter_date_approve"
+                    date="date_approve"
+                    default_period="this_month"
+                />
+                <field name="po_name" />
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="product_id" />
+                <field name="company_id" />
+                <group expand="0" string="Extended Filters">
+                    <field name="user_id" />
+                    <field name="company_id" groups="base.group_multi_company" />
+                    <field name="date_order" />
+                    <field name="date_approve" />
+                    <field
+                        name="category_id"
+                        filter_domain="[('category_id', 'child_of', self)]"
+                    />
+                </group>
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Purchase Order"
+                        name="group_purchase_order"
+                        context="{'group_by':'order_id'}"
+                    />
+                    <filter
+                        string="Product"
+                        name="group_product_id"
+                        context="{'group_by':'product_id'}"
+                    />
+                    <filter
+                        string="Product Category"
+                        name="group_category_id"
+                        context="{'group_by':'category_id'}"
+                    />
+                    <filter
+                        string="Status"
+                        name="group_status"
+                        context="{'group_by':'state'}"
+                    />
+                    <filter
+                        string="Company"
+                        name="group_company"
+                        context="{'group_by':'company_id'}"
+                        groups="base.group_multi_company"
+                    />
+                    <separator />
+                    <filter
+                        string="Order Date"
+                        name="group_order_month"
+                        context="{'group_by': 'date_order:month'}"
+                    />
+                    <filter
+                        string="Confirmation Date"
+                        name="group_date_approve_month"
+                        context="{'group_by': 'date_approve:month'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="purchase_intercompany_report_action" model="ir.actions.act_window">
+        <field name="name">Purchase Intercompany Report</field>
+        <field name="res_model">purchase.intercompany.report</field>
+        <field name="view_mode">tree</field>
+        <field name="target">current</field>
+        <field name="domain">[('is_interco_partner','=',True)]</field>
+        <field
+            name="context"
+        >{'search_default_sent_quotation': 1, 'search_default_group_company': 1}</field>
+    </record>
+
+    <menuitem
+        id="purchase_intercompany_report_menu"
+        name="Intercompany Report"
+        parent="purchase.menu_purchase_root"
+        sequence="99"
+        groups="purchase.group_purchase_user"
+        action="purchase_intercompany_report_action"
+    />
+
+</odoo>

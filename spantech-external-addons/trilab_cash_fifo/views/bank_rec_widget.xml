@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_bank_rec_widget_form_inherit" model="ir.ui.view">
+        <field name="name">bank.rec.widget.form.inherit</field>
+        <field name="model">bank.rec.widget</field>
+        <field name="inherit_id" ref="account_accountant.view_bank_rec_widget_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_validate']" position="before">
+                <field name="x_show_post_move_btn" invisible="True"/>
+                <button name="x_button_post_move"
+                        string="Post Move"
+                        class="btn btn-primary"
+                        type="object"
+                        attrs="{'invisible': [('x_show_post_move_btn', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

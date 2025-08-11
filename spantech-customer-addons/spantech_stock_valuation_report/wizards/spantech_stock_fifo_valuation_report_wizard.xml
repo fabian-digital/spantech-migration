@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record
+        id="spantech_stock_fifo_valuation_report_excel_wizard_form_view"
+        model="ir.ui.view"
+    >
+        <field name="name">spantech.stock.fifo.valuation.report.excel.wizard.form.view
+        </field>
+        <field name="model">spantech.stock.fifo.valuation.report.excel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generated Excel File">
+                <group>
+                    <field name="file_name" invisible="1" />
+                    <field name="excel_file" readonly="1" filename="file_name" />
+                </group>
+                <footer>
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record
+        id="spantech_stock_fifo_valuation_report_wizard_form_view"
+        model="ir.ui.view"
+    >
+        <field name="name">spantech.stock.fifo.valuation.report.wizard.form.view</field>
+        <field name="model">spantech.stock.fifo.valuation.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="start_date" />
+                        <field name="end_date" />
+                        <field name="display_sum" />
+                    </group>
+                    <group
+                        string="Filter By"
+                        attrs="{'invisible' : [('display_sum','=',True)]}"
+                    >
+                        <field name="filter_by" widget="radio" />
+                    </group>
+                    <group string="Warehouses">
+                        <field name="company_id" invisible="1" />
+                        <field
+                            name="warehouse_ids"
+                            widget="many2many_tags"
+                            nolabel="1"
+                            colspan="2"
+                        />
+                    </group>
+                    <group string="Locations">
+                        <field name="location_id" nolabel="1" colspan="2" />
+                    </group>
+                </group>
+                <group
+                    string="Product"
+                    attrs="{'invisible' : ['|',('filter_by','!=','product'),('display_sum','=',True)]}"
+                >
+                    <field name="product_ids" nolabel="1" colspan="4">
+                        <tree>
+                            <field name="name" />
+                        </tree>
+                    </field>
+                </group>
+                <group
+                    string="Category"
+                    attrs="{'invisible' : ['|',('filter_by','!=','categ'),('display_sum','=',True)]}"
+                >
+                    <field name="category_id" nolabel="1" colspan="4">
+                        <tree>
+                            <field name="name" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button
+                        string="Print Excel"
+                        name="print_xls_report"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record
+        id="spantech_stock_fifo_valuation_report_wizard_action"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Inventory Valuation Report FIFO</field>
+        <field name="res_model">spantech.stock.fifo.valuation.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="spantech_stock_fifo_valuation_report_wizard_menu"
+        parent="stock.menu_warehouse_report"
+        action="spantech_stock_fifo_valuation_report_wizard_action"
+        groups="stock.group_stock_manager,stock.group_stock_user"
+    />
+</odoo>

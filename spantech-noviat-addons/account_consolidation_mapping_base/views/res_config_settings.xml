@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">account settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div data-key="account" position="inside">
+                <h2 id="account_consolidation_h2">Account Consolidation</h2>
+                <div id="account_consolidation" class="row mt16 o_settings_container">
+                    <div
+                        id="account_consolidation_settings"
+                        class="col-12 col-lg-12 o_setting_box"
+                    >
+                        <div
+                            id="account_consolidation_left_pane"
+                            class="o_setting_left_pane"
+                        />
+                        <div
+                            id="account_consolidation_right_pane"
+                            class="o_setting_right_pane"
+                        >
+                            <div class="row">
+                                <label for="consolidation_chart_id" class="col-md-5" />
+                                <field name="consolidation_chart_id" />
+                            </div>
+                            <div
+                                class="text-muted"
+                            >Select the Consolidation Chart to use for mapping purposes in this Company.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="timesheet_itl_report_wizard_form_view" model="ir.ui.view">
+        <field name="name">timesheet.itl.report.wizard.form</field>
+        <field name="model">timesheet.itl.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date" widget="date" />
+                </group>
+                <footer>
+                    <button
+                        string="Generate"
+                        name="action_generate_report"
+                        type="object"
+                    />
+                    <button string="Cancel" special="cancel" class="oe-link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

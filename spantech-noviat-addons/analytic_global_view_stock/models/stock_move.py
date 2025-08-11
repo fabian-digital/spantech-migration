@@ -1,0 +1,25 @@
+from odoo import api, fields, models
+
+
+class StockMove(models.Model):
+    _inherit = "stock.move"
+
+    analytic_account_ids = fields.Many2many(
+        comodel_name="account.analytic.account",
+        relation="account_analytic_account_stock_move_rel",
+        column1="move_id",
+        column2="analytic_account_id",
+        compute="_compute_analytic_account_ids",
+        store=True,
+    )
+
+    @api.depends("analytic_distribution")
+    def _compute_analytic_account_ids(self):
+        for line in self:
+            if line.analytic_distribution:
+                analytic_account_ids = [int(key) for key in line.analytic_distribution]
+                line.analytic_account_ids = self.env["account.analytic.account"].browse(
+                    analytic_account_ids
+                )
+            else:
+                line.analytic_account_ids = False

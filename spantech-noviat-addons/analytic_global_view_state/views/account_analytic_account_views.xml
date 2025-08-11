@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_account_analytic_account_list" model="ir.ui.view">
+        <field name="name">account.analytic.account.list</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_list" />
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <field name="state_id" required="1" optional="show" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">account.analytic.account.form</field>
+        <field name="model">account.analytic.account</field>
+        <field
+            name="inherit_id"
+            ref="analytic_global_view.view_account_analytic_account_form"
+        />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field
+                    name="state_id"
+                    widget="statusbar"
+                    options="{'clickable': '1', 'fold_field': 'fold'}"
+                />
+            </header>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_kanban" model="ir.ui.view">
+        <field name="name">account.analytic.account.kanban</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_kanban" />
+        <field name="arch" type="xml">
+            <kanban position="attributes">
+                <attribute name="default_group_by">state_id</attribute>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_search" model="ir.ui.view">
+       <field name="name">account.analytic.account.search</field>
+       <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_search" />
+        <field name="arch" type="xml">
+            <filter name="associatedpartner" position="before">
+                <filter
+                    string="State"
+                    name="state_id_group"
+                    context="{'group_by': 'state_id'}"
+                />
+            </filter>
+       </field>
+    </record>
+
+</odoo>

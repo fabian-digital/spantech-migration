@@ -1,0 +1,649 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* trilab_mbank
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-26 17:43+0000\n"
+"PO-Revision-Date: 2023-10-26 17:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,help:trilab_mbank.field_account_journal__x_mbank_app_cert
+msgid ".p12 file containing private key and certificate"
+msgstr "Wymagane plik .p12 zawierający klucz prywatny i certyfikat."
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_journal.py:0
+#, python-format
+msgid ".p12 files containing private key and certificate required."
+msgstr "Wymagane pliki .p12 zawierające klucz prywatny i certyfikat."
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid "Account Number is not set for this journal bank account."
+msgstr "Numer konta nie jest ustawiony dla tego konta bankowego dziennika."
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/copy_session_token_wizard.py:0
+#, python-format
+msgid ""
+"All Journals have to have same DIK and User ID and Long term Session "
+"Authentication Method"
+msgstr ""
+"Wszystkie dzienniki muszą mieć ten sam DIK i id użytkownika i Sesję "
+"Długotrwałą jako metodę autentykacji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_app_cert
+msgid "App Cert File"
+msgstr "Certyfikat"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_app_cert_filename
+msgid "App Cert Filename"
+msgstr "Nazwa Pliku Certyfikatu"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_app_cert_password
+msgid "App Cert Password"
+msgstr "Hasło Certyfikatu"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.view_account_journal_form_inherit
+msgid "Are you sure? It will remove current Session Token."
+msgstr "Jesteś pewien? Usunie to aktualny token Sesji."
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__auth_token
+msgid "Auth Token"
+msgstr "Token autoryzacyjny"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_auth_method
+msgid "Authentication Method"
+msgstr "Metoda Autentykacji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__authorized
+msgid "Authorized"
+msgstr "Autoryzowane"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__bank_account_ids
+msgid "Bank Account"
+msgstr "Konto Bankowe"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/statement_import_wizard.py:0
+#, python-format
+msgid "Bank account is required"
+msgstr "Konto Bankowe jest wymagane"
+
+#. module: trilab_mbank
+#: model:ir.model,name:trilab_mbank.model_account_batch_payment
+msgid "Batch Payment"
+msgstr "Płatność zbiorcza"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid "Batch can't be empty"
+msgstr "Paczka nie może być pusta"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.copy_session_token_wizard_form
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.statement_import_wizard_form
+msgid "Cancel"
+msgstr "Anuluj"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__conditional
+msgid "Conditional"
+msgstr "Przyjęte"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__confirmed
+msgid "Confirmed (PZ)"
+msgstr "Potwierdzone (dla PZ)"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.copy_session_token_wizard_form
+msgid "Copy Session Token"
+msgstr "Kopiuj Token Sesji"
+
+#. module: trilab_mbank
+#: model:ir.actions.act_window,name:trilab_mbank.copy_session_token_wizard_action
+msgid "Copy Session Token Wizard"
+msgstr "Kopiuj Token Sesji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__create_uid
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__create_uid
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__create_uid
+msgid "Created by"
+msgstr "Utworzony przez"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__create_date
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__create_date
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__create_date
+msgid "Created on"
+msgstr "Utworzony"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_dik
+msgid "DIK"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__date_from
+msgid "Date From"
+msgstr "Data Od"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__date_to
+msgid "Date To"
+msgstr "Data Do"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__deleted
+msgid "Deleted"
+msgstr "Usunięta"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__denied
+msgid "Denied"
+msgstr "Odrzucone"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid "Different Batch and Payment bank accounts"
+msgstr "Różne konta bankowe batch i płatnicze"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid "Different Batch and Payment payment methods"
+msgstr "Różne metody płatności batch i płatności"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__display_name
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__display_name
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__display_name
+msgid "Display Name"
+msgstr "Nazwa wyświetlana"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Download file to sign"
+msgstr "Pobierz Plik do podpisania"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Download login file to sign"
+msgstr "Pobierz plik logowania do podpisu"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_enable_logging
+msgid "Enable Logging"
+msgstr "Włącz logowanie"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.view_account_journal_form_inherit
+msgid "Get New Session Token"
+msgstr "Utwórz nowy token sesji"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.view_account_journal_form_inherit
+msgid "Get Session Token"
+msgstr "Pobierz Token Sesji"
+
+#. module: trilab_mbank
+#: model:ir.actions.act_window,name:trilab_mbank.get_multi_session_token_wizard_action
+#: model:ir.actions.act_window,name:trilab_mbank.get_session_token_wizard_action
+msgid "Get Session Token Wizard"
+msgstr "Wizard pobrania tokenu sesji"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Get login file to sign"
+msgstr "Pobierz Plik logowania do Podpisu"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Get session token to sign"
+msgstr "Pobierz Token sesji do Podpisu"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__id
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__id
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.statement_import_wizard_form
+msgid "Import Statements"
+msgstr "Importuj wyciągi"
+
+#. module: trilab_mbank
+#: model:ir.actions.act_window,name:trilab_mbank.action_statement_import_wizard
+#: model:ir.ui.menu,name:trilab_mbank.menu_mbank_statement_import_wizard
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.statement_import_wizard_form
+msgid "Import mBank Statements"
+msgstr "Importuj wyciągi mBank"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__in_auth
+msgid "In Auth"
+msgstr "Zautoryzowane częściowo"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_journal.py:0
+#, python-format
+msgid ""
+"In Production Environment only Signature Authentication  or Long term "
+"Session is allowed."
+msgstr ""
+"W środowisku Produkcyjnym jedyną dozwoloną metodą Autentykacji jest Podpis "
+"lub Sesja Długotrwała."
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__in_realiz
+msgid "In Realization"
+msgstr "W realizacji"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid "Incorrect batch type"
+msgstr "Niepoprawny typ paczki"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_journal.py:0
+#, python-format
+msgid "Incorrect source"
+msgstr "Niepoprawne źródło"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid ""
+"Invalid account numbers for:\n"
+"%s"
+msgstr ""
+"Niepoprawny numer konta dla:\n"
+"%s"
+
+#. module: trilab_mbank
+#: model:ir.model,name:trilab_mbank.model_account_journal
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__journal_ids
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__journal_ids
+msgid "Journal"
+msgstr "Dziennik"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard____last_update
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard____last_update
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard____last_update
+msgid "Last Modified on"
+msgstr "Data ostatniej modyfikacji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__write_uid
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__write_uid
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Ostatnia aktualizacja przez"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__write_date
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__write_date
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_statement_import_wizard__write_date
+msgid "Last Updated on"
+msgstr "Ostatnia aktualizacja"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Login"
+msgstr "Zaloguj się"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__login_to_sign_file_id
+msgid "Login To Sign File"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_journal__x_mbank_auth_method__background_session
+msgid "Long term Session"
+msgstr "Sesja Długotrwała"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__mbank_dik
+msgid "Mbank Dik"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__mbank_user_id
+msgid "Mbank User"
+msgstr ""
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid ""
+"More than one invoice connected with payment %s or no invoices connected"
+msgstr ""
+"Więcej niż jedna faktura jest połączona z płatnością %s lub żadna faktura "
+"nie jest połączona"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid "Only PLN at the moment"
+msgstr "Aktualnie tylko PLN"
+
+#. module: trilab_mbank
+#: model:ir.model,name:trilab_mbank.model_account_payment_method
+msgid "Payment Methods"
+msgstr "Metody wysyłania płatności"
+
+#. module: trilab_mbank
+#: model:ir.model,name:trilab_mbank.model_account_payment
+msgid "Payments"
+msgstr "Wpłaty"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__pending
+msgid "Pending"
+msgstr "Oczekujące"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__stop_acc_c
+msgid "Pending - stop account"
+msgstr "Oczekujące - stop rachunek"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__stop_cust_c
+msgid "Pending - stop client"
+msgstr "Oczekujące - stop klient"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__stopped
+msgid "Pending - stop transaction"
+msgstr "Oczekujące - stop transakcja"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/get_session_token_wizard.py:0
+#, python-format
+msgid "Please Login"
+msgstr "Proszę zalogować się"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Please sign files in \"CAdES\" format with data included."
+msgstr "Proszę podpisać pliki w formacie \"CAdES\" załączając dane."
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/get_session_token_wizard.py:0
+#, python-format
+msgid "Please upload in Signed Login File"
+msgstr "Proszę wgrać Plik Podpisany Login"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/get_session_token_wizard.py:0
+#, python-format
+msgid "Please upload in Signed Token File"
+msgstr "Proszę przesłać podpisany plik"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__processed
+msgid "Processed"
+msgstr "Przetworzone"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__realized
+msgid "Realized"
+msgstr "Zaksięgowane"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__realiz_and_cond
+msgid "Realized and Conditional"
+msgstr "Zrealizowane"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_batch_payment.py:0
+#, python-format
+msgid "Recipient Bank Account is required for %s"
+msgstr "Numer konta odbiorcy jest wymagany dla %s"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__session_expiration
+msgid "Session Expiration date"
+msgstr "Data Ważności Sesji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,help:trilab_mbank.field_trilab_mbank_get_session_token_wizard__session_expiration
+msgid ""
+"Session Expiration date could not be bigger than certificate validity date."
+msgstr ""
+"Data Ważności sesji nie może być większa od daty ważności certyfikatu."
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_session_token
+msgid "Session Token"
+msgstr "Token Sesji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_journal__x_mbank_auth_method__sign
+msgid "Signature"
+msgstr "Podpis"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__signed_file_id
+msgid "Signed File"
+msgstr "Podpisany Plik"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__signed_login_file_id
+msgid "Signed Login File"
+msgstr "Podpisany Login Plik"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__signed_login_file_datas
+msgid "Signed Login File "
+msgstr "Podpisany Login Plik "
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__signed_login_file_name
+msgid "Signed Login File Name"
+msgstr "Podpisany Login Nazwa Pliku"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__signed_file_datas
+msgid "Signed Token File"
+msgstr "Podpisany Token Plik"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__signed_file_name
+msgid "Signed Token File Name"
+msgstr "Podpisany Token Nazwa Pliku"
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/get_session_token_wizard.py:0
+#, python-format
+msgid ""
+"Some journals are incompatible with this action. Make sure all journals have:\n"
+"- same `User ID`\n"
+"- `Bank Feeds` set as `mBank Polska`\n"
+"- `Authentication Method` set to `Long term Session`\n"
+"- `Test` is enabled or disabled across all journals"
+msgstr ""
+"Niektóre dzienniki są niekompatybilne z tą akcją. Upewnij się, że wszystkie dzienniki mają:\n"
+"- taki sam `Identyfikator Użytkownika`\n"
+"- `Wpływy Bankowe` ustawione na `mBank Polska`\n"
+"- `Metoda Autentykacji` ustawioną na `Sesja Długotrwała`\n"
+"- `Test` jest włączony na wszystkich dziennikach lub jest wyłączony na wszystkich dziennikach"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_copy_session_token_wizard__source_journal_id
+msgid "Source Journal"
+msgstr "Dziennik źródłowy "
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Step One - Login"
+msgstr "Krok Pierwszy - Logowanie"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.get_session_token_wizard_form
+msgid "Step Two - Create Session"
+msgstr "Krok Drugi - Tworzenie Sesji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_test
+msgid "Test"
+msgstr ""
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/models/account_journal.py:0
+#, python-format
+msgid "The bank account of a mBank journal must be in IBAN type."
+msgstr "Konto bankowe dziennika mBanku musi być typu IBAN."
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__to_auth
+msgid "To Auth"
+msgstr "Do autoryzacji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__to_edit
+msgid "To Edit"
+msgstr "Do Edycji"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__sign_verify
+msgid "To Sign Verify"
+msgstr "Oczekujące na weryfikację"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_journal__x_mbank_auth_method__token
+msgid "Token"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_trilab_mbank_get_session_token_wizard__token_to_sign_file_id
+msgid "Token To Sign File"
+msgstr "Plik Token do podpisania"
+
+#. module: trilab_mbank
+#: model:ir.model,name:trilab_mbank.model_trilab_mbank_copy_session_token_wizard
+msgid "Trilab mBank Copy Session Token Wizard"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.model,name:trilab_mbank.model_trilab_mbank_get_session_token_wizard
+msgid "Trilab mBank Get Session Token Wizard"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_journal__x_mbank_user_id
+msgid "User ID"
+msgstr "Identyfikator Użytkownika"
+
+#. module: trilab_mbank
+#: model:ir.model.fields.selection,name:trilab_mbank.selection__account_batch_payment__x_mbank_status__validated
+msgid "Validated - mass"
+msgstr "Zwalidowane (dla masowych)"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_batch_payment__x_mbank_show_payment_button
+msgid "X Mbank Show Payment Button"
+msgstr ""
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/get_session_token_wizard.py:0
+#, python-format
+msgid "login-to-sign-%s.txt"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_batch_payment__x_mbank_batch_id
+msgid "mBank Batch Id"
+msgstr ""
+
+#. module: trilab_mbank
+#: model:ir.actions.server,name:trilab_mbank.mbank_batch_status_cron_ir_actions_server
+#: model:ir.cron,cron_name:trilab_mbank.mbank_batch_status_cron
+msgid "mBank Check Batch Status"
+msgstr "mBank Sprawdź Status Batch"
+
+#. module: trilab_mbank
+#: model:account.payment.method,name:trilab_mbank.mbank_payment_method
+msgid "mBank Domestic Payment"
+msgstr "mBank Płatność krajowa"
+
+#. module: trilab_mbank
+#: model:ir.actions.server,name:trilab_mbank.mbank_download_statements_cron_ir_actions_server
+#: model:ir.cron,cron_name:trilab_mbank.mbank_download_statements_cron
+msgid "mBank Download Statements"
+msgstr "mBank Pobierz Wyciągi"
+
+#. module: trilab_mbank
+#: model_terms:ir.ui.view,arch_db:trilab_mbank.view_batch_payment_form_inherit
+msgid "mBank Payment"
+msgstr "mBank Płatność"
+
+#. module: trilab_mbank
+#: model:account.payment.method,name:trilab_mbank.mbank_split_payment_method
+msgid "mBank Split Payment"
+msgstr "mBank Płatność Podzielona"
+
+#. module: trilab_mbank
+#: model:ir.model,name:trilab_mbank.model_trilab_mbank_statement_import_wizard
+msgid "mBank Statement Import Wizard"
+msgstr "mBank Kreator Importu Wyciągów"
+
+#. module: trilab_mbank
+#: model:ir.model.fields,field_description:trilab_mbank.field_account_batch_payment__x_mbank_status
+msgid "mBank Status"
+msgstr ""
+
+#. module: trilab_mbank
+#. odoo-python
+#: code:addons/trilab_mbank/wizard/get_session_token_wizard.py:0
+#, python-format
+msgid "token-to-sign-%s.txt"
+msgstr "token-do-podpisu-%s.txt"

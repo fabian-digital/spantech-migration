@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">spantech.analytic.analytic.account.form.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field
+            name="inherit_id"
+            ref="spantech_analytic.view_account_analytic_account_form"
+        />
+        <field name="arch" type="xml">
+            <field name="customer_reference" position="after">
+                <field name="block_purchase" groups="account.group_account_manager" />
+                <field
+                    name="block_purchase"
+                    readonly="1"
+                    groups="!account.group_account_manager"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_search" model="ir.ui.view">
+        <field name="name">account.analytic.account.search</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_search" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <filter
+                    string="Block Purchase"
+                    domain="[('block_purchase', '=', True)]"
+                    name="block_purchase"
+                />
+            </filter>
+        </field>
+    </record>
+
+</odoo>

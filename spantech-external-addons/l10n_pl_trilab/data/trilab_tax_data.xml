@@ -1,0 +1,1471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="vat_z_23_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 23 T</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="sequence" eval="1"/>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_z_23_uslugi_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 23 U</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">service</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="sequence" eval="2"/>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="vat_z_23_towary_st" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 23 ST</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="3"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_43')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_43')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="vat_s_23_towary" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S 23 T</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="sequence" eval="4"/>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_s_23_uslugi" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S 23 U</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">service</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="sequence" eval="5"/>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],
+          }),
+              ]"/>
+    </record>
+
+
+    <!-- ZAKUPY -->
+
+    <record id="vat_z_8_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 8 T</field>
+        <field name="description">8%</field>
+        <field name="amount">8</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_8"/>
+        <field name="sequence" eval="100"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="vat_z_5_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 5 T</field>
+        <field name="description">5%</field>
+        <field name="amount">5</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_5"/>
+        <field name="sequence" eval="101"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_z_0_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 0 T</field>
+        <field name="description">0%</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="102"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',            
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_z_zw_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z ZW T</field>
+        <field name="description">ZW</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_zw"/>
+        <field name="sequence" eval="103"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',            
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_z_23_towary_st" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE Z 23 ST</field>
+        <field name="description">UEZT</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="104"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_43')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_43')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_z_23_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE Z 23 T</field>
+        <field name="description">UEZT</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="105"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_z_8_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE Z 8 T</field>
+        <field name="description">UEZT</field>
+        <field name="amount">8</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_8"/>
+        <field name="sequence" eval="110"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_z_5_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE Z 5 T</field>
+        <field name="description">UEZT</field>
+        <field name="amount">5</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_5"/>
+        <field name="sequence" eval="111"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_z_0_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE Z 0 T</field>
+        <field name="description">UEZT</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="112"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_z_zw_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE Z ZW T</field>
+        <field name="description">UEZT</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_zw"/>
+        <field name="sequence" eval="113"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_23'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_24')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_z_23_uslugi_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE Z 23 U</field>
+        <field name="description">UEZU</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">service</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="114"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_29'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_30')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_29'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_30')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="im_z_23_towary_st" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">IM 23 ST (33a)</field>
+        <field name="description">IMT</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="120"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_43')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_43')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="im_z_23_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">IM 23 T (33a)</field>
+        <field name="description">IMT</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="121"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="im_z_8_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">IM 8 T (33a)</field>
+        <field name="description">IMT</field>
+        <field name="amount">8</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_8"/>
+        <field name="sequence" eval="122"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="im_z_5_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">IM 5 T (33a)</field>
+        <field name="description">IMT</field>
+        <field name="amount">5</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_5"/>
+        <field name="sequence" eval="123"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="im_z_0_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">IM 0 T (33a)</field>
+        <field name="description">IMT</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="124"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="im_z_zw_towary_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">IM ZW T (33a)</field>
+        <field name="description">IMT</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_zw"/>
+        <field name="sequence" eval="125"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_25'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_26')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="im_z_23_uslugi_poz" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">IM 23 U</field>
+        <field name="description">IMU</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">service</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="126"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_27'), ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+            (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_28')],
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_27'), ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+           (0,0, {
+              'factor_percent': -100,
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_28')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_z_23_towary_poz_brutto" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 23 T (brutto)</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="price_include">True</field>
+        <field name="include_base_amount">True</field>
+        <field name="sequence" eval="130"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_z_23_towary_st_brutto" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 23 T ST (brutto)</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="price_include">True</field>
+        <field name="include_base_amount">True</field>
+        <field name="sequence" eval="131"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_43')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_43')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_44')],
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="vat_z_8_towary_poz_brutto" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 8 T (brutto)</field>
+        <field name="description">8%</field>
+        <field name="amount">8</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_8"/>
+        <field name="price_include">True</field>
+        <field name="include_base_amount">True</field>
+        <field name="sequence" eval="132"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_z_5_towary_poz_brutto" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 5 T (brutto)</field>
+        <field name="description">5%</field>
+        <field name="amount">5</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="tax_group_id" ref="tax_group_vat_5"/>
+        <field name="price_include">True</field>
+        <field name="include_base_amount">True</field>
+        <field name="sequence" eval="133"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="vat_z_23_KSO_0,5" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT Z 23 KSO 0,5</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="sequence" eval="2"/>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="sequence" eval="134"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],              
+          }), 
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],              
+          }),
+          (0,0, {
+              'factor_percent': 242.391304347826100,
+              'repartition_type': 'tax',           
+         }),
+           (0,0, {
+              'factor_percent': 292.391304347826,
+              'repartition_type': 'tax',           
+         }),
+         ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_45')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22102'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_46')],
+          }),
+          (0,0, {
+              'factor_percent': 242.391304347826100,
+              'repartition_type': 'tax',           
+         }),
+           (0,0, {
+              'factor_percent': 292.391304347826,
+              'repartition_type': 'tax',           
+         }),
+         ]"/>
+    </record>
+
+    <!-- SPRZEDAZ -->
+
+    <record id="vat_s_8_towary" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S 8 T</field>
+        <field name="description">8%</field>
+        <field name="amount">8</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_8"/>
+        <field name="sequence" eval="200"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_17')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_18')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_17')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_18')],
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="vat_s_5_towary" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S 5 T</field>
+        <field name="description">5%</field>
+        <field name="amount">5</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_5"/>
+        <field name="sequence" eval="201"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_15')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_16')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_15')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_16')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_s_0_towary" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S 0 T</field>
+        <field name="description">0%</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="202"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',              
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_13')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',          
+          }),
+       ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_13')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+          }),
+       ]"/>
+    </record>
+
+    <record id="vat_s_zw_towary" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S ZW T</field>
+        <field name="description">ZW</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_zw"/>
+        <field name="sequence" eval="203"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_10')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',                        
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_10')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_s_towary" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE S T</field>
+        <field name="description">UEST</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="204"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_21')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',           
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_21')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+          }),
+              ]"/>
+    </record>
+
+    <record id="ue_s_uslugi" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">UE S U</field>
+        <field name="description">UESU</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">service</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="205"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_11'), ref('trilab_jpk_vat.pl_jpk_K_12')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',                        
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_11'), ref('trilab_jpk_vat.pl_jpk_K_12')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',          
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="ex_s_towary" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">EX T</field>
+        <field name="description">EXT</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="206"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_22')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',                       
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_22')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+          }),
+              ]"/>
+    </record>
+
+    <record id="ex_s_uslugi" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">EX U</field>
+        <field name="description">EXU</field>
+        <field name="amount">0</field>
+        <field name="tax_scope">service</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="tax_group_vat_0"/>
+        <field name="sequence" eval="207"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_11')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',            
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_11')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+          }),
+              ]"/>
+    </record>
+
+
+    <record id="vat_s_23_usługi_brutto" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S 23 U (brutto)</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">service</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="price_include">True</field>
+        <field name="include_base_amount">True</field>
+        <field name="sequence" eval="208"/>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],
+          }),
+              ]"/>
+    </record>
+
+    <record id="vat_s_23_towary_brutto" model="account.tax.template">
+        <field name="chart_template_id" ref="pl_trilab_chart_template"/>
+        <field name="name">VAT S 23 T (brutto)</field>
+        <field name="description">23%</field>
+        <field name="amount">23</field>
+        <field name="tax_scope">consu</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="price_include">True</field>
+        <field name="include_base_amount">True</field>
+        <field name="sequence" eval="209"/>
+        <field name="tax_group_id" ref="tax_group_vat_23"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],              
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],              
+          }),
+                ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+          (0,0, {
+              'repartition_type': 'base',
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_19')],
+          }),
+          (0,0, {
+              'repartition_type': 'tax',
+              'account_id': ref('l10n_pl_trilab.chart22101'),
+              'tag_ids': [ref('trilab_jpk_vat.pl_jpk_K_20')],
+          }),
+              ]"/>
+    </record>
+
+</odoo>

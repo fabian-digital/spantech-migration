@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">trilab_invoice account.view_move_form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <button name="action_reverse" position="after">
+                <field name="x_final_source_id" invisible="1"/>
+                <field name="x_use_ti" invisible="1"/>
+                <button name="action_recalculate_advance_payment" string="Recalculate Downpayment"
+                        type='object' groups="account.group_account_invoice"
+                        attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'), ('x_use_ti', '=', False), ('x_final_source_id', '=', False)]}"/>
+                <button name="action_reverse_pl" string="Add Credit Note PL"
+                        type='object' groups="account.group_account_invoice"
+                        attrs="{'invisible': ['|', ('x_correction_invoices_len', '!=', 0), '|', ('x_use_ti', '=', False),
+                                                   ('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+            </button>
+
+            <button name="action_reverse" position="attributes">
+                <attribute name="attrs">{'invisible': [
+                    ('x_use_ti', '=', True),
+                    '|',
+                    ('state', '!=', 'posted'),
+                    ('move_type', '!=', 'in_invoice'),
+                ]}</attribute>
+            </button>
+
+            <xpath expr="//div[hasclass('oe_title')]//field[@name='move_type']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_title')]//field[@name='move_type']" position="after">
+                <field name="type_name" attrs="{'invisible': [('move_type', '=', 'entry')]}" readonly="1" nolabel="1"/>
+            </xpath>
+
+            <field name="invoice_date" position="after">
+                <field name="x_invoice_sale_date"
+                       attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('x_use_ti', '=', False)]}"/>
+                <field name="x_invoice_duplicate_date"
+                       attrs="{'invisible': ['|', ('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt', 'in_invoice', 'in_refund', 'in_receipt')), ('x_use_ti', '=', False)]}"/>
+                <field name="x_show_currency_rate" invisible="1"/>
+                <field name="x_currency_rate"
+                       attrs="{'invisible': [('x_show_currency_rate', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+            </field>
+
+            <field name="ref" position="after">
+                <field name="reversed_entry_id" string="Corrected Invoice" readonly="1"
+                       attrs="{'invisible': [('reversed_entry_id', '=', False)]}"/>
+            </field>
+
+            <div name="button_box" position="inside">
+                <field name="x_correction_invoices_len" invisible="1"/>
+                <button name="x_view_correction_invoices_action" class="oe_stat_button" icon="fa-bars" type="object"
+                        attrs="{'invisible': [('x_correction_invoices_len', '=', 0)]}">
+                    <field name="x_correction_invoices_len" string="Correction Invoices" widget="statinfo"/>
+                </button>
+            </div>
+
+            <page id="invoice_tab" position="before">
+                <page id="invoice_tab_corrected" string="Lines After"
+                      attrs="{'invisible': ['|', ('x_use_ti', '=', False), '|', ('move_type', 'in', ('entry', 'in_refund')), ('reversed_entry_id', '=', False)]}">
+                    <field name="x_corrected_invoice_line_ids"
+                           widget="section_and_note_one2many"
+                           mode="tree,kanban"
+                           context="{
+                            'default_x_is_corrected_line': True,
+                             'default_move_type': context.get('default_move_type'),
+                             'journal_id': journal_id,
+                             'default_partner_id': commercial_partner_id,
+                             'default_currency_id': currency_id or company_currency_id,
+                             'default_display_type': 'product',
+                             'quick_encoding_vals': quick_encoding_vals,
+                         }"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}">
+                        <tree editable="bottom" string="Journal Items" default_order="sequence, id">
+                            <control>
+                                <create name="add_line_control" string="Add a line"/>
+                                <create name="add_section_control" string="Add a section"
+                                        context="{'default_display_type': 'line_section'}"/>
+                                <create name="add_note_control" string="Add a note"
+                                        context="{'default_display_type': 'line_note'}"/>
+                            </control>
+
+                            <!-- Displayed fields -->
+                            <field name="sequence" widget="handle"/>
+                            <field name="product_id"
+                                   optional="show"
+                                   domain="context.get('default_move_type') in ('out_invoice', 'out_refund', 'out_receipt')
+                                         and [('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
+                                         or [('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
+                                        "/>
+                            <field name="name" widget="section_and_note_text" optional="show"
+                                   attrs="{'required': [('parent.move_type', 'not in', ('in_invoice', 'in_refund','in_receipt'))]}"/>
+                            <field name="account_id"
+                                   context="{'partner_id': partner_id, 'move_type': parent.move_type}"
+                                   groups="account.group_account_readonly"
+                                   options="{'no_create': True}"
+                                   domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_receivable', 'liability_payable')), ('company_id', '=', parent.company_id), ('is_off_balance', '=', False)]"
+                                   attrs="{'required': [('display_type', 'not in', ('line_note', 'line_section'))]}"/>
+
+                            <field name="analytic_distribution" widget="analytic_distribution"
+                                   groups="analytic.group_analytic_accounting"
+                                   optional="show"
+                                   options="{'product_field': 'product_id', 'account_field': 'account_id'}"
+                                   business_domain_compute="parent.move_type in ['out_invoice', 'out_refund', 'out_receipt'] and 'invoice' or parent.move_type in ['in_invoice', 'in_refund', 'in_receipt'] and 'bill' or 'general'"/>
+
+                            <field name="quantity" invisible="1"
+                                   force_save="1"/> <!-- on correction replaced by x_quantity_reverse -->
+                            <field name="x_quantity" string="Quantity"/>
+
+                            <field name="product_uom_id" string="UoM" groups="uom.group_uom" optional="show"/>
+
+                            <field name="price_unit" string="Price"/>
+
+                            <field name="discount" string="Disc.%" optional="hide"/>
+                            <field name="tax_ids" widget="many2many_tags"
+                                   domain="[('type_tax_use', '=?', parent.invoice_filter_type_domain), ('company_id', '=', parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                                   context="{'append_type_to_tax_name': not parent.invoice_filter_type_domain}"
+                                   options="{'no_create': True}"
+                                   optional="show"/>
+
+                            <!-- this replaces price_subtotal -->
+                            <field name="price_subtotal" invisible="1"/>
+                            <field name="x_price_subtotal" string="Subtotal"
+                                   groups="account.group_show_line_subtotals_tax_excluded"/>
+
+                            <!-- this replaces price_total -->
+                            <field name="price_total" invisible="1"/>
+                            <field name="x_price_total" string="Total"
+                                   groups="account.group_show_line_subtotals_tax_included"/>
+
+                            <!-- Other fields -->
+                            <field name="partner_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="display_type" force_save="1" invisible="1"/>
+                            <field name="product_uom_category_id" invisible="1"/>
+                            <field name="move_name" invisible="1"/>
+                            <field name="x_is_corrected_line" invisible="1"/>
+                            <field name="product_uom_id" invisible="1"/>
+                            <field name="x_force_print" optional="hide"/>
+
+                        </tree>
+
+                        <form>
+                            <sheet>
+                                <field name="display_type" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="partner_id" invisible="1"/>
+
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <field name="parent_state" invisible="1"/>
+
+                                <group>
+                                    <field name="product_id" widget="many2one_barcode"/>
+                                    <field name="quantity"/>
+                                    <field name="product_uom_category_id" invisible="1"/>
+                                    <field name="product_uom_id" groups="uom.group_uom"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount" string="Disc.%"/>
+                                </group>
+
+                                <group>
+                                    <field name="account_id" options="{'no_create': True}"
+                                           domain="[('company_id', '=', company_id)]"
+                                           context="{'partner_id': partner_id, 'move_type': parent.move_type}"/>
+                                    <field name="tax_ids" widget="many2many_tags"/>
+                                    <field name="analytic_distribution" widget="analytic_distribution"
+                                           groups="analytic.group_analytic_accounting"/>
+                                </group>
+                                <label for="name" string="Description"
+                                       attrs="{'invisible': [('display_type', 'in', ('line_note', 'line_section'))]}"/>
+                                <label for="name" string="Section"
+                                       attrs="{'invisible': [('display_type', '!=', 'line_section')]}"/>
+                                <label for="name" string="Note"
+                                       attrs="{'invisible': [('display_type', '!=', 'line_note')]}"/>
+                                <field name="name" widget="text"/>
+                                <group>
+                                    <field name="price_subtotal" string="Subtotal"
+                                           groups="account.group_show_line_subtotals_tax_excluded"/>
+                                    <field name="price_total" string="Total"
+                                           groups="account.group_show_line_subtotals_tax_included"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                    <div>Change only those lines that should be corrected</div>
+                </page>
+
+                <page id="invoice_tab_original" string="Lines Before"
+                      attrs="{'invisible': ['|', ('x_use_ti', '=', False), '|', ('move_type', 'in', ('entry', 'in_refund')), ('reversed_entry_id', '=', False)]}">
+                    <field name="x_original_invoice_line_ids" widget="section_and_note_one2many" mode="tree">
+                        <tree editable="bottom" string="Journal Items" default_order="sequence, id">
+
+                            <!-- Displayed fields -->
+                            <field name="sequence" widget="handle"/>
+                            <field name="product_id"
+                                   optional="show"
+                                   domain="context.get('default_move_type') in ('out_invoice', 'out_refund', 'out_receipt')
+                                        and [('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
+                                        or [('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
+                               "/>
+
+                            <field name="name" widget="section_and_note_text" optional="show"/>
+                            <field name="account_id"
+                                   context="{'partner_id': partner_id, 'move_type': parent.move_type}"
+                                   groups="account.group_account_readonly"
+                                   options="{'no_create': True}"
+                                   domain="[('deprecated', '=', False), ('account_type', 'not in', ('asset_receivable', 'liability_payable')), ('company_id', '=', parent.company_id), ('is_off_balance', '=', False)]"
+                                   attrs="{'required': [('display_type', 'not in', ('line_note', 'line_section'))]}"/>
+                            <field name="analytic_distribution" widget="analytic_distribution"
+                                   groups="analytic.group_analytic_accounting"
+                                   optional="show"
+                                   options="{'product_field': 'product_id', 'account_field': 'account_id'}"
+                                   business_domain_compute="parent.move_type in ['out_invoice', 'out_refund', 'out_receipt'] and 'invoice' or parent.move_type in ['in_invoice', 'in_refund', 'in_receipt'] and 'bill' or 'general'"/>
+
+                            <field name="quantity" string="Quantity" optional="show"/>
+
+                            <field name="product_uom_category_id" invisible="1"/>
+                            <field name="product_uom_id" string="UoM" groups="uom.group_uom" optional="show"/>
+
+                            <field name="price_unit" string="Price"/>
+
+                            <field name="discount" string="Disc.%" optional="hide"/>
+                            <field name="tax_ids" widget="many2many_tags"
+                                   domain="[('type_tax_use', '=?', parent.invoice_filter_type_domain), ('company_id', '=', parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                                   context="{'append_type_to_tax_name': not parent.invoice_filter_type_domain}"
+                                   options="{'no_create': True}"
+                                   optional="show"/>
+
+                            <field name="price_subtotal"
+                                   string="Subtotal"
+                                   groups="account.group_show_line_subtotals_tax_excluded"/>
+
+                            <field name="price_total"
+                                   string="Total"
+                                   groups="account.group_show_line_subtotals_tax_included"/>
+
+                            <!-- Others fields -->
+                            <field name="partner_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="display_type" force_save="1" invisible="1"/>
+                            <!-- /l10n_in_edi.test_edi_json -->
+                            <!-- required for @api.onchange('product_id') -->
+                            <field name="product_uom_id" invisible="1"/>
+                            <field name="x_force_print" optional="hide"/>
+                        </tree>
+
+                        <form>
+                            <sheet>
+                                <field name="display_type" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="partner_id" invisible="1"/>
+                                <group>
+                                    <field name="product_id" widget="many2one_barcode"/>
+                                    <field name="quantity"/>
+                                    <field name="product_uom_category_id" invisible="1"/>
+                                    <field name="product_uom_id" groups="uom.group_uom"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount" string="Disc.%"/>
+                                </group>
+                                <group>
+                                    <field name="account_id" options="{'no_create': True}"
+                                           domain="[('company_id', '=', company_id)]"
+                                           context="{'partner_id': partner_id, 'move_type': parent.move_type}"/>
+                                    <field name="tax_ids" widget="many2many_tags"/>
+                                    <field name="analytic_distribution" widget="analytic_distribution"
+                                           groups="analytic.group_analytic_accounting"/>
+                                </group>
+                                <label for="name" string="Description"
+                                       attrs="{'invisible': [('display_type', 'in', ('line_note', 'line_section'))]}"/>
+                                <label for="name" string="Section"
+                                       attrs="{'invisible': [('display_type', '!=', 'line_section')]}"/>
+                                <label for="name" string="Note"
+                                       attrs="{'invisible': [('display_type', '!=', 'line_note')]}"/>
+                                <field name="name" widget="text"/>
+                                <group>
+                                    <field name="price_subtotal" string="Subtotal"
+                                           groups="account.group_show_line_subtotals_tax_excluded"/>
+                                    <field name="price_total" string="Total"
+                                           groups="account.group_show_line_subtotals_tax_included"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </page>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree/*[1]" position="before">
+                <field name="move_type" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree" position="inside">
+                <field name="x_force_print" optional="hide"/>
+            </xpath>
+
+            <xpath expr="//field[@name='line_ids']/tree" position="inside">
+                <field name="x_force_print" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='quantity']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('move_type', 'in', ('out_refund',))]}</attribute>
+                <attribute name="optional"/>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='quantity']" position="after">
+                <field name="x_quantity" string="Quantity" invisible="1"
+                       attrs="{'invisible': [('move_type', 'not in', ('out_refund',))]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='price_subtotal']" position="attributes">
+                <!--                <attribute name="invisible">0</attribute>-->
+                <attribute name="attrs">{'column_invisible': [('move_type', 'in', ('out_refund',))]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='price_subtotal']" position="after">
+                <field name="x_price_subtotal" string="Subtotal" invisible="1"
+                       attrs="{'invisible': [('move_type', 'not in', ('out_refund',))]}"/>
+            </xpath>
+
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="attrs">{'readonly': [('x_use_ti', '=', True),
+                                                      ('move_type', '!=', 'in_refund'),
+                                                      '|', ('state', '!=', 'draft'),
+                                                      ('reversed_entry_id', '!=', False)]}</attribute>
+            </field>
+
+            <xpath expr="//field[@name='ref']" position="attributes">
+                <attribute name="attrs">{'invisible': [('move_type', '=', 'entry')]}</attribute>
+            </xpath>
+
+            <xpath expr="//label[@for='ref']" position="replace">
+                <label for="ref" string="Reference"
+                       attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                <label for="ref" string="Invoice Number"
+                       attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+            </xpath>
+
+            <xpath expr="//group[@id='header_right_group']/field[@name='currency_id']" position="attributes">
+                <attribute name="groups">base.group_multi_currency</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='line_ids']//tree" position="inside">
+                <field name="currency_rate" optional="hide" digits="[12,12]"/>
+            </xpath>
+
+            <xpath expr="//field[@name='tax_totals']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('state', '!=', 'draft'), '&amp;',
+                                                      ('move_type', 'not in', ('in_invoice', 'in_receipt')),
+                                                      ('quick_edit_mode', '=', False)]}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="view_out_invoice_tree" model="ir.ui.view">
+        <field name="name">trilab_invoice account.out.invoice.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="currency_id" optional="show"/>
+                <field name="x_amount_total" optional="hide"/>
+                <field name="x_amount_residual" string="To Pay in Currency" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_in_invoice_tree" model="ir.ui.view">
+        <field name="name">trilab_invoice account.in.invoice.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="currency_id" optional="show"/>
+                <field name="x_amount_total" optional="hide"/>
+                <field name="x_amount_residual" string="To Pay in Currency" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

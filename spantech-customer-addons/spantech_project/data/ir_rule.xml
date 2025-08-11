@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <function model="ir.model.data" name="write">
+        <value
+            model="ir.model.data"
+            eval="obj().search([('module', '=', 'project'),('name','in',('project_comp_rule','task_comp_rule'))]).ids"
+        />
+        <value eval="{'noupdate': False}" />
+    </function>
+
+    <record id="project.project_comp_rule" model="ir.rule">
+        <field name="domain_force">[(1,"=",1)]</field>
+    </record>
+    <record id="project.task_comp_rule" model="ir.rule">
+        <field name="domain_force">[(1,"=",1)]</field>
+    </record>
+
+    <function model="ir.model.data" name="write">
+        <value
+            model="ir.model.data"
+            eval="obj().search([('module', '=', 'project'),('name','in',('project_comp_rule','task_comp_rule'))]).ids"
+        />
+        <value eval="{'noupdate': True}" />
+    </function>
+
+</odoo>

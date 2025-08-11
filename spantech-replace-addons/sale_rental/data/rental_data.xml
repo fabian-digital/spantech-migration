@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2014-2021 Akretion France (http://www.akretion.com/)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  Copyright 2016-2021 Sodexis
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2009-2023 Noviat (https://www.noviat.com)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+    <record id="route_warehouse0_rental" model="stock.route">
+        <field name="name">Rent</field>
+        <field name="sequence">100</field>
+        <field name="warehouse_selectable" eval="True" />
+        <field name="product_selectable" eval="False" />
+    </record>
+
+    <record
+    id="route_warehouse0_sell_rented_product"
+    model="stock.route"
+  >
+        <field name="name">Sell Rented Product</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <record id="stock.warehouse0" model="stock.warehouse">
+        <field name="rental_allowed" eval="True" />
+    </record>
+
+    <record id="uom_categ_rental_time" model="uom.category">
+        <field name="name">Rental Time</field>
+    </record>
+
+    <record id="sale_rental_product_uom_day" model="uom.uom">
+        <field name="name">Days (Rental)</field>
+        <field name="category_id" ref="uom_categ_rental_time" />
+        <field name="factor" eval="1.0" />
+        <field name="uom_type">reference</field>
+    </record>
+
+    <record id="sale_rental_product_uom_hour" model="uom.uom">
+        <field name="name">Hours (Rental)</field>
+        <field name="category_id" ref="uom_categ_rental_time" />
+        <field name="factor" eval="24.0" />
+        <field name="uom_type">smaller</field>
+    </record>
+
+    <record id="sale_rental_product_uom_week" model="uom.uom">
+        <field name="name">Weeks (Rental)</field>
+        <field name="category_id" ref="uom_categ_rental_time" />
+        <field
+      name="factor"
+      eval="0.14285714285714285"
+    /> <!-- Ratio: 7.0000 -->
+        <field name="uom_type">bigger</field>
+    </record>
+
+    <record id="sale_rental_product_uom_month" model="uom.uom">
+        <field name="name">Months (Rental)</field>
+        <field name="category_id" ref="uom_categ_rental_time" />
+        <field
+      name="factor"
+      eval="0.03285420944558522"
+    /> <!-- Ratio: 30.4375 -->
+        <field name="uom_type">bigger</field>
+    </record>
+
+    <record id="sale_rental_product_uom_year" model="uom.uom">
+        <field name="name">Years (Rental)</field>
+        <field name="category_id" ref="uom_categ_rental_time" />
+        <field
+      name="factor"
+      eval="0.002737907006988508"
+    /> <!-- Ratio: 365.2425 -->
+        <field name="uom_type">bigger</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cancel_reason_wizard,access_cancel_reason_wizard,spantech_mrp.model_cancel_reason_wizard,mrp.group_mrp_user,1,1,1,1

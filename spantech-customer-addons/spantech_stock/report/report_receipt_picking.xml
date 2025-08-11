@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <template
+        id="report_receipt_picking"
+        inherit_id="stock.report_picking"
+        primary="True"
+        priority="101"
+    >
+            <div name="right_box" position="replace" />
+            <th name="th_serial_number" position="replace" />
+            <th name="th_barcode" position="replace" />
+            <xpath expr="//td[@t-if='has_barcode']" position="replace" />
+            <xpath expr="//td[@t-if='has_serial_number']" position="replace" />
+            <span t-field="ml.product_id.description_picking" position="replace">
+                <span
+                t-if="ml.move_id.purchase_line_id"
+                t-field="ml.move_id.purchase_line_id.name"
+            />
+            </span>
+        </template>
+</odoo>

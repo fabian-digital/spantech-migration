@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="analytic_as_centralized_project_analytic_budget_action_menu"
+        name="Budgets"
+        groups="analytic_global_view.analytic_global_view_user"
+        parent="analytic_global_view.analytic_global_view_analytic_menu"
+        action="account_budget.act_crossovered_budget_view"
+        sequence="40"
+    />
+    <menuitem
+        id="analytic_as_centralized_project_analytic_budget_version_action_menu"
+        name="PRB Versions"
+        groups="analytic_global_view.analytic_global_view_user"
+        parent="analytic_global_view.analytic_global_view_analytic_menu"
+        action="crossovered_budget_version_action"
+        sequence="45"
+    />
+
+    <menuitem
+        id="analytic_as_centralized_project_analytic_budget_analysis_action_menu"
+        name="Budgets Analysis"
+        groups="analytic_global_view.analytic_global_view_user"
+        parent="analytic_global_view.analytic_global_view_analytic_menu"
+        action="account_budget.act_crossovered_budget_lines_view"
+        sequence="50"
+    />
+
+    <menuitem
+        name="Budgetary Positions"
+        id="analytic_as_centralized_project_analytic_budget_positions_action_menu"
+        parent="analytic_global_view.analytic_global_view_configuration_menu"
+        action="account_budget.open_budget_post_form"
+        sequence="75"
+    />
+
+</odoo>

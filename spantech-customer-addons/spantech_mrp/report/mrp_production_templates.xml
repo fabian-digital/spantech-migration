@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+        <xpath expr="//span[@t-field='o.user_id']/parent::div" position="after">
+            <div class="col-3">
+                <strong>Scheduled Date:</strong><br />
+                <span t-field="o.date_planned_start" />
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="report_mrp_production_components_handwritten"
+        inherit_id="mrp.report_mrp_production_components"
+        primary="True"
+        priority="1000"
+    >
+        <xpath expr="//th[@t-if='has_product_barcode']" position="replace">
+            <th width="15%" class="text-center">Consumed</th>
+        </xpath>
+        <xpath expr="//td[@t-if='has_product_barcode']" position="replace">
+            <td width="15%" class="text-center">
+                <span> __________ </span>
+                <span t-field="raw_line.product_uom" groups="uom.group_uom" /></td>
+        </xpath>
+    </template>
+
+    <template
+        id="spantech_mrp.report_mrporder_handwritten"
+        inherit_id="spantech_mrp.report_mrporder"
+        primary="True"
+        priority="1000"
+    >
+        <xpath expr="//span[@t-field='o.product_qty']/parent::div" position="after">
+            <div class="col-3">
+                <strong>Quantity Produced :</strong><br />
+                <span> __________ </span>
+                <span t-field="o.product_uom_id.name" groups="uom.group_uom" />
+            </div>
+        </xpath>
+        <xpath
+            expr='//t[@t-call="mrp.report_mrp_production_components"]'
+            position="replace"
+        >
+            <t
+                t-call="spantech_mrp.report_mrp_production_components_handwritten"
+                t-if="o.move_raw_ids"
+            />
+        </xpath>
+    </template>
+
+    <record id="action_report_production_order" model="ir.actions.report">
+            <field name="name">Production Order Handwritten</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">spantech_mrp.report_mrporder_handwritten</field>
+            <field name="report_file">mrp.report.mrp_production_templates</field>
+            <field
+            name="print_report_name"
+        >'Production Order - %s' % object.name</field>
+            <field name="binding_model_id" ref="mrp.model_mrp_production" />
+            <field name="binding_type">report</field>
+        </record>
+
+</odoo>

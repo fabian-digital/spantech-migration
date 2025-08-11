@@ -1,0 +1,128 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="helpdesk_ticket_form_view_inherited" model="ir.ui.view">
+        <field name="name">Helpdesk Ticket Form Inherited view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field
+            name="inherit_id"
+            ref="helpdesk_repair.helpdesk_ticket_view_form_inherit_helpdesk_repair"
+        />
+        <field name="arch" type="xml">
+            <field name="partner_ticket_count" position="after">
+                <field name="is_show_customer_fields" invisible="1" />
+            </field>
+            <field name="team_id" position="before">
+                <field name="ticket_type_id" position="move" />
+                <field name="category_of_incident_id" required="True" />
+                <field name="reported_by_id" />
+            </field>
+            <field name="ticket_type_id" position="attributes">
+                <attribute name="required">True</attribute>
+            </field>
+            <field name="product_id" position="after">
+                <field name="analytic_account_id" required="True" />
+            </field>
+            <field name="description" position="attributes">
+                <attribute name="required">True</attribute>
+                <attribute name="string">Description of the incident</attribute>
+                <attribute
+                    name="placeholder"
+                >Explain the issue + add attachment if useful</attribute>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="partner_email" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="partner_name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="email_cc" position="before">
+                <field
+                    name="customer_id"
+                    attrs="{'invisible':[('is_show_customer_fields','=',False)]}"
+                />
+                <field
+                    name="customer_name"
+                    attrs="{'invisible':[('is_show_customer_fields','=',False)]}"
+                />
+                <field
+                    name="customer_email"
+                    attrs="{'invisible':[('is_show_customer_fields','=',False)]}"
+                />
+                <field name="ticket_number" readonly="1" />
+            </field>
+            <field name="product_id" position="attributes">
+                <attribute name="attrs">{}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="helpdesk_tickets_view_tree_inherited_view" model="ir.ui.view">
+        <field name="name">Helpdesk Ticket Tree Inherited view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree" />
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="decoration-danger">priority=='3'</attribute>
+                <attribute name="default_order">id desc</attribute>
+            </tree>
+            <field name="ticket_type_id" position="after">
+                <field name="category_of_incident_id" optional="hide" />
+            </field>
+            <field name="name" position="before">
+                <field name="ticket_number" />
+            </field>
+            <field name="name" position="after">
+                <field name="analytic_account_id" />
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="partner_id" position="after">
+                <field
+                    name="customer_id"
+                    domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+                    widget="res_partner_many2one"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="helpdesk_tickets_view_search_inherited" model="ir.ui.view">
+        <field name="name">Helpdesk Ticket Search Inherited view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search" />
+        <field name="priority">101</field>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="ticket_number" />
+                <field name="analytic_account_id" />
+            </field>
+            <field name="partner_id" position="replace">
+                <field name="customer_id" />
+            </field>
+            <filter name="ticket_type_id" position="after">
+                <filter
+                    string="Category of Incident"
+                    name="filter_category_of_incident"
+                    context="{'group_by':'category_of_incident_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="helpdesk_ticket_type_view_tree_inherited_view" model="ir.ui.view">
+        <field name="name">helpdesk_tycket_type Inherited view</field>
+        <field name="model">helpdesk.ticket.type</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_type_view_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="help" />
+                <field name="is_show_customer_fields" />
+            </field>
+        </field>
+    </record>
+</odoo>

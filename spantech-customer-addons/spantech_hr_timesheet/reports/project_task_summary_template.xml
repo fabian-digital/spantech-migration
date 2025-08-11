@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_project_task_summary_document">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <div class="page">
+                <div class="oe_structure" />
+                <h2 class="mt-4">
+                    <span>Task: </span>
+                    <span t-field="doc.name" />
+                </h2>
+
+                <div class="row mt-4 mb-4">
+                    <div t-if="doc.project_id" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Project:</strong>
+                        <p class="m-0" t-field="doc.project_id.name" />
+                    </div>
+                    <div t-if="doc.partner_id" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Customer:</strong>
+                        <p class="m-0" t-field="doc.partner_id.name" />
+                    </div>
+                    <div t-if="doc.date_deadline" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Deadline:</strong>
+                        <p class="m-0" t-field="doc.date_deadline" />
+                    </div>
+                    <div
+                        t-if="doc.allocated_man_days"
+                        class="col-auto col-3 mw-100 mb-2"
+                    >
+                        <strong>Allocated Man Days:</strong>
+                        <p class="m-0" t-field="doc.allocated_man_days" />
+                    </div>
+                </div>
+
+                <div class="row mt-4 mb-4">
+                    <div t-if="doc.user_ids" class="col-auto col-5 mw-100 mb-2">
+                        <strong>Assignees:</strong>
+                        <p class="m-0" t-esc="', '.join(doc.user_ids.mapped('name'))" />
+                    </div>
+                    <div
+                        t-if="doc.employee_sponsor_id"
+                        class="col-auto col-3 mw-100 mb-2"
+                    >
+                        <strong>Sponsor:</strong>
+                        <p class="m-0" t-field="doc.employee_sponsor_id.name" />
+                    </div>
+                    <div t-if="doc.tag_ids" class="col-auto col-4 mw-100 mb-2">
+                        <strong>Tags:</strong>
+                        <p class="m-0" t-esc="' / '.join(doc.tag_ids.mapped('name'))" />
+                    </div>
+                </div>
+                <hr>Description</hr>
+                <div>
+                    <p t-field="doc.description" />
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="report_project_task_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+                    t-call="spantech_hr_timesheet.report_project_task_summary_document"
+                    t-lang="doc.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+
+    <record id="action_project_task_summary" model="ir.actions.report">
+        <field name="name">Task Summary</field>
+        <field name="model">project.task</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >spantech_hr_timesheet.report_project_task_summary</field>
+        <field
+            name="report_file"
+        >spantech_hr_timesheet.report_project_task_summary</field>
+        <field name="print_report_name">object.name</field>
+        <field name="binding_model_id" ref="model_project_task" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

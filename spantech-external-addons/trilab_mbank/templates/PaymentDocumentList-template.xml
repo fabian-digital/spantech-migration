@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PaymentDocumentList xmlns="com/hp/ws/ufp"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:ufp="com/hp/ws/ufp">
+    {% for document in documents %}
+    <PaymentDocument>
+        <PaymentHeader>
+            <PaymentIdentifier>{{ document.payment_id }}</PaymentIdentifier>
+
+            <!-- Typ transakcji -->
+            <!-- Domestic, International, ZUS, US, PP, PZ -->
+            <PmtCategory>{{ document.payment_type }}</PmtCategory>
+            <!-- Data realizacji -->
+            <ExecutionDateRequested>{{ document.execution_date }}</ExecutionDateRequested>
+
+            <!-- Tryb realizacji zlecenia (0 – standard, 1 – SRPN (przelew krajowy w PLN) lub pilny (w pozostałych przypadkach) 2 – BlueCash (przelew krajowy w PLN) lub express, 5 - SORBNET (dot. PLN)) -->
+            <ExecutionMode>0</ExecutionMode>
+            <PayorAccount>
+                <!-- Z rachunku -->
+                <AccountIdentifier IdentificationSchemeName="NRB">{{ document.payor_account }}</AccountIdentifier>
+            </PayorAccount>
+
+            <!--Prowizje i oplaty mBank-->
+            <ChargeResponsibility CodeListAgency="SWIFT">BEN</ChargeResponsibility>
+        </PaymentHeader>
+        <PaymentLineItem>
+            <!-- ID -->
+            <TransactionIdentifier>{{ document.transaction_id }}</TransactionIdentifier>
+            <!-- Kwota, waluta -->
+            <OrderedAmount AmountCurrencyIdentificationCode="PLN">{{ document.amount }}</OrderedAmount>
+            <PayeeParty>
+                <Name TextLanguageCode="pl">{{ document.partner_name }}</Name>
+                <Address>
+                    <!-- Nazwa ulicy lub wsi (Pocztowy) + Nr domu (Pocztowy) + Nr mieszkania (Pocztowy) -->
+                    <StreetName TextLanguageCode="pl">{{ document.street_name }}</StreetName>
+
+                    <PostCode>{{ document.post_code }}</PostCode>
+
+                    <CityName>{{ document.city }}</CityName>
+
+                    <!-- Code -->
+                    <Country CodeListIdentifier="ISO 3166">{{ document.country }}</Country>
+                </Address>
+
+            </PayeeParty>
+            <PayeeAccount>
+                <!--Rachunek beneficjenta-->
+                <AccountIdentifier IdentificationSchemeName="NRB">{{ document.payee_account }}</AccountIdentifier>
+            </PayeeAccount>
+
+            <RemittanceInformation>
+                <!-- Referencje -->
+                {% if document.ref %}
+                <PmtId>{{ document.ref }}</PmtId>
+                {% endif %}
+                <!-- Tytulem -->
+                <Memo TextLanguageCode="pl">{{ document.title }}</Memo>
+            </RemittanceInformation>
+        </PaymentLineItem>
+        <PaymentSummary>
+            <!--Podsumowanie zlec-->
+            <SummaryAmount>{{ document.summary_amount }}</SummaryAmount>
+            <TransactionsQuantity>{{ document.transactions_quantity }}</TransactionsQuantity>
+        </PaymentSummary>
+    </PaymentDocument>
+    {% endfor %}
+</PaymentDocumentList>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="external_layout_striped" inherit_id="web.external_layout_striped">
+        <xpath expr="//li[@t-if='forced_vat']" position="after">
+            <li t-else="">
+                <t t-esc="company.country_id.vat_label or 'Tax ID'" />:
+                <span t-esc="company.vat" />
+            </li>
+        </xpath>
+        <xpath expr="//t[@t-call='web.address_layout']/.." position="attributes">
+            <attribute name="t-attf-class" add="pt-4" separator=" " />
+        </xpath>
+    </template>
+</odoo>

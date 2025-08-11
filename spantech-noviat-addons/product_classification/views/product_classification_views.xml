@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="product_classification_view_search" model="ir.ui.view">
+        <field name="name">product.classification.search</field>
+        <field name="model">product.classification</field>
+        <field name="arch" type="xml">
+            <search string="Classifications">
+                <field
+                    name="name"
+                    string="Name / Code"
+                    filter_domain="['|', ('name', 'ilike', self), ('code', '=ilike', self)]"
+                />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="product_classification_view_tree" model="ir.ui.view">
+        <field name="name">product.classification.tree</field>
+        <field name="model">product.classification</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="level" invisible="1" />
+                <field name="name" invisible="1" />
+                <field name="complete_name" />
+                <field name="code" />
+                <field name="active" widget="boolean_toggle" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_classification_view_tree_embedded" model="ir.ui.view">
+        <field name="name">product.classification.tree.embedded</field>
+        <field name="model">product.classification</field>
+        <field
+            name="inherit_id"
+            ref="product_classification.product_classification_view_tree"
+        />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="active" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_classification_view_form" model="ir.ui.view">
+        <field name="name">product.classification.form</field>
+        <field name="model">product.classification</field>
+        <field name="arch" type="xml">
+            <form string="Product Classifications">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            class="oe_stat_button"
+                            name="%(product.product_template_action_all)d"
+                            icon="fa-th-list"
+                            type="action"
+                            context="{'search_default_classification_ids': active_id, 'default_classification_ids': active_id, 'group_expand': True}"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="product_count" />
+                                </span>
+                                <span class="o_stat_text"> Products</span>
+                            </div>
+                        </button>
+                        <button
+                            class="oe_stat_button"
+                            name="action_open_all_products"
+                            icon="fa-th-list"
+                            type="object"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="recursive_product_count" />
+                                </span>
+                                <span class="o_stat_text">All Products</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Classification Name" />
+                        <h1>
+                            <div class="d-flex">
+                                <field
+                                    class="text-break"
+                                    name="name"
+                                    placeholder="e.g. Food"
+                                />
+                            </div>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="parent_id" />
+                            <field name="code" />
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle" />
+                            <field name="company_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" />
+                    </group>
+                    <notebook>
+                        <page name="child_page" string="Childs">
+                            <field name="child_ids" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_classification_action" model="ir.actions.act_window">
+        <field name="name">Product Classifications</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.classification</field>
+        <field name="search_view_id" ref="product_classification_view_search" />
+        <field name="view_id" ref="product_classification_view_tree" />
+    </record>
+
+</odoo>

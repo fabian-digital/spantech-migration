@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="report_control_checklist_document"
+        inherit_id="stock.report_delivery_document"
+        primary="True"
+        priority="106"
+    >
+        <h2 position="inside">
+            CHECKLIST
+        </h2>
+        <xpath expr="//t[@t-set='address']" position="replace" />
+        <xpath expr="//t[@t-set='information_block']" position="replace" />
+        <xpath expr="//div[@t-if='o.shipping_weight']" position="replace" />
+        <xpath
+            expr="//div[@t-if='o.sudo().sale_id.client_order_ref']"
+            position="replace"
+        >
+            <div class="col-3 justify-content-end" t-if="o.partner_id">
+                <strong>Customer:</strong>
+                <p t-field="o.partner_id.name" />
+            </div>
+            <div class="col-2 justify-content-end">
+                <strong>Date:</strong>
+            </div>
+            <div class="col-3 justify-content-end">
+                <strong>Controller:</strong>
+
+            </div>
+        </xpath>
+        <div name="div_origin" position="before">
+            <div t-if="o.analytic_account_ids" class="col-auto">
+                <strong>Project code:</strong>
+                <p t-foreach="o.analytic_account_ids" t-as="anal">
+                    <t t-esc="anal.name" />
+                </p>
+            </div>
+        </div>
+        <table name="stock_move_table" position="replace">
+            <table class="table table-sm" name="control_checklist_table">
+                <thead>
+                    <tr>
+                        <th name="th_cc_product" width="60%"><strong
+                            >Product</strong></th>
+                        <th name="th_cc_quantity" width="10%"><strong
+                            >Quantity</strong></th>
+                        <th name="th_cc_control" width="30%"><strong
+                            >Control</strong></th>
+                    </tr>
+                    <tbody>
+                        <t
+                            t-set="bom_kits"
+                            t-value="o.move_ids_without_package.filtered(lambda x: x.description_bom_line).sorted('product_id', reverse=True)"
+                        />
+                        <t
+                            t-set="bom_no_kits"
+                            t-value="o.move_ids_without_package.filtered(lambda x: len(x.product_id.bom_ids) > 0 and not x.description_bom_line).sorted('product_id', reverse=True)"
+                        />
+                        <t
+                            t-set="no_kit"
+                            t-value="o.move_ids_without_package.filtered(lambda x: not x.product_id.bom_ids and not x.description_bom_line).sorted('product_id', reverse=True)"
+                        />
+                        <t t-foreach="bom_kits" t-as="move">
+                            <t
+                                t-foreach="int(move.product_uom_qty)"
+                                t-as="q"
+                                t-if="len(move.product_id.bom_ids) > 0"
+                            >
+                                <tr>
+                                    <td>
+                                        <span t-field="move.product_id" />
+                                    </td>
+                                    <td>
+                                        1.000
+                                    </td>
+                                    <td>
+                                        <br /><br /><br />
+                                    </td>
+                                </tr>
+                                <tr
+                                    t-foreach="move.product_id.bom_ids.bom_line_ids"
+                                    t-as="bom"
+                                >
+                                    <td style="padding-left: 30px">
+                                        <span t-field="bom.product_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="bom.product_qty" />
+                                    </td>
+                                    <td>
+                                        <br /><br /><br />
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="len(move.product_id.bom_ids) == 0">
+                                <tr>
+                                    <td>
+                                        <span t-field="move.product_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="move.product_uom_qty" />
+                                    </td>
+                                    <td>
+                                        <br /><br /><br />
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <t t-foreach="bom_no_kits" t-as="move">
+                            <t t-foreach="int(move.product_uom_qty)" t-as="q">
+                                <tr>
+                                    <td>
+                                        <span t-field="move.product_id" />
+                                    </td>
+                                    <td>
+                                        1.000
+                                    </td>
+                                    <td>
+                                        <br /><br /><br />
+                                    </td>
+                                </tr>
+                                <tr
+                                    t-foreach="move.product_id.bom_ids.bom_line_ids"
+                                    t-as="bom"
+                                >
+                                    <td style="padding-left: 30px">
+                                        <span t-field="bom.product_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="bom.product_qty" />
+                                    </td>
+                                    <td>
+                                        <br /><br /><br />
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <t t-foreach="no_kits" t-as="move">
+                            <tr>
+                                <td>
+                                    <span t-field="move.product_id" />
+                                </td>
+                                <td>
+                                    <span t-field="move.product_uom_qty" />
+                                </td>
+                                <td>
+                                    <br /><br /><br />
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </thead>
+            </table>
+
+        </table>
+        <table name="stock_move_line_table" position="replace" />
+        <xpath expr="//t[@t-if='o.backorder_ids and backorders']" position="replace" />
+        <div name="signature" position="replace" />
+    </template>
+
+
+    <template id="report_control_checklist">
+        <t t-foreach="docs" t-as="o">
+            <t
+                t-call="spantech_stock.report_control_checklist_document"
+                t-lang="user.lang"
+            />
+        </t>
+    </template>
+
+</odoo>

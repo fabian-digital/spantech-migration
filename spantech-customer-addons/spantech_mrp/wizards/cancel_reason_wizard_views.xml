@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="cancel_reason_wizard_form_view" model="ir.ui.view">
+        <field name="name">Cancel Reason Wizard Form View</field>
+        <field name="model">cancel.reason.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="MO Cancellation">
+                <p>
+                    Are you sure you want to cancel these Manufacturing Orders ?
+                </p>
+                <group>
+                    <field name="cancel_reason" />
+                </group>
+                <footer>
+                    <button
+                        string="Confirm"
+                        type="object"
+                        name="cancel_order"
+                        class="btn btn-primary"
+                    />
+                    <button string="Close" class="btn btn-primary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

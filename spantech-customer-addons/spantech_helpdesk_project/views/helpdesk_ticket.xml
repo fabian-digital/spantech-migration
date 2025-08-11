@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="helpdesk_ticket_view_form" model="ir.ui.view">
+        <field name="name">helpdesk_ticket_project Inherited view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <xpath
+                expr="//sheet/group/group[1]/field[@name='company_id']"
+                position="replace"
+            />
+            <field name="analytic_account_id" position="after">
+                <field name="project_task_id" required="1" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    context="{'create': False}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record
+        id="helpdesk_ticket_view_form_inherit_helpdesk_timesheet"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >helpdesk_ticket_view_form_inherit_helpdesk_timesheet Inherited view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="priority">101</field>
+        <field
+            name="inherit_id"
+            ref="helpdesk_timesheet.helpdesk_ticket_view_form_inherit_helpdesk_timesheet"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_email']/.." position="replace" />
+            <xpath expr="//field[@name='partner_phone']/.." position="replace" />
+            <label for="partner_phone" position="replace" />
+            <label for="partner_email" position="replace" />
+            <field name="email_cc" position="replace" />
+            <field name="priority" position="replace" />
+            <field name="tag_ids" position="replace" />
+            <xpath expr="//page[@name='description']" position="inside">
+                <label for="solution_to_incident" string="Solution to the incident" />
+                <field
+                    name="solution_to_incident"
+                    class="field_description"
+                    placeholder="Assignee must explain the solution put in place + add attachment if useful"
+                />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Other Info" name="other_info">
+                    <group>
+                        <group>
+                            <field name="priority" widget="priority" />
+                            <field
+                                name="tag_ids"
+                                widget="many2many_tags"
+                                options="{'color_field': 'color'}"
+                            />
+                            <field name="estimated_cost" string="Estimated Cost (€)" />
+                        </group>
+                        <group>
+                            <label for="partner_email" string="Email" />
+                            <div class="o_row o_row_readonly">
+                                <field
+                                    name="partner_email"
+                                    widget="email"
+                                    string="email"
+                                />
+                                <span
+                                    class="fa fa-exclamation-triangle text-warning oe_edit_only"
+                                    title="By saving this change, the customer email will also be updated."
+                                    attrs="{'invisible': [('is_partner_email_update', '=', False)]}"
+                                />
+                            </div>
+                            <label for="partner_phone" string="Phone" />
+                            <div class="o_row o_row_readonly">
+                                <field
+                                    name="partner_phone"
+                                    widget="phone"
+                                    string="Phone"
+                                />
+                                <span
+                                    class="fa fa-exclamation-triangle text-warning oe_edit_only"
+                                    title="By saving this change, the customer phone number will also be updated."
+                                    attrs="{'invisible': [('is_partner_phone_update', '=', False)]}"
+                                />
+                            </div>
+                            <field name="email_cc" groups="base.group_no_one" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

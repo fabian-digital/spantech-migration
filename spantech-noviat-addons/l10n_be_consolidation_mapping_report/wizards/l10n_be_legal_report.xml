@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_be_legal_report_view_form" model="ir.ui.view">
+        <field name="name">l10n.be.legal.report.consolidation.account</field>
+        <field name="model">l10n.be.legal.report</field>
+        <field
+            name="inherit_id"
+            ref="l10n_be_coa_multilang.l10n_be_legal_report_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="target_move" position="after">
+                <group name="consolidation" col="2" style="margin-bottom:0px;">
+                    <label for="consolidation" />
+                    <div name="consolidation" class="o_row">
+                        <field name="consolidation" nolabel="1" />
+                        <button
+                            name="check_consolidation"
+                            string="Sanity Check"
+                            type="object"
+                            attrs="{'invisible': [('consolidation', '=', False)]}"
+                            help="Check the consistency of the Consolidation Counterpart Account Settings."
+                        />
+                    </div>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    <record id="l10n_be_legal_report_view_form_report" model="ir.ui.view">
+        <field name="name">l10n.be.legal.report.consolidation.account.report</field>
+        <field name="model">l10n.be.legal.report</field>
+        <field
+            name="inherit_id"
+            ref="l10n_be_coa_multilang.l10n_be_legal_report_view_form_report"
+        />
+        <field name="arch" type="xml">
+            <group name="invisible" invisible="1" position="inside">
+                <field name="consolidation" />
+            </group>
+            <field name="date_to" position="after">
+                <div
+                    colspan="4"
+                    id="consolidation"
+                    class="alert alert-success"
+                    role="alert"
+                    attrs="{'invisible': [('consolidation', '=', False)]}"
+                >
+                    <span>This Report is based upon the Consolidation Accounts</span>
+                </div>
+            </field>
+        </field>
+    </record>
+
+</odoo>

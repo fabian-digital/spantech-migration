@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button
+                    name="action_type_code_set_all"
+                    type="object"
+                    string="Set All"
+                    attrs="{'invisible':[('state','in',('done','cancel'))]}"
+                />
+            </header>
+            <button name="action_toggle_is_locked" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <notebook position="inside">
+                <page string="External Note" name="external_note">
+                    <field
+                        name="external_note"
+                        string="External Note"
+                        widget="html"
+                        placeholder="Add an external note that will be printed on the delivery slip"
+                    />
+                </page>
+            </notebook>
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']"
+                position="after"
+            >
+                <field
+                    name="purchase_line_id"
+                    readonly="1"
+                    optional="hide"
+                    string="Purchase Reference"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree/field[@name='quantity_done']"
+                position="after"
+            >
+                <button
+                    name="action_set_to_zero"
+                    type="object"
+                    title="Set to zero"
+                    icon="fa-trash"
+                    attrs="{'invisible':[('state','in',['done','cancel'])]}"
+                />
+                <field name="sale_line_id" readonly="1" optional="hide" />
+            </xpath>
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree"
+                position="attributes"
+            >
+                <attribute name="limit">500</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_tree" model="ir.ui.view">
+        <field name="name">stock.picking.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="date_done" />
+                </field>
+        </field>
+    </record>
+
+    <record id="action_check_availability" model="ir.actions.server">
+            <field name="name">Check Availability</field>
+            <field name="model_id" ref="stock.model_stock_picking" />
+            <field name="groups_id" eval="[(4,ref('base.group_erp_manager'))]" />
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+            if records:
+                res = records.action_assign()
+                if isinstance(res, dict):
+                    action = res
+            </field>
+        </record>
+
+    <record id="action_force_all_quantity_done" model="ir.actions.server">
+            <field name="name">Force All Quantity Done</field>
+            <field name="model_id" ref="stock.model_stock_picking" />
+            <field name="groups_id" eval="[(4,ref('base.group_erp_manager'))]" />
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+            if records:
+                res = records.action_type_code_set_all()
+                if isinstance(res, dict):
+                    action = res
+            </field>
+        </record>
+
+        <record id="action_validate_copy_scheduled_done" model="ir.actions.server">
+            <field name="name">Validate Copy Scheduled Date</field>
+            <field name="model_id" ref="stock.model_stock_picking" />
+            <field name="groups_id" eval="[(4,ref('base.group_erp_manager'))]" />
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">
+            if records:
+                res = records.with_context(copy_scheduled_date=True).button_validate()
+                if isinstance(res, dict):
+                    action = res
+            </field>
+        </record>
+
+</odoo>

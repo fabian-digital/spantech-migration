@@ -1,0 +1,113 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spantech_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-16 11:10+0000\n"
+"PO-Revision-Date: 2022-04-16 11:10+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spantech_purchase
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchasequotation_document
+msgid "<strong>Order Date</strong>"
+msgstr "<strong>Order datum:</strong>"
+
+#. module: spantech_purchase
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchasequotation_document
+msgid "<strong>Our Order Reference</strong>"
+msgstr ""
+
+#. module: spantech_purchase
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchasequotation_document
+msgid "<strong>Project Code:</strong>"
+msgstr "<strong>Projectcode:</strong>"
+
+#. module: spantech_purchase
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchasequotation_document
+msgid "<strong>Validated by</strong>"
+msgstr ""
+
+#. module: spantech_purchase
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.report_purchasequotation_document
+msgid "<strong>Your Order Reference</strong>"
+msgstr ""
+
+#. module: spantech_purchase
+#: model:ir.model.fields,field_description:spantech_purchase.field_purchase_order__analytic_account_ids
+msgid "Analytic Account"
+msgstr ""
+
+#. module: spantech_purchase
+#: model:ir.model.fields,field_description:spantech_purchase.field_purchase_order__commercial_partner_id
+msgid "Company"
+msgstr ""
+
+#. module: spantech_purchase
+#: model:ir.model.fields,field_description:spantech_purchase.field_purchase_order__picking_type_id
+msgid "Deliver To"
+msgstr ""
+
+#. module: spantech_purchase
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.purchase_order_form
+msgid "Explode Kit"
+msgstr ""
+
+#. module: spantech_purchase
+#. odoo-python
+#: code:addons/spantech_purchase/models/purchase_order.py:0
+#, python-format
+msgid "One of the products has the default category and it's not allowed."
+msgstr ""
+
+#. module: spantech_purchase
+#: model_terms:ir.ui.view,arch_db:spantech_purchase.purchase_order_form
+msgid ""
+"One of the products has the default category and then you will not be able "
+"to validate your purchase order until the products have the correct settings."
+msgstr ""
+
+#. module: spantech_purchase
+#: model:ir.model,name:spantech_purchase.model_purchase_order
+msgid "Purchase Order"
+msgstr "Inkooporder"
+
+#. module: spantech_purchase
+#: model:ir.model,name:spantech_purchase.model_purchase_order_line
+#, fuzzy
+msgid "Purchase Order Line"
+msgstr "Inkooporder"
+
+#. module: spantech_purchase
+#: model:ir.model.fields,field_description:spantech_purchase.field_purchase_order__show_category_warning
+msgid "Show Category Warning"
+msgstr ""
+
+#. module: spantech_purchase
+#: model:ir.model.fields,help:spantech_purchase.field_purchase_order__picking_type_id
+msgid "This will determine operation type of incoming shipment"
+msgstr ""
+
+#. module: spantech_purchase
+#: model:ir.model.fields,field_description:spantech_purchase.field_purchase_order__order_type
+msgid "Type"
+msgstr ""
+
+#~ msgid "Display Name"
+#~ msgstr "Weergave naam"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst gewijzigd op"

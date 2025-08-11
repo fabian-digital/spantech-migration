@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CstmrCdtTrfInitn>
+        <GrpHdr>
+            <MsgId>{{ unique_id }}</MsgId>
+            <CreDtTm>{{ now.isoformat() }}</CreDtTm>
+            <NbOfTxs>{{ transactions_len }}</NbOfTxs>
+            <InitgPty>
+                <Nm>{{ company_name }}</Nm>
+            </InitgPty>
+        </GrpHdr>
+        <PmtInf>
+            <PmtInfId>{{ unique_id }}</PmtInfId>
+            <PmtMtd>TRF</PmtMtd>
+            <ReqdExctnDt>{{ exec_date.isoformat() }}</ReqdExctnDt>
+            <Dbtr>
+                <Nm>{{ company_name }}</Nm>
+            </Dbtr>
+            <DbtrAcct>
+                <Id>
+                    <IBAN>{{ acc_number }}</IBAN>
+                </Id>
+            </DbtrAcct>
+            <DbtrAgt>
+                <FinInstnId>
+                    <ClrSysMmbId>
+                        <ClrSysId>
+                            <Cd>PLKNR</Cd>
+                        </ClrSysId>
+                        <MmbId>11401010</MmbId>
+                    </ClrSysMmbId>
+                </FinInstnId>
+            </DbtrAgt>
+            {% for transaction in transactions %}
+            <CdtTrfTxInf>
+                <PmtId>
+                    {% if transaction.sanitized_reference %}
+                    <InstrId>{{ transaction.sanitized_reference }}</InstrId>
+                    {% endif %}
+                    <EndToEndId>{{ transaction.unique_id }}</EndToEndId>
+                </PmtId>
+
+                {% if transaction.split_payment_data %}
+                <PmtTpInf>
+                    <CtgyPurp>
+                        <Cd>VATX</Cd>
+                    </CtgyPurp>
+                </PmtTpInf>
+                {% endif %}
+
+                <Amt>
+                    <InstdAmt Ccy="{{ transaction.currency_code }}">{{ transaction.amount }}</InstdAmt>
+                </Amt>
+                <Cdtr>
+                    <Nm>{{ transaction.sanitized_partner_name }}</Nm>
+                    <PstlAdr>
+                        <Ctry>{{ transaction.country }}</Ctry>
+                        {% for address_line in transaction.sanitized_address_lines %}
+                        <AdrLine>{{ address_line }}</AdrLine>
+                        {% endfor %}
+                    </PstlAdr>
+                </Cdtr>
+                <CdtrAcct>
+                    <Id>
+                        <Othr>
+                            <Id>{{ transaction.partner_acc_num }}</Id>
+                        </Othr>
+                    </Id>
+                </CdtrAcct>
+                <Purp>
+                    <Prtry>PLKR</Prtry>
+                </Purp>
+                <RmtInf>
+                    <Ustrd>{{ transaction.title }}</Ustrd>
+                </RmtInf>
+            </CdtTrfTxInf>
+            {% endfor %}
+        </PmtInf>
+    </CstmrCdtTrfInitn>
+</Document>

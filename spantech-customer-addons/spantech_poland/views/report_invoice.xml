@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_invoice_document_poland"
+        inherit_id="trilab_invoice.report_invoice_document"
+        priority="101"
+    >
+        <th name="thead_invoice_date" position="after">
+            <th name="thead_sale_date">
+                <strong>Sale Date</strong>
+            </th>
+        </th>
+        <td name="td_invoice_date" position="after">
+            <td name="td_sale_date">
+                <span
+                    t-if="o.x_invoice_sale_date"
+                    t-field="o.x_invoice_sale_date"
+                    t-options='{"widget": "date"}'
+                />
+            </td>
+        </td>
+        <th name="thead_ref" position="replace">
+            <th
+                name="thead_ref"
+                t-if="o.show_reference_in_document or o.move_type in ('out_refund', 'in_refund')"
+            >
+                <t t-if="o.move_type in ('out_refund', 'in_refund')">
+                    <strong>Correction Reason</strong>
+                </t>
+                <t
+                    t-if="o.show_reference_in_document and o.move_type not in ('out_refund', 'in_refund')"
+                >
+                    <strong>Customer Reference</strong>
+                </t>
+            </th>
+            <th
+                name="thead_corrected_invoice"
+                t-if="o.move_type.endswith('_refund') and o.reversed_entry_id"
+            >
+                <strong>Corrected invoice</strong>
+            </th>
+            <th
+                name="thead_corrected_date"
+                t-if="o.move_type.endswith('_refund') and o.reversed_entry_id.invoice_date"
+            >
+                <strong>Original invoice date</strong>
+            </th>
+        </th>
+        <td name="td_ref" position="attributes">
+            <attribute
+                name="t-if"
+            >o.show_reference_in_document or o.move_type in ('out_refund', 'in_refund')</attribute>
+        </td>
+        <td name="td_ref" position="after">
+            <td
+                name="td_corrected_invoice"
+                t-if="o.move_type.endswith('_refund') and o.reversed_entry_id"
+            >
+                <span t-field="o.reversed_entry_id.name" />
+            </td>
+            <td
+                name="td_corrected_date"
+                t-if="o.move_type.endswith('_refund') and o.reversed_entry_id.invoice_date"
+            >
+                <span
+                    t-if="o.reversed_entry_id.invoice_date"
+                    t-field="o.reversed_entry_id.invoice_date"
+                    t-options='{"widget": "date"}'
+                />
+            </td>
+        </td>
+        <p id="total-in-words" position="replace" />
+        <t t-set="amount_total_in_words" position="replace" />
+        <p name="payment_communication" position="before">
+            <t
+                t-set="amount_total_in_words"
+                t-value="o.x_num2words(abs(o.amount_total), o.currency_id.name)"
+            />
+            <p id="total-in-words" t-if="amount_total_in_words">
+                In words: <span t-esc="amount_total_in_words" />
+            </p>
+        </p>
+        <t name="partner_bank_id" position="replace">
+            <t
+                t-if="o.partner_bank_id and o.amount_residual and o.invoice_date != o.invoice_date_due"
+                name="partner_bank_id"
+            >
+            Please pay on bank account: <span t-field="o.partner_bank_id.acc_number" />
+            <span t-if="o.currency_id.name != 'PLN' and o.partner_bank_id.bank_bic">
+              &amp;bull;&amp;nbsp;BIC/SWIFT: <span
+                        t-field="o.partner_bank_id.bank_bic"
+                    />
+            </span>
+          </t>
+        </t>
+    </template>
+
+    <template id="tax_summary" inherit_id="trilab_invoice.tax_summary">
+        <xpath expr="//table" position="inside">
+            <tr
+                class="border-black o_total"
+                style="border-bottom: 1px solid #000000;"
+                t-if="o.amount_residual"
+            >
+              <td>
+                <strong t-if="o.move_type.endswith('_refund')">Total to refund</strong>
+                <strong t-if="not o.move_type.endswith('_refund')">Total to pay</strong>
+              </td>
+              <td class="text-right" style="white-space: nowrap;">
+              </td>
+              <td class="text-right" style="white-space: nowrap;">
+              </td>
+              <td class="text-right" style="white-space: nowrap;" t-if="vat_to_pln">
+              </td>
+
+              <td class="text-right" style="white-space: nowrap;">
+                <strong>
+                    <span t-field="o.amount_residual" />
+                </strong>
+              </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>

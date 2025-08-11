@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="spantech_purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='date_planned_div']" position="after">
+                <field
+                    name="intercompany_commitment_date"
+                    widget="date"
+                    attrs="{'invisible': [('is_interco_partner', '=', False)]}"
+                />
+            </xpath>
+            <field name="origin" position="after">
+                <separator
+                    string="Intercompany"
+                    attrs="{'invisible':[('is_interco_partner','=',False)]}"
+                />
+                <field
+                    name="is_interco_partner"
+                    attrs="{'invisible':[('is_interco_partner','=',False)]}"
+                />
+                <field
+                    name="spantech_automatic_intercompany_document"
+                    attrs="{'invisible':[('is_interco_partner','=',False)],'readonly': [('state', '!=', 'draft')]}"
+                />
+            </field>
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='date_planned']"
+                position="after"
+            >
+                <field
+                    name="sale_effective_date"
+                    optional="show"
+                    attrs="{'column_invisible':['|',('parent.is_interco_partner','=',False),('parent.state','=','draft')]}"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='date_planned']"
+                position="after"
+            >
+                <field
+                    name="sale_effective_date"
+                    attrs="{'invisible':[('parent.is_interco_partner','=',False)]}"
+                />
+            </xpath>
+            <field name="notes" position="attributes">
+                <attribute name="widget">html</attribute>
+            </field>
+            <button name="button_draft" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':['|', ('is_interco_partner','=',True)]}</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_tree" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="date_planned" position="after">
+                <field
+                    name="intercompany_commitment_date"
+                    optional="hide"
+                    widget="date"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

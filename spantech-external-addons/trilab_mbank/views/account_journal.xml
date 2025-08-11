@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_account_journal_form_inherit" model="ir.ui.view">
+        <field name="name">view_account_journal_form_inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='bank_account_number']//field[@name='bank_statements_source']" position="after">
+                <field name="x_mbank_dik"
+                       attrs="{'required': [('bank_statements_source', '=', 'mbank')],
+                               'invisible': [('bank_statements_source', '!=', 'mbank')]}"/>
+                <field name="x_mbank_user_id"
+                       attrs="{'required': [('bank_statements_source', '=', 'mbank')],
+                               'invisible': [('bank_statements_source', '!=', 'mbank')]}"/>
+                <field name="x_mbank_auth_method"
+                       attrs="{'required': [('bank_statements_source', '=', 'mbank')],
+                               'invisible': [('bank_statements_source', '!=', 'mbank')]}"/>
+                <field name="x_mbank_test"
+                       attrs="{'required': [('bank_statements_source', '=', 'mbank')],
+                               'invisible': [('bank_statements_source', '!=', 'mbank')]}"/>
+                <field name="x_mbank_enable_logging"
+                       attrs="{'invisible': [('bank_statements_source', '!=', 'mbank')]}"/>
+                <field name="x_mbank_app_cert_filename" invisible="1"/>
+                <field name="x_mbank_app_cert" filename="x_mbank_app_cert_filename"
+                       attrs="{'required': [('bank_statements_source', '=', 'mbank'), ('x_mbank_auth_method', '=', 'sign')],
+                               'invisible': ['|', ('bank_statements_source', '!=', 'mbank'), ('x_mbank_auth_method', '!=', 'sign')]}"/>
+                <field name="x_mbank_app_cert_password"
+                       attrs="{'invisible': ['|', ('bank_statements_source', '!=', 'mbank'), ('x_mbank_auth_method', '!=', 'sign')]}"/>
+
+                <label for="x_mbank_session_token"
+                       attrs="{'invisible': [('bank_statements_source', '!=', 'mbank')]}"
+                       class="oe_inline"
+                />
+                <div class="o_row" col="2">
+                    <field name="x_mbank_session_token" password="1"
+                           nolabel="1" style="word-wrap: break-word"
+                           attrs="{'invisible': [('bank_statements_source', '!=', 'mbank')]}"/>
+                    <button name="%(trilab_mbank.get_session_token_wizard_action)d" type="action"
+                            attrs="{'invisible': ['|', ('x_mbank_auth_method', '!=', 'background_session'), ('x_mbank_session_token', '!=', False)]}"
+                            string="Get Session Token"/>
+                    <button name="%(trilab_mbank.get_session_token_wizard_action)d" type="action"
+                            attrs="{'invisible': ['|', ('x_mbank_auth_method', '!=', 'background_session'), ('x_mbank_session_token', '=', False)]}"
+                            string="Get New Session Token"
+                            confirm="Are you sure? It will remove current Session Token."/>
+                </div>
+
+            </xpath>
+
+            <xpath expr="//field[@name='bank_account_id']" position="attributes">
+                <attribute name="attrs">{'required': [('bank_statements_source', '=', 'mbank')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

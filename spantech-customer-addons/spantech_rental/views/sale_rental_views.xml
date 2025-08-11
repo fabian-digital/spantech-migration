@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="sale_rental_form" model="ir.ui.view">
+        <field name="name">sale.rental.form</field>
+        <field name="model">sale.rental</field>
+        <field name="inherit_id" ref="sale_rental.sale_rental_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="analytic_account_id" />
+            </field>
+            <notebook position="inside">
+                <page string="Rental Stock Moves">
+                    <field name="stock_move_ids" nolabel="1" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="sale_rental_tree" model="ir.ui.view">
+        <field name="name">sale.rental.tree</field>
+        <field name="model">sale.rental</field>
+        <field name="inherit_id" ref="sale_rental.sale_rental_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="analytic_account_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_rental_search" model="ir.ui.view">
+        <field name="name">sale.rental.search</field>
+        <field name="model">sale.rental</field>
+        <field name="inherit_id" ref="sale_rental.sale_rental_search" />
+        <field name="arch" type="xml">
+            <field name="rented_product_id" position="after">
+                <field name="analytic_account_id" />
+            </field>
+            <group name="groupby" position="inside">
+                <filter
+                    name="analytic_groupby"
+                    string="Analytic Account"
+                    context="{'group_by': 'analytic_account_id'}"
+                />
+            </group>
+        </field>
+    </record>
+
+    <record id="sale_rental_gantt" model="ir.ui.view">
+        <field name="name">sale.rental.gantt</field>
+        <field name="model">sale.rental</field>
+        <field name="arch" type="xml">
+            <gantt
+                class="o_sale_rental_gantt"
+                date_stop="end_date"
+                date_start="start_date"
+                string="Rentals"
+                default_group_by="start_order_id"
+                create="0"
+                delete="0"
+                edit="0"
+                plan="0"
+                decoration-success="state in ['in','sold']"
+                decoration-info="state in ['out','sell_progress']"
+                decoration-warning="state == 'ordered'"
+                decoration-secondary="state == 'cancel'"
+                color="analytic_account_id"
+                display_unavailability="1"
+                sample="1"
+                form_view_id="%(sale_rental.sale_rental_form)d"
+            >
+
+                <field name="start_date" />
+                <field name="state" />
+                <field name="start_order_id" />
+                <field name="rental_product_id" />
+
+                <templates>
+                    <div t-name="gantt-popover" class="container-fluid">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <ul class="pl-1 mb-0 list-unstyled">
+                                    <li><strong>Start Date: </strong> <t
+                                            t-esc="userTimezoneStartDate.format('DD/MM/YYYY')"
+                                        /></li>
+                                    <li><strong>Stop Date: </strong> <t
+                                            t-esc="userTimezoneStopDate.format('DD/MM/YYYY')"
+                                        /></li>
+                                    <li><strong>Order: </strong> <t
+                                            t-esc="start_order_id[1]"
+                                        /></li>
+                                    <li><strong>Product: </strong> <t
+                                            t-esc="rental_product_id[1]"
+                                        /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
+            </gantt>
+        </field>
+    </record>
+
+    <record id="sale_rental.sale_rental_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,pivot,gantt</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="jpk_fa_form" model="ir.ui.view">
+        <field name="name">jpk_fa_form</field>
+        <field name="model">trilab.jpk.fa</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="1"/>
+                <field name="jpk_filename" invisible="1"/>
+                <group states="choose">
+                    <field name="invoice_ids" widget="many2many_tags"/>
+                </group>
+                <div states="get">
+                    <h2>Export Complete</h2>
+                    <p>Here is the exported JPK FA file: <field name="jpk_file" readonly="1" filename="jpk_filename"/></p>
+                </div>
+                <footer states="choose">
+                    <button name="generate_jpk" string="Generate JPK" type="object" class="btn-primary"/>
+                    <button special="cancel" string="Cancel" type="object" class="btn-secondary"/>
+                </footer>
+                <footer states="get">
+                    <field name="is_jpk_transfer_installed" invisible="1"/>
+                    <button name="action_transfer_xml" string="Submit" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('is_jpk_transfer_installed', '!=', True)]}"/>
+                    <button special="cancel" string="Close" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_jpk_fa_wizard" model="ir.actions.act_window">
+        <field name="name">JPK FA</field>
+        <field name="res_model">trilab.jpk.fa</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="trilab_jpk_fa.jpk_fa_form"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">list</field>
+    </record>
+
+</odoo>

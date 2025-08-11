@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+
+    <record id="mbank_payment_method" model="account.payment.method">
+        <field name="name">mBank Domestic Payment</field>
+        <field name="code">mbank_payment</field>
+        <field name="payment_type">outbound</field>
+    </record>
+
+    <record id="mbank_split_payment_method" model="account.payment.method">
+        <field name="name">mBank Split Payment</field>
+        <field name="code">mbank_split_payment</field>
+        <field name="payment_type">outbound</field>
+    </record>
+
+</odoo>

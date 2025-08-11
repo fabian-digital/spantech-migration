@@ -1,0 +1,9 @@
+# generated from manifests external_dependencies
+astor
+chardet
+python-dateutil
+python-stdnum
+python-stdnum>=1.16
+requests
+unidecode
+xlrd

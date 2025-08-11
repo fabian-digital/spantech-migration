@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="report_itl_timesheet_document">
+        <t t-call="web.internal_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=project.partner_id.lang)" />
+            <div class="page">
+                <table
+                    class="table table-bordered"
+                    width="100%"
+                    style="text-align: left;"
+                >
+                    <thead>
+                        <th width="20%" height="50px">
+                            Project code: <span
+                                t-field="project.analytic_account_id.name"
+                            />
+                        </th>
+                        <th width="20%">
+                            Date: <span t-field="doc.date" />
+                        </th>
+                        <th width="20%">
+                            # Week: <span t-field="doc.week_number" />
+                        </th>
+                        <th width="20%">
+                            Hours in man days: <span
+                                t-field="project.hours_in_man_days"
+                            />
+                        </th>
+                        <th width="20%">
+                            Worker:
+                        </th>
+                    </thead>
+                </table>
+                <br />
+                <table class="table table-bordered" width="100%">
+                    <thead style="text-align: center">
+                        <th>TASKS</th>
+                        <th><span t-esc="doc.date.strftime('%d/%m')" /></th>
+                        <th t-foreach="6" t-as="d"><span
+                                t-esc="(doc.date + datetime.timedelta(days=d+1)).strftime('%d/%m')"
+                            /></th>
+                        <th>TOTAL</th>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="project.task_ids" t-as="task">
+                            <td width="40%">
+                                <span t-field="task.name" />
+                            </td>
+                            <td t-foreach="8" t-as="d">
+                                <br /><br /><br />
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td t-foreach="8" t-as="d">
+                                <br /><br /><br />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <br /><br />
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td width="50%">
+                                <strong>Site manager signature</strong>
+                                <br /><br /><br /><br />
+                            </td>
+                            <td width="50%">
+                                <strong>Worker signature</strong>
+                                <br /><br /><br /><br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong>Remarks</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template name="ITL Timesheet" id="report_itl_timesheet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-foreach="doc.project_ids" t-as="project">
+                    <t
+                        t-call="spantech_project.report_itl_timesheet_document"
+                        t-lang="project.partner_id.lang"
+                    />
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="timesheet_itl_report_action" model="ir.actions.report">
+        <field name="name">ITL timesheet report</field>
+        <field name="model">timesheet.itl.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">spantech_project.report_itl_timesheet</field>
+        <field name="report_file">spantech_project.report_itl_timesheet</field>
+        <field name="paperformat_id" ref="spantech_base.paperformat_landscape" />
+    </record>
+
+</odoo>

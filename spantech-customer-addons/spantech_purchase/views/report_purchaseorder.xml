@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_purchaseorder_document"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="100"
+    >
+        <xpath expr="//div[@id='informations']" position="replace">
+            <div class="row mt-4 mb-4" id="informations">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>Project Code:</strong>
+                            </th>
+                            <th>
+                                <strong>Expected Arrival</strong>
+                            </th>
+                            <th>
+                                <strong>Your Order Reference</strong>
+                            </th>
+                            <th>
+                                <strong>Order Date</strong>
+                            </th>
+                            <th>
+                                <strong>Validated by</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <t
+                                    t-set="analytic_count"
+                                    t-value="len(o.analytic_distribution) if o.analytic_distribution else 0"
+                                />
+                                <t
+                                    t-foreach="o.analytic_distribution"
+                                    t-as="distribution"
+                                >
+                                    <span><t
+                                            t-esc="o.env['account.analytic.account'].browse(int(distribution))[0].name"
+                                        /><t t-if="analytic_count > 1">: <t
+                                                t-esc="o.analytic_distribution.get(distribution)"
+                                            />%</t></span>
+                                </t>
+                            </td>
+                            <td>
+                                <span
+                                    t-field="o.date_planned"
+                                    t-options='{"widget": "date"}'
+                                />
+                            </td>
+                            <td>
+                                <span t-field="o.partner_ref" />
+                            </td>
+                            <td>
+                                <span
+                                    t-if="o.date_order"
+                                    t-field="o.date_order"
+                                    t-options='{"widget": "date"}'
+                                />
+                            </td>
+                            <td>
+                                <span t-if="o.user_id" t-field="o.user_id.name" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+        <th name="th_taxes" position="replace" />
+        <td name="td_taxes" position="replace" />
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="class">page mt-4</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='line.date_planned']" position="attributes">
+            <attribute name="t-options">{"widget": "date"}</attribute>
+        </xpath>
+        <xpath expr="//p[@t-field='o.notes']" position="replace">
+            <p t-raw="o.notes" />
+        </xpath>
+    </template>
+    <template
+        id="report_purchasequotation_document"
+        inherit_id="purchase.report_purchasequotation_document"
+        priority="100"
+    >
+        <xpath expr="//span[@t-field='order_line.date_planned']" position="attributes">
+            <attribute name="t-options">{"widget": "date"}</attribute>
+        </xpath>
+        <table class="table table-sm mt-4" position="before">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>
+                            <strong>Project Code:</strong>
+                        </th>
+                        <th>
+                            <strong>Expected Arrival</strong>
+                        </th>
+                        <th>
+                            <strong>Your Order Reference</strong>
+                        </th>
+                        <th>
+                            <strong>Order Date</strong>
+                        </th>
+                        <th>
+                            <strong>Validated by</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                                <t
+                                t-set="analytic_count"
+                                t-value="len(o.analytic_distribution) if o.analytic_distribution else 0"
+                            />
+                                <t
+                                t-foreach="o.analytic_distribution"
+                                t-as="distribution"
+                            >
+                                    <span><t
+                                        t-esc="o.env['account.analytic.account'].browse(int(distribution))[0].name"
+                                    /><t t-if="analytic_count > 1">: <t
+                                            t-esc="o.analytic_distribution.get(distribution)"
+                                        />%</t></span>
+                                </t>
+                        </td>
+                        <td>
+                            <span
+                                t-field="o.date_planned"
+                                t-options='{"widget": "date"}'
+                            />
+                        </td>
+                        <td>
+                            <span t-field="o.partner_ref" />
+                        </td>
+                        <td>
+                            <span
+                                t-if="o.date_order"
+                                t-field="o.date_order"
+                                t-options='{"widget": "date"}'
+                            />
+                        </td>
+                        <td>
+                            <span t-if="o.user_id" t-field="o.user_id.name" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </table>
+    </template>
+</odoo>

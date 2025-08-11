@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_analytic_account_form_inherit_budget" model="ir.ui.view">
+        <field name="name">account.analytic.account.form.inherit.budget</field>
+        <field name="model">account.analytic.account</field>
+        <field
+            name="inherit_id"
+            ref="account_budget.view_account_analytic_account_form_inherit_budget"
+        />
+        <field name="priority">101</field>
+        <field name="arch" type="xml">
+            <notebook position="replace" />
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">spantech.analytic.analytic.account.form.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form" />
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="customer_reference" />
+            </field>
+            <field name="partner_id" position="after">
+                <field name="approver_id" />
+            </field>
+            <field name="currency_id" position="after">
+                <field name="project_type" />
+                <field name="apply_threshold" />
+            </field>
+            <page id="account_move_lines_tab" position="before">
+                <page id="analytic_detail" string="Details">
+                        <field name="analytic_account_detail_ids">
+                            <tree>
+                                <field name="analytic_account_id" invisible="1" />
+                                <field name="name" />
+                                <field name="country_id" optional="show" />
+                                <field name="segment_id" optional="show" />
+                                <field name="dimension" optional="show" />
+                                <field name="billing_entity_id" optional="show" />
+                                <field name="billing_entity_code" optional="show" />
+                                <field name="billing_country_id" optional="show" />
+                                <field name="project_total_amount" optional="show" />
+                                <field name="date_sale" optional="show" />
+                                <field name="structure_type" optional="show" />
+                            </tree>
+                        </field>
+                </page>
+                <page string="Budget Items" name="budget_items">
+                    <field
+                        name="crossovered_budget_line"
+                        widget="one2many"
+                        colspan="4"
+                        nolabel="1"
+                        mode="tree"
+                    >
+                        <tree editable="top">
+                            <field name="crossovered_budget_id" />
+                            <field name="general_budget_id" />
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="paid_date" />
+                            <field name="planned_amount" widget="monetary" />
+                            <field
+                                name="practical_amount"
+                                sum="Practical Amount"
+                                widget="monetary"
+                            />
+                            <field
+                                name="theoritical_amount"
+                                sum="Theoretical Amount"
+                                widget="monetary"
+                                invisible="1"
+                            />
+                            <field name="percentage" />
+                            <field name="currency_id" invisible="1" />
+                        </tree>
+                        <form string="Budget Items">
+                            <group>
+                                <field name="crossovered_budget_id" />
+                                <field name="general_budget_id" />
+                                <field name="date_from" />
+                                <field name="date_to" />
+                                <field name="paid_date" />
+                                <field name="planned_amount" widget="monetary" />
+                                <field name="currency_id" invisible="1" />
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+    <record id="view_account_analytic_account_list" model="ir.ui.view">
+        <field name="name">account.analytic.account.list</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_list" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="segment" optional="show" />
+                <field name="subsegment" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_analytic_account_search" model="ir.ui.view">
+        <field name="name">account.analytic.account.search</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_search" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="segment" />
+                <field name="subsegment" />
+            </field>
+            <filter name="associatedpartner" position="after">
+                <filter
+                    string="Segment"
+                    name="groupby_segment"
+                    context="{'group_by': 'segment'}"
+                />
+                <filter
+                    string="Subsegment"
+                    name="groupby_subsegment"
+                    context="{'group_by': 'subsegment'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="account_analytic_account_detail_view_form" model="ir.ui.view">
+        <field name="name">account.analytic.account.view.form</field>
+        <field name="model">account.analytic.account.detail</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="analytic_account_id" invisible="1" />
+                            <field name="country_id" />
+                            <field name="segment_id" />
+                            <field name="dimension" />
+                        </group>
+                        <group>
+                            <field name="billing_entity_id" />
+                            <field name="billing_entity_code" />
+                            <field name="billing_country_id" />
+                            <field name="project_total_amount" />
+                            <field name="date_sale" />
+                            <field name="structure_type" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

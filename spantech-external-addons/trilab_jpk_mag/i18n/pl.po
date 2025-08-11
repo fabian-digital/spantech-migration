@@ -1,0 +1,329 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* trilab_jpk_mag
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-31 10:54+0000\n"
+"PO-Revision-Date: 2023-08-31 10:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Backorder"
+msgstr "Pobranie częściowe"
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.jpk_mag_report_wizard
+msgid "Cancel"
+msgstr "Anuluj"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/jpk_mag_report.py:0
+#, python-format
+msgid "Community is not set for company"
+msgstr "Gmina nie jest wprowadzona dla firmy"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__company_id
+msgid "Company"
+msgstr "Firma"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Contact/Partner name"
+msgstr "Kontakt/nazwa klienta"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/jpk_mag_report.py:0
+#, python-format
+msgid "County is not set for company"
+msgstr "Powiat nie jest wprowadzony dla firmy"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Date done"
+msgstr "Data wykonania"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Dest Location"
+msgstr "Do Lokalizacji"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Document Amount"
+msgstr "Kwota dokumentu"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__date_to
+msgid "End Date"
+msgstr "Data końcowa"
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.jpk_mag_report_wizard
+msgid "Export XLSX"
+msgstr "Eksportuj XLSX"
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.jpk_mag_report_wizard
+msgid "Export XML"
+msgstr "Eksportuj XML"
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.jpk_mag_report_wizard
+msgid "Export XML and send"
+msgstr "Eksportuj XML i wyślij"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__is_jpk_transfer_installed
+msgid "Is Jpk Transfer Installed"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.view_picking_type_form_jpk_mag
+msgid "JPK"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.actions.act_window,name:trilab_jpk_mag.action_jpk_mag_report_wizard
+#: model:ir.actions.report,name:trilab_jpk_mag.action_print_report_jpk_mag_report_html
+#: model:ir.actions.report,name:trilab_jpk_mag.action_print_report_jpk_mag_report_pdf
+#: model:ir.actions.report,name:trilab_jpk_mag.action_print_report_jpk_mag_report_xlsx
+#: model:ir.actions.report,name:trilab_jpk_mag.action_print_report_jpk_mag_report_xml
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_stock_picking_type__x_jpk_mag
+#: model:ir.ui.menu,name:trilab_jpk_mag.menu_jpk_mag_report_wizard
+msgid "JPK MAG"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model,name:trilab_jpk_mag.model_report_trilab_jpk_mag_jpk_mag_report
+msgid "JPK MAG Report"
+msgstr "Raport JPK MAG"
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.report_jpk_mag_report_base
+msgid "JPK MAG Report -"
+msgstr "Raport JPK MAG -"
+
+#. module: trilab_jpk_mag
+#: model:ir.model,name:trilab_jpk_mag.model_jpk_mag_report_wizard
+msgid "JPK MAG Report Wizard"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields.selection,name:trilab_jpk_mag.selection__stock_picking_type__x_jpk_mag__jpk_mm
+msgid "JPK_MM"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields.selection,name:trilab_jpk_mag.selection__stock_picking_type__x_jpk_mag__jpk_pz
+msgid "JPK_PZ"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields.selection,name:trilab_jpk_mag.selection__stock_picking_type__x_jpk_mag__jpk_rw
+msgid "JPK_RW"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields.selection,name:trilab_jpk_mag.selection__stock_picking_type__x_jpk_mag__jpk_wz
+msgid "JPK_WZ"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/jpk_mag_report.py:0
+#, python-format
+msgid "Jednolity Plik Kontrolny - MAG"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Landed Costs"
+msgstr "Koszty Nabycia"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "PO Value"
+msgstr "Wartość PZ"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Picking Summary"
+msgstr "Podsumowanie Przesunięć"
+
+#. module: trilab_jpk_mag
+#: model:ir.actions.report,name:trilab_jpk_mag.action_print_report_stock_picking_summary_report_xlsx
+msgid "Picking Summary (XLSX)"
+msgstr ""
+
+#. module: trilab_jpk_mag
+#: model:ir.model,name:trilab_jpk_mag.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Typ pobrania"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Picking date"
+msgstr "Data przesunięcia"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/jpk_mag_report.py:0
+#, python-format
+msgid "Post is not set for company"
+msgstr "Poczta nie jest wprowadzona dla firmy"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Reference"
+msgstr "Odnośnik"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Related document"
+msgstr "Dokument powiązany"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Source document"
+msgstr "Dokument źródłowy"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Src Location"
+msgstr "Lokalizacja Źródłowa"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__date_from
+msgid "Start Date"
+msgstr "Data początkowa"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "State"
+msgstr "Status"
+
+#. module: trilab_jpk_mag
+#: model:ir.model,name:trilab_jpk_mag.model_report_trilab_jpk_mag_stock_picking_summary_report
+msgid "Stock Picking Summary Report"
+msgstr "Raport Podsumowanie Pobrań"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/jpk_mag_report.py:0
+#, python-format
+msgid "Tax Office is not set for the company"
+msgstr "Urząd Skarbowy nie jest wprowadzony dla firmy"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/stock_picking_summary_report.py:0
+#, python-format
+msgid "Total Value"
+msgstr "Wartość Razem"
+
+#. module: trilab_jpk_mag
+#: model:ir.model,name:trilab_jpk_mag.model_stock_picking
+msgid "Transfer"
+msgstr "Pobranie"
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.jpk_mag_report_wizard
+msgid "Report Options"
+msgstr "Opcje Raportu"
+
+#. module: trilab_jpk_mag
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_mag.jpk_mag_report_wizard
+msgid "View Transactions"
+msgstr "Zobacz Pozycje"
+
+#. module: trilab_jpk_mag
+#: model:ir.model.fields,field_description:trilab_jpk_mag.field_jpk_mag_report_wizard__warehouse_id
+msgid "Warehouse"
+msgstr "Magazyn"
+
+#. module: trilab_jpk_mag
+#. odoo-python
+#: code:addons/trilab_jpk_mag/report/jpk_mag_report.py:0
+#, python-format
+msgid "Warehouse is not selected"
+msgstr "Magazyn nie został wybrany"
+
+#. module: trilab_jpk_mag
+#: model:ir.actions.report,print_report_name:trilab_jpk_mag.action_print_report_stock_picking_summary_report_xlsx
+msgid "object.x_jpk_get_summary_print_report_name()"
+msgstr ""

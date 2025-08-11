@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+        <record id="mail_cancel_po" model="mail.template">
+            <field name="name">PO: cancel email</field>
+            <field name="model_id" ref="spantech_intercompany.model_purchase_order" />
+            <field name="subject">Intercompany Purchase Order canceled</field>
+            <field name="email_from">{{ (object.company_id.email_formatted) }}</field>
+            <field name="email_to">{{ (object.partner_id.email_formatted) }}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="body_html" type="html">
+                <div>
+                    The Purchase Order <t t-out="object.name" /> from <t
+                    t-out="object.company_id.code"
+                /> has been cancelled. Please check the impact on the Sales Order <t
+                    t-out="object.partner_ref"
+                />.
+                </div>
+            </field>
+        </record>
+
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="jpk_mag_report_wizard" model="ir.ui.view">
+        <field name="name">JPK MAG Report Wizard</field>
+        <field name="model">jpk.mag.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                <div class="row gx-1">
+                    <div class="col-6">
+                        <group name="main_info">
+                            <field name="company_id" invisible="1"/>
+                            <field name="is_jpk_transfer_installed" invisible="1"/>
+
+                            <field
+                                    name="company_id"
+                                    options="{'no_create': True}"
+                                    groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group name="filters">
+                            <group name="date_range">
+                                <field name="date_from" widget="daterange" options='{"related_end_date": "date_to"}'/>
+                                <field name="date_to" widget="daterange" options='{"related_start_date": "date_from"}'/>
+                            </group>
+                        </group>
+                    </div>
+                    <div class="col-6">
+                        <group name="other_filters">
+                            <field name="warehouse_id"/>
+                        </group>
+                    </div>
+                </div>
+
+                <footer>
+                    <button
+                            name="button_export_html"
+                            string="View Transactions"
+                            type="object"
+                            default_focus="1"
+                            class="oe_highlight"
+                    />
+                    <button name="button_transfer_xml" string="Export XML and send" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('is_jpk_transfer_installed', '!=', True)]}"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                    <button
+                            name="button_export_xlsx"
+                            string="Export XLSX"
+                            type="object"
+                    />
+                    <button
+                            name="button_export_xml"
+                            string="Export XML"
+                            type="object"
+                    />
+
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_jpk_mag_report_wizard" model="ir.actions.act_window">
+        <field name="name">JPK MAG</field>
+        <field name="res_model">jpk.mag.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="jpk_mag_report_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem
+            parent="trilab_jpk_base.menu_report_jpk"
+            action="trilab_jpk_mag.action_jpk_mag_report_wizard"
+            id="menu_jpk_mag_report_wizard"
+            sequence="70"
+    />
+
+</odoo>

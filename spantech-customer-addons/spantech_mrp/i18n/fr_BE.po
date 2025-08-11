@@ -1,0 +1,115 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* spantech_mrp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-16 11:11+0000\n"
+"PO-Revision-Date: 2022-04-16 11:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: spantech_mrp
+#: model:ir.actions.report,print_report_name:spantech_mrp.bom_structure_xlsx
+msgid "'Bom Structure - %s' % object.display_name"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.actions.report,print_report_name:spantech_mrp.action_report_production_order
+msgid "'Production Order - %s' % object.name"
+msgstr ""
+
+#. module: spantech_mrp
+#: model_terms:ir.ui.view,arch_db:spantech_mrp.mrp_bom_form_view
+msgid "<span class=\"o_stat_text\"> Component Moves</span>"
+msgstr ""
+
+#. module: spantech_mrp
+#: model_terms:ir.ui.view,arch_db:spantech_mrp.report_mrp_production_components_handwritten
+msgid "<span> __________ </span>"
+msgstr ""
+
+#. module: spantech_mrp
+#: model_terms:ir.ui.view,arch_db:spantech_mrp.report_mrporder_handwritten
+msgid ""
+"<strong>Quantity Produced :</strong><br/>\n"
+"                <span> __________ </span>"
+msgstr ""
+
+#. module: spantech_mrp
+#: model_terms:ir.ui.view,arch_db:spantech_mrp.report_mrporder
+msgid "<strong>Scheduled Date:</strong><br/>"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.model,name:spantech_mrp.model_ir_attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.model,name:spantech_mrp.model_report_mrp_report_bom_structure
+msgid "BOM Structure Report"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.model,name:spantech_mrp.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Nomenclature"
+
+#. module: spantech_mrp
+#: model:ir.actions.report,name:spantech_mrp.bom_structure_xlsx
+msgid "Bom Structure XLSX"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.model.fields,field_description:spantech_mrp.field_mrp_bom__component_stock_move_ids
+msgid "Component Stock Move"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.model.fields,field_description:spantech_mrp.field_mrp_bom__component_stock_move_count
+msgid "Component Stock Move Count"
+msgstr ""
+
+#. module: spantech_mrp
+#: model_terms:ir.ui.view,arch_db:spantech_mrp.report_mrp_production_components_handwritten
+msgid "Consumed"
+msgstr ""
+
+#. module: spantech_mrp
+#: model_terms:ir.ui.view,arch_db:spantech_mrp.report_mrp_bom_spantech
+msgid "Level"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.model,name:spantech_mrp.model_mrp_document
+msgid "Production Document"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.actions.report,name:spantech_mrp.action_report_production_order
+msgid "Production Order Handwritten"
+msgstr ""
+
+#. module: spantech_mrp
+#: model:ir.model,name:spantech_mrp.model_report_spantech_mrp_bom_structure_xlsx
+msgid "XLSX Reporting for MRP BOM"
+msgstr ""
+
+#. module: spantech_mrp
+#: model_terms:ir.ui.view,arch_db:spantech_mrp.report_mrp_bom_spantech
+msgid "plan"
+msgstr ""
+
+#~ msgid "Display Name"
+#~ msgstr "Nom affiché"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"

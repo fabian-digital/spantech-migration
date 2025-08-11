@@ -1,0 +1,44 @@
+<odoo>
+
+    <record id="project_performance_tree_view" model="ir.ui.view">
+            <field name="name">project_performance_tree_view</field>
+            <field name="model">project.performance.history</field>
+            <field name="arch" type="xml">
+                <tree edit="0" create="0" default_order="date desc">
+                    <field name="performance_indicator_status" invisible="1" />
+                    <field name="date" />
+                    <field
+                    name="performance"
+                    widget="percentage"
+                    decoration-danger="performance_indicator_status == 'bad'"
+                    decoration-warning="performance_indicator_status == 'danger'"
+                    decoration-success="performance_indicator_status == 'good'"
+                />
+                    <field name="man_days_consumption" widget="percentage" />
+                    <field name="project_completion" widget="percentage" />
+                    <field name="budgeted_man_days" widget="integer" />
+                    <field name="allocated_man_days" widget="integer" />
+                    <field name="actual_man_days" widget="integer" />
+                    <field name="scheduled_man_days" widget="integer" />
+                    <field name="man_days_overconsumed" widget="integer" />
+                    <field name="calendar_progression" widget="percentage" />
+                    <field name="date_start" widget="date" optional="hide" />
+                    <field name="date_deadline" widget="date" />
+                    <field name="calendar_day_left" />
+                </tree>
+            </field>
+        </record>
+
+    <record id="project_performance_action" model="ir.actions.act_window">
+        <field name="name">Project Performances History</field>
+        <field name="res_model">project.performance.history</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No history for this project.
+            </p>
+        </field>
+    </record>
+
+</odoo>

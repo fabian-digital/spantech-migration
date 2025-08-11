@@ -1,0 +1,67 @@
+<odoo>
+    <record id="account_invoice_line_update_view_form" model="ir.ui.view">
+        <field name="name">Update invoice line</field>
+        <field name="model">account.invoice.line.update</field>
+        <field name="arch" type="xml">
+            <form string="Update invoice line">
+                <group>
+                    <group colspan="4">
+                        <field name="name" />
+                        <!--<field name="product_id" />-->
+                        <field
+                            name="account_id"
+                            domain="[('deprecated', '=', False)]"
+                        />
+                        <field
+                            name="analytic_distribution"
+                            widget="analytic_distribution"
+                        />
+                        <field
+                            name="tax_ids"
+                            widget="many2many_tags"
+                            domain="[('type_tax_use', '=', type_tax_use), ('company_id', '=', company_id)]"
+                            options="{'no_create': True}"
+                        />
+                    </group>
+                    <field name="inv_line_id" invisible="1" />
+                    <field name="company_id" invisible="1" />
+                    <field name="type_tax_use" invisible="1" />
+                </group>
+                <footer>
+                    <button
+                        name="update_invoice_line"
+                        string="Confirm"
+                        type="object"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="z"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="account_invoice_line_update_view_form_result" model="ir.ui.view">
+        <field name="name">Update invoice iine results</field>
+        <field name="model">account.invoice.line.update</field>
+        <field name="arch" type="xml">
+            <form string="Update invoice line results">
+                <separator colspan="4" string="Results :" />
+                <field name="note" colspan="4" nolabel="1" width="850" height="400" />
+                <footer>
+                    <button
+                        name="action_close"
+                        string="Close"
+                        type="object"
+                        class="btn-primary"
+                        data-hotkey="z"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

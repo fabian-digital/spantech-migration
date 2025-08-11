@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="account_partner_open_items_xlsx.wiz_partner_open_items_menu"
+        name="Open Items per Partner"
+        parent="account_reports.account_reports_partners_reports_menu"
+        sequence="100"
+    />
+
+</odoo>

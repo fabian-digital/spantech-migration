@@ -1,0 +1,190 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* trilab_jpk_fa
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-21 06:57+0000\n"
+"PO-Revision-Date: 2024-06-21 06:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trilab_jpk_fa
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_fa.jpk_fa_form
+msgid "Cancel"
+msgstr "Anuluj"
+
+#. module: trilab_jpk_fa
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_fa.jpk_fa_form
+msgid "Close"
+msgstr "Zamknij"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__company_id
+msgid "Company"
+msgstr "Spółka"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__create_uid
+msgid "Created by"
+msgstr "Utworzony przez"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__create_date
+msgid "Created on"
+msgstr "Utworzono"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__display_name
+msgid "Display Name"
+msgstr "Wyświetlana nazwa"
+
+#. module: trilab_jpk_fa
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_fa.jpk_fa_form
+msgid "Export Complete"
+msgstr "Eksport zakończony"
+
+#. module: trilab_jpk_fa
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_fa.jpk_fa_form
+msgid "Generate JPK"
+msgstr "Wygeneruj JPK"
+
+#. module: trilab_jpk_fa
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_fa.jpk_fa_form
+msgid "Here is the exported JPK FA file:"
+msgstr "Tu znajduje się wyeksportowany plik JPK FA:"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__id
+msgid "ID"
+msgstr ""
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__invoice_ids
+msgid "Invoice"
+msgstr "Faktury"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__invoice_len
+msgid "Invoice Len"
+msgstr "Ilość faktur"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__invoice_line_ids
+msgid "Invoice Line"
+msgstr "Linie faktury"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__invoice_line_len
+msgid "Invoice Line Len"
+msgstr "Ilość linii faktur"
+
+#. module: trilab_jpk_fa
+#. odoo-python
+#: code:addons/trilab_jpk_fa/wizard/jpk_fa.py:0
+#, python-format
+msgid "Invoices containing lines with multiple tax: %s"
+msgstr "Faktury zawierające pozycje z wieloma podatkami: %s"
+
+#. module: trilab_jpk_fa
+#. odoo-python
+#: code:addons/trilab_jpk_fa/wizard/jpk_fa.py:0
+#, python-format
+msgid "Invoices containing lines without tax: %s"
+msgstr "Faktury zawierające pozycje bez podatku: %s"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__is_jpk_transfer_installed
+msgid "Is Jpk Transfer Installed"
+msgstr "Czy JPK Transfer jest zainstalowany"
+
+#. module: trilab_jpk_fa
+#: model:ir.actions.act_window,name:trilab_jpk_fa.action_jpk_fa_wizard
+msgid "JPK FA"
+msgstr ""
+
+#. module: trilab_jpk_fa
+#: model:ir.model,name:trilab_jpk_fa.model_trilab_jpk_fa
+msgid "JPK FA Wizard"
+msgstr "Wizard JPK FA"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__jpk_file
+msgid "JPK File"
+msgstr "Plik JPK FA"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__jpk_filename
+msgid "Jpk Filename"
+msgstr "Nazwa pliku JPK"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa____last_update
+msgid "Last Modified on"
+msgstr "Ostatnio modyfikacja"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__write_uid
+msgid "Last Updated by"
+msgstr "Ostatnio aktualizowane przez"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__write_date
+msgid "Last Updated on"
+msgstr "Ostatnia aktualizacja"
+
+#. module: trilab_jpk_fa
+#. odoo-python
+#: code:addons/trilab_jpk_fa/wizard/jpk_fa.py:0
+#, python-format
+msgid "Please set state for current company '%s'"
+msgstr "Ustaw stan dla bieżącej spółki '%s'"
+
+#. module: trilab_jpk_fa
+#. odoo-python
+#: code:addons/trilab_jpk_fa/wizard/jpk_fa.py:0
+#, python-format
+msgid "Please set tax office for current company '%s'"
+msgstr "Ustaw urząd skarbowy dla obecnej firmy '%s'"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields,field_description:trilab_jpk_fa.field_trilab_jpk_fa__state
+msgid "State"
+msgstr "województwo"
+
+#. module: trilab_jpk_fa
+#: model_terms:ir.ui.view,arch_db:trilab_jpk_fa.jpk_fa_form
+msgid "Submit"
+msgstr "Wyślij"
+
+#. module: trilab_jpk_fa
+#. odoo-python
+#: code:addons/trilab_jpk_fa/wizard/jpk_fa.py:0
+#, python-format
+msgid "Wrong invoice state - Only accepted invoices allowed"
+msgstr ""
+"Nieprawidłowy status faktury — dozwolone są tylko zaakceptowane faktury"
+
+#. module: trilab_jpk_fa
+#. odoo-python
+#: code:addons/trilab_jpk_fa/wizard/jpk_fa.py:0
+#, python-format
+msgid "Wrong invoice type - Only sale invoices/corrections allowed"
+msgstr ""
+"Niewłaściwy typ faktury - Dozwolone są tylko faktury sprzedaży/korekty"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields.selection,name:trilab_jpk_fa.selection__trilab_jpk_fa__state__choose
+msgid "choose"
+msgstr "wybierz"
+
+#. module: trilab_jpk_fa
+#: model:ir.model.fields.selection,name:trilab_jpk_fa.selection__trilab_jpk_fa__state__get
+msgid "get"
+msgstr "pobierz"
