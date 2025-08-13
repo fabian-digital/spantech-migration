@@ -10,7 +10,6 @@ class PurchaseOrder(models.Model):
 
     order_type = fields.Many2one(
         comodel_name="purchase.order.type",
-        readonly="state in ('purchase', 'done', 'cancel')",
         string="Type",
         ondelete="restrict",
         domain="[('company_id', 'in', [False, company_id])]",
