@@ -234,12 +234,16 @@ The `daterange` widget has been updated for better functionality.
 - **Frontend Speed**: Website and eCommerce are 2.7 times faster to load controllers
 - **Enhanced ORM**: Updated ORM layer performance
 - **JavaScript Framework**: Updated JavaScript framework components
-- **REST API**: Improved REST API capabilities
+- **REST API**: Improved REST API capabilitiesls
 
 ### Odoo 17
 - **Search Count**: `search_count()` takes the limit argument into account for better performance
 - **Cache API**: New flushing and invalidation API for better performance
 - **Index Types**: Specific PostgreSQL index types for optimized queries
+
+## Database Schema Changes
+
+- In the table mrp_production the field date_planned_start must be renamed date_start
 
 ## Migration Guide
 
