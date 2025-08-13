@@ -17,30 +17,33 @@
             >
                 <field
                     name="start_date"
-                    attrs="{'invisible': [('must_have_dates', '=', False)], 'required': [('must_have_dates', '=', True)]}"
+                    invisible="not must_have_dates"
+                    required="must_have_dates"
                 />
                 <field
                     name="end_date"
-                    attrs="{'invisible': [('must_have_dates', '=', False)], 'required': [('must_have_dates', '=', True)]}"
+                    invisible="not must_have_dates"
+                    required="must_have_dates"
                 />
                 <field
                     name="number_of_days"
-                    attrs="{'invisible': [('must_have_dates', '=', False)], 'required': [('must_have_dates', '=', True)]}"
+                    invisible="not must_have_dates"
+                    required="must_have_dates"
                 />
                 <field name="must_have_dates" invisible="1" />
             </xpath>
             <xpath
-                expr="//field[@name='order_line']/tree/field[@name='name']"
+                expr="//field[@name='order_line']/list/field[@name='name']"
                 position="after"
             >
                 <field
                     name="start_date"
-                    attrs="{'required': [('must_have_dates', '=', True)]}"
+                    required="must_have_dates"
                     optional="show"
                 />
                 <field
                     name="end_date"
-                    attrs="{'required': [('must_have_dates', '=', True)]}"
+                    required="must_have_dates"
                     optional="show"
                 />
                 <field name="number_of_days" optional="hide" />
