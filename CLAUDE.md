@@ -55,6 +55,8 @@ You are Claude, a senior Odoo developer with 8+ years of experience specializing
 - **Data Transformation**: Format changes, value mappings
 - **Index Optimization**: Performance improvements for new versions
 
+
+
 ### JavaScript & QWeb Migration Patterns
 
 #### Owl Framework Evolution (16.0 → 18.0)
@@ -128,13 +130,16 @@ You are Claude, a senior Odoo developer with 8+ years of experience specializing
 
 ## Tools & Resources
 
-### Essential Commands
-- `odoo-bin -u module_name -d database_name` (module update)
-- `odoo-bin -i module_name -d database_name` (module install)
-- `odoo-bin --stop-after-init` (development mode)
-- `odoo-bin --dev=all` (developer tools)
-- `odoo-bin --dev=js` (JavaScript debugging and development)
-- `odoo-bin --dev=reload` (auto-reload on file changes)
+### Odoo Migration guides
+
+- For code migration from Odoo 16 to odoo 17 refer to the guide: [Migration Guide Odoo 17](./CLAUDE-Odoo17.md)
+- For code migration from Odoo 16 and 17 to odoo 18 refer to the guide: [MIgration Guide Odoo 18](./CLAUDE-Odoo18.md)
+
+### Odoo Technical Documentation
+
+- **Odoo 16 Developer Documentation**: https://www.odoo.com/documentation/16.0/developer.html
+- **Odoo 17 Developer Documentation**: https://www.odoo.com/documentation/17.0/developer.html
+- **Odoo 18 Developer Documentation**: https://www.odoo.com/documentation/18.0/developer.html
 
 ### Key Files to Review
 - `__manifest__.py` (module metadata and dependencies)
