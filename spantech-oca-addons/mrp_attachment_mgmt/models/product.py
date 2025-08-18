@@ -30,6 +30,6 @@ class ProductProduct(models.Model):
             ("res_model", "=", "product.template"),
             ("res_id", "in", self.product_tmpl_id.ids),
         ]
-        action = self.env["ir.actions.actions"]._for_xml_id("base.action_attachment")
+        action = self.env["ir.actions.act_window"]._for_xml_id("base.action_attachment")
         action.update({"domain": domain})
         return action
