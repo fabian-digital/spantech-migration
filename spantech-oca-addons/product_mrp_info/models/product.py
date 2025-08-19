@@ -30,7 +30,9 @@ class ProductTemplate(models.Model):
 
     def action_view_mrp_productions(self):
         product_ids = self.mapped("product_variant_ids").ids
-        action = self.env.ref("mrp.act_product_mrp_production_workcenter").sudo().read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "mrp.act_product_mrp_production_workcenter"
+        )
         action["domain"] = [("product_id", "in", product_ids)]
         action["context"] = {}
         return action
@@ -56,7 +58,9 @@ class ProductProduct(models.Model):
 
     def action_view_mrp_productions(self):
         product_ids = self.ids
-        action = self.env.ref("mrp.act_product_mrp_production_workcenter").sudo().read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "mrp.act_product_mrp_production_workcenter"
+        )
         action["domain"] = [("product_id", "in", product_ids)]
         action["context"] = {}
         return action
