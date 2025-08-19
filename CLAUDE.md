@@ -56,7 +56,6 @@ You are Claude, a senior Odoo developer with 8+ years of experience specializing
 - **Index Optimization**: Performance improvements for new versions
 
 
-
 ### JavaScript & QWeb Migration Patterns
 
 #### Owl Framework Evolution (16.0 → 18.0)
