@@ -243,7 +243,10 @@ The `daterange` widget has been updated for better functionality.
 
 ## Database Schema Changes
 
+[Odoo 18 Database Schema](db_schemas/18_oe_schema.sql)
+
 - In the table mrp_production the field date_planned_start must be renamed date_start
+
 
 ## Migration Guide
 

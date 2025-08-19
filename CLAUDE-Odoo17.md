@@ -134,6 +134,10 @@ class MyModel(models.Model):
 
 ## SQL and Database Changes
 
+# Database Schema Changes
+
+[Odoo 17 Database Schema](db_schemas/17_oe_schema.sql)
+
 ### SQL Wrapper Object
 Introduce an SQL wrapper object to make SQL composition easier and safer with respect to SQL injections. Methods of the ORM now use it internally
 
